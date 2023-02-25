@@ -23,13 +23,15 @@ public class EventManager : MonoBehaviour
     IEnumerator EventRoutine()
     {
         yield return new WaitForSeconds(Random.Range(minEventTime, maxEventTime));
-        JackEvent randomEvent = null;
-        if(randomEvent != null)randomEvent = EventList[Random.Range(0, EventList.Count - 1)];
-        randomEvent.ExecuteEvent();
-        randomEvent.addListenerEventEnded(() => {
-            StartCoroutine(EventRoutine());
-        }); 
-        
+        int randomEventIndex = Random.Range(0, EventList.Count - 1);
+        if (randomEventIndex < EventList.Count)
+        {
+            JackEvent randomEvent = EventList[randomEventIndex];
+            if (randomEvent != null) randomEvent.ExecuteEvent();
+            randomEvent.addListenerEventEnded(() => {
+                StartCoroutine(EventRoutine());
+            });
+        }
         
     }
 
