@@ -19,6 +19,7 @@ public class Deck : CardHolder
             {
                 Card newCard = DeckManager.DrawCard();
                 GameObject card = Instantiate<GameObject>(Resources.Load<GameObject>("Card"));
+                card.GetComponent<CardClickController>().Init();
                 card.GetComponent<CardClickController>().side1.sprite = Resources.Load<Sprite>("BackCard");
                 card.GetComponent<CardClickController>().side2.sprite = newCard.sprite;
                 card.GetComponent<CardClickController>().cardRep.card = newCard;

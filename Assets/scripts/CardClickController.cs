@@ -18,6 +18,12 @@ public class CardClickController : MonoBehaviour
     public CardRepresentation cardRep;
     void Start()
     {
+
+        
+    }
+
+    public void Init()
+    {
         hand = GameObject.Find("Hand");
         cardRep = GetComponent<CardRepresentation>();
         side1 = transform.Find("Side1").GetComponent<SpriteRenderer>();
