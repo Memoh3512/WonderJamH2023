@@ -20,4 +20,9 @@ public abstract class JackEvent
         onEventEnded.AddListener(action);
     }
 
+    public void ClearListeners()
+    {
+        onEventEnded.RemoveAllListeners();
+    }
+
 }
