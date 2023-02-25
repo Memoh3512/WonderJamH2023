@@ -7,7 +7,6 @@ public class AIJackPlayer : JackPlayer
 {
     public float suspicion;
     public float distractionLevel;
-    public int tokens = 50;
     public bool intel = true;
     public AIDecision aiDecision;
 
