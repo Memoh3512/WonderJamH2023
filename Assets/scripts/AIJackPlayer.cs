@@ -30,7 +30,7 @@ public class AIJackPlayer : JackPlayer
     #region Events
     protected UnityEvent OnBetEnd;
     protected UnityEvent OnDrawCardEnd;
-    protected UnityEvent OnDecideEnd;
+    protected UnityEvent<JackDecision> OnDecideEnd;
     protected UnityEvent OnLose;
 
     public void AddOnBetEndListener(UnityAction action)
@@ -45,9 +45,9 @@ public class AIJackPlayer : JackPlayer
         OnDrawCardEnd.AddListener(action);
     }
 
-    public void AddOnDecideEndListener(UnityAction action)
+    public void AddOnDecideEndListener(UnityAction<JackDecision> action)
     {
-        if (OnDecideEnd == null) OnDecideEnd = new UnityEvent();
+        if (OnDecideEnd == null) OnDecideEnd = new UnityEvent<JackDecision>();
         OnDecideEnd.AddListener(action);
     }
 
