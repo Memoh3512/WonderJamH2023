@@ -42,6 +42,7 @@ public class DeckManager
     public static void ResetDeck()
     {
         Deck = new List<Card>(OgDeck);
+        PlayerCards.Clear();
     }
 
     public static List<Card> GetCardsForPlayer(JackPlayer player)

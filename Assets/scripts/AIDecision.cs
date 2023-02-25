@@ -114,18 +114,13 @@ public class AIDecision: MonoBehaviour
 
 
 
-    public int HandValue(List<Card> hand)
+    public int HandValue(List<int> hand)
     {
-        List<int> values = new List<int>();
-        foreach (Card card in hand)
-        {
-            values.Add(card.value);
-        }
        
         int score = 0;
         int nb_as = 0;
 
-        foreach (int value in values)
+        foreach (int value in hand)
         {
             if (value == 11)
             {
