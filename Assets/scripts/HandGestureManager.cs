@@ -4,26 +4,23 @@ using UnityEngine;
 
 public class HandGestureManager : MonoBehaviour
 {
+    public AIJackPlayer jackPlayer;
+
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void HitGesture()
     {
-        
+        anim.SetTrigger("Hit");
     }
 
-    void DrawCardGesture()
+    public void HoldGesture()
     {
-        
-    }
-
-    void DoNotDrawCardGesture()
-    {
-        
+        anim.SetTrigger("Hold");   
     }
 
 }

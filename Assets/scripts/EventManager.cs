@@ -7,40 +7,35 @@ public class EventManager : MonoBehaviour
     private List<JackEvent> EventList= new List<JackEvent>();
     public float minEventTime = 20;
     public float maxEventTime = 45;
-    private bool firstEvent;
-    
     // Start is called before the first frame update
     void Start()
     {
-       //faire un add pour chaque type d'évent
+        //faire un add pour chaque type d'évent
+      //  EventList.Add(new DecorationFallingEvent());
+        EventList.Add(new TurnOffLightsEvent());
         StartCoroutine(EventRoutine());
-        firstEvent = true;
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
+           
     }
 
     IEnumerator EventRoutine()
     {
-
-        while(true)
+        yield return new WaitForSeconds(Random.Range(minEventTime, maxEventTime));
+        int randomEventIndex = Random.Range(0, EventList.Count - 1);
+        
+        if (randomEventIndex < EventList.Count)
         {
-            if (firstEvent)
-            {
-                yield return new WaitForSeconds( Random.Range(minEventTime, maxEventTime));
-                firstEvent = false;
+            JackEvent randomEvent = EventList[randomEventIndex];
+            if (randomEvent != null) randomEvent.ExecuteEvent();
+            randomEvent.addListenerEventEnded(() => {
+                StartCoroutine(EventRoutine());
+                randomEvent.ClearListeners();
 
-            }
-
-            Debug.Log("Execute event!");
-            if (EventList.Count > 0) EventList[Random.Range(0, EventList.Count - 1)].ExecuteEvent();
-            yield return new WaitForSeconds(Random.Range(minEventTime, maxEventTime));
-
+            });
         }
         
     }

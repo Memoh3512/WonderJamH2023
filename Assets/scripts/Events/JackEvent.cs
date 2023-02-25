@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public abstract class JackEvent
 {
-    private UnityEvent onEventEnded;
+    protected UnityEvent onEventEnded;
 
 
     abstract public void ExecuteEvent();
@@ -20,10 +20,9 @@ public abstract class JackEvent
         onEventEnded.AddListener(action);
     }
 
-
-
-
-     
-
+    public void ClearListeners()
+    {
+        onEventEnded.RemoveAllListeners();
+    }
 
 }
