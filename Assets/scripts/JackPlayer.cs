@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class JackPlayer : MonoBehaviour
 {
     public List<Card> hand;
+    public List<CardHolder> holders;
     public int money;
     
     protected UnityEvent OnCardAskComplete;
