@@ -749,8 +749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bras_target: {fileID: 1229906828}
   rotation_base_obj: {fileID: 1577090717}
-  actual_hand: {fileID: 0}
-  actual_hand_transform: {fileID: 0}
+  actual_hand_transform: {fileID: 1118051071}
 --- !u!1 &2085188821
 GameObject:
   m_ObjectHideFlags: 0
