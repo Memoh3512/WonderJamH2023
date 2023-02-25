@@ -13,20 +13,23 @@ public class AIDecision
     public List<int> table_values;
     public int score;
     
-    public AIDecision(List<Card> ai_cards, List<Card> table_cards, Card dealer_card, bool intelligent)
+    public AIDecision(bool intelligent)
+    {
+        
+        this.intelligent = intelligent;
+       
+    }
+   
+    
+    public bool Pige(List<Card> ai_cards, List<Card> table_cards, Card dealer_card) 
     {
         this.ai_cards = ai_cards;
         this.table_cards = table_cards;
         this.dealer_card = dealer_card;
-        this.intelligent = intelligent;
         ai_values = CardValues(ai_cards);
         table_values = CardValues(table_cards);
         score = HandValue(ai_values);
-    }
-   
-    
-    public bool Pige() 
-    {
+
         bool pige = false;
         if (score < 21)
         {
