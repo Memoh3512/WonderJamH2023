@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 8015457723011822643}
   - component: {fileID: 8015457723011822641}
   - component: {fileID: 8015457723011822640}
+  - component: {fileID: 1616422559812491495}
   m_Layer: 0
   m_Name: Arms
   m_TagString: Untagged
@@ -234,6 +235,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jackPlayer: {fileID: 8015457722233002302}
+--- !u!95 &1616422559812491495
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8015457723011822642}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f3a919c72a97a764789419de155ae4d7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &8015457723210044931
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +353,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jackPlayer: {fileID: 8015457722233002302}
+  neutralFace: {fileID: 0}
+  susFace: {fileID: 0}
+  stressedFace: {fileID: 0}
+  happyFace: {fileID: 0}
+  sadFace: {fileID: 0}
+  fiouFace: {fileID: 0}
 --- !u!1 &8015457723602135099
 GameObject:
   m_ObjectHideFlags: 0

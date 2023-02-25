@@ -9,25 +9,66 @@ public class AIJackPlayer : JackPlayer
     public float distractionLevel;
     public bool intel = true;
     public AIDecision aiDecision;
+    
+    public bool lost = false;
+
+    public FacialExpressionManager expressionManager;
+    public HandGestureManager handGestureManager;
 
     public void Start()
     {
         aiDecision = new AIDecision(intel);
+        expressionManager = transform.GetComponentInChildren<FacialExpressionManager>();
+        handGestureManager = transform.GetComponentInChildren<HandGestureManager>();
+
+        StartCoroutine(testHitMiss());
     }
 
-    public bool lost = false;
+    IEnumerator testHitMiss()
+    {
+        handGestureManager.HitGesture();
+
+        yield return new WaitForSeconds(3);
+        
+        handGestureManager.HoldGesture();
+
+        yield return new WaitForSeconds(3);
+        
+        handGestureManager.HitGesture();
+    }
 
     public void Bet(int amount)
     {
+        StartCoroutine(BetRoutine(amount));
+    }
+
+    IEnumerator BetRoutine(int amount)
+    {
+        yield return new WaitForSeconds(Random.Range(1, 4));
         money -= amount;
         if (money < 0) Lose();
+        //TODO SFX Bet
+        OnBetEnd.Invoke();
     }
 
     public void Decide()
     {
-        //TODO decider si hit or miss
-        //bool pick = aiDecision.Pige(hand, table_hand, dealer_hand); //table_hand inclut la main du joueur et du dealer
+        StartCoroutine(DecideRoutine());
+    }
 
+    IEnumerator DecideRoutine()
+    {
+        //TODO decider si hit or miss
+        //TODO SFX Hummmmm
+        yield return new WaitForSeconds(Random.Range(10, 20));
+        //TODO SFX Haha!
+        Card dealerCard = DeckManager.GetDealerCards()[0];
+        if (dealerCard == null) Debug.LogError("DEALER A PAS DE CARTE WTFF");
+        bool hit = aiDecision.Pige(hand, DeckManager.GetAllCardsOnTable(), dealerCard); //table_hand inclut la main du joueur et du dealer
+        JackDecision decision = hit ? JackDecision.Hit : JackDecision.Hold;
+        OnDecideEnd.Invoke(decision);
+        
+        handGestureManager.HitGesture();
     }
 
     public void Lose()

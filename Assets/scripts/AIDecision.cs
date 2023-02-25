@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIDecision
+public class AIDecision //: MonoBehaviour
 {
     //Remplacer par get Card plus tard
     public List<Card> ai_cards;
@@ -20,7 +20,26 @@ public class AIDecision
        
     }
    
-    
+    /*public void Start()
+    {
+        intelligent = true;
+        List<Card> hand = new List<Card>();
+        List<Card> table_hand = new List<Card>();
+        Card dealer_hand = new Card(2, null);
+        hand.Add(new Card(4, null));
+        hand.Add(new Card(10, null));
+        table_hand.Add(new Card(4, null));
+        table_hand.Add(new Card(7, null));
+        table_hand.Add(new Card(2, null));
+        table_hand.Add(new Card(8, null));
+        table_hand.Add(new Card(10, null));
+        table_hand.Add(new Card(5, null));
+        table_hand.Add(new Card(11, null));
+        Debug.Log(Pige(hand, table_hand, dealer_hand));
+
+
+    }*/
+
     public bool Pige(List<Card> ai_cards, List<Card> table_cards, Card dealer_card) 
     {
         this.ai_cards = ai_cards;
@@ -33,30 +52,36 @@ public class AIDecision
         bool pige = false;
         if (score < 21)
         {
-            if (intelligent)
-            {
-                pige = SmartPigeCheck(score, table_values, dealer_card);
-            }
-            else
-            {
-                //pige = DumbPigeChecl()
-            }
+           pige = PigeCheck(score,ai_values, table_values, dealer_card, intelligent);
+            
         }
         return pige;
             
     }
     
     
-    public bool SmartPigeCheck(int score, List<int> table_values, Card dealer_card)
+    public bool PigeCheck(int score,List<int> hand_values,List<int> table_values, Card dealer_card, bool intel)
     {
         //Créer le nombre de carte de chaque value (index 0 = nombre de value 2)
         int[] all_cards = new int[] { 16, 16, 16, 16, 16, 16, 16, 16, 64, 16 };
         int[] remaining_cards = all_cards;
         bool pige = false;
-        foreach (int value in table_values)
+
+        if (intel)
         {
-            remaining_cards[value - 2] -= 1;
+            foreach (int value in table_values)
+            {
+                remaining_cards[value - 2] -= 1;
+            }
         }
+        else
+        {
+            foreach (int value in hand_values)
+            {
+                remaining_cards[value - 2] -= 1;
+            }
+        }
+        
         int nb_usefull_card = 0;
         for (int i = 0; i < 9; i++)
         {
@@ -74,35 +99,29 @@ public class AIDecision
             nb_remaining_card += remaining_cards[i];
         }
         float odds_of_usefull_card = (float)nb_usefull_card / (float)nb_remaining_card;
+        
         float rng = Random.Range(0f, 1);
+
         if (dealer_card.value >= 10){
-            if (odds_of_usefull_card >= rng * 0.8 )
+
+            odds_of_usefull_card = odds_of_usefull_card * 1.1f;
+
+            if (odds_of_usefull_card > 1)
             {
-                pige = true;
+                odds_of_usefull_card = Mathf.Floor(odds_of_usefull_card);
             }
+        }
+        if (intel)
+        {
+            pige = (1 - ((Mathf.Cos(Mathf.PI * odds_of_usefull_card) / 2) + 0.5f) >=rng);
         }
         else
         {
-            if (odds_of_usefull_card >= rng)
-            {
-                pige = true;
-            }
+            pige = (Mathf.Pow(odds_of_usefull_card,2) >= rng);
         }
+        
         return pige;
     }
-    
-
-
- 
-    
-        
-      
-      
-
-        
-        
-
-
 
     public int HandValue(List<int> hand)
     {
@@ -113,6 +132,7 @@ public class AIDecision
         foreach (int value in hand)
         {
             if (value == 11)
+
             {
                 nb_as += 1;
             }
@@ -135,12 +155,6 @@ public class AIDecision
         return score;
     }
 
-    
-
-
-
-
-
     public List<int> CardValues(List<Card> cards)
     {
         List<int> values = new List<int>();
@@ -150,12 +164,6 @@ public class AIDecision
         }
         return (values);
     }
-
-
-
-
-
-
 }
 
 

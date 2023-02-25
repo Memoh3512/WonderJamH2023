@@ -6,7 +6,7 @@ using UnityEngine;
 public class DestroyAfterX : MonoBehaviour
 {
 
-    private float delay;
+    public float delay;
 
     private void Start()
     {
