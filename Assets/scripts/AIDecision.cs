@@ -26,12 +26,15 @@ public class AIDecision //: MonoBehaviour
         List<Card> hand = new List<Card>();
         List<Card> table_hand = new List<Card>();
         Card dealer_hand = new Card(2, null);
-        hand.Add(new Card(4, null));
-        hand.Add(new Card(10, null));
+        hand.Add(new Card(6, null));
+        hand.Add(new Card(6, null));
         table_hand.Add(new Card(4, null));
         table_hand.Add(new Card(7, null));
         table_hand.Add(new Card(2, null));
         table_hand.Add(new Card(8, null));
+        table_hand.Add(new Card(10, null));
+        table_hand.Add(new Card(10, null));
+        table_hand.Add(new Card(7, null));
         table_hand.Add(new Card(10, null));
         table_hand.Add(new Card(5, null));
         table_hand.Add(new Card(11, null));
@@ -113,7 +116,7 @@ public class AIDecision //: MonoBehaviour
         }
         if (intel)
         {
-            pige = (1 - ((Mathf.Cos(Mathf.PI * odds_of_usefull_card) / 2) + 0.5f) >=rng);
+            pige = (odds_of_usefull_card >=rng);
         }
         else
         {
@@ -128,6 +131,8 @@ public class AIDecision //: MonoBehaviour
        
         int score = 0;
         int nb_as = 0;
+        int nb_as_un = 0;
+        int nb_as_onze = 0;
 
         foreach (int value in hand)
         {
@@ -139,19 +144,26 @@ public class AIDecision //: MonoBehaviour
             if (value == 11 && score + value > 21)
             {
                 score += 1;
+                nb_as_un += 1;
             }
             else
             {
                 score += value;
             }
-
+        }
+        nb_as_onze = nb_as - nb_as_un;
         
-        }
-        while (score > 21 && nb_as != 0)
+
+        if (nb_as_onze != 0)
         {
-            score -= 10;
-            nb_as -= 1;
+           while (score > 21 && nb_as_onze != 0)
+            {
+                score -= 10;
+                nb_as_onze -= 1;
+            }
+            
         }
+        
         return score;
     }
 

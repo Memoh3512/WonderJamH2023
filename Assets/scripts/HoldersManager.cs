@@ -9,7 +9,7 @@ public class HoldersManager : MonoBehaviour
 
     [SerializeField]
     public JackPlayer owner;
-    // Start is called before the first frame update
+
     void Start()
     {
         GetHolders();
