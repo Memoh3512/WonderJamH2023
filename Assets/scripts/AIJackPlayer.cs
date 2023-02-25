@@ -20,8 +20,8 @@ public class AIJackPlayer : JackPlayer
 
     public void Bet(int amount)
     {
-        tokens -= amount;
-        if (tokens < 0) Lose();
+        money -= amount;
+        if (money < 0) Lose();
     }
 
     public void Decide()
