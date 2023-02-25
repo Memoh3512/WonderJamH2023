@@ -7,18 +7,31 @@ public class AIDecision: MonoBehaviour
     //Remplacer par get Card plus tard
     List<Card> ai_cards = new List<Card>();
     List<Card> table_cards = new List<Card>();
-    Card dealer_card = new Card();
-    bool intelligent = true//Pour savoir si y pige de façon intelligente ou pas
+    Card dealer_card = new Card(11,null);
+    bool intelligent = true;//Pour savoir si y pige de façon intelligente ou pas
+    int score;
+    List<int> ai_values;
+    List<int> table_values;
 
-    List<int> ai_values = CardValues(ai_cards);
-    List<int> table_values = CardValues(table_cards);
 
-    int score = HandValue(ai_values);
-
-    
     public void Start()
     {
-
+        
+        ai_cards.Add(new Card(9,null));
+        ai_cards.Add(new Card(2, null));
+        table_cards.Add(new Card(9, null));
+        table_cards.Add(new Card(8, null));
+        table_cards.Add(new Card(10, null));
+        table_cards.Add(new Card(10, null));
+        table_cards.Add(new Card(6, null));
+        table_cards.Add(new Card(7, null));
+        table_cards.Add(new Card(11, null));
+        ai_values = CardValues(ai_cards);
+        table_values = CardValues(table_cards);
+        score = HandValue(ai_values);
+        Pige();
+        Debug.Log(score);
+        
     }
        
     
@@ -54,7 +67,7 @@ public class AIDecision: MonoBehaviour
         int nb_usefull_card = 0;
         for (int i = 0; i < 9; i++)
         {
-            if ((score + i + 2) =< 21)
+            if ((score + i + 2) <= 21)
             {
                 nb_usefull_card += remaining_cards[i];
             }
@@ -67,16 +80,18 @@ public class AIDecision: MonoBehaviour
         {
             nb_remaining_card += remaining_cards[i];
         }
-        float odds_of_usefull_card = nb_usefull_card / nb_remaining_card;
-        if (dealer_card.value => 10){
-            if (odds_of_usefull_card => 0.4)
+        float odds_of_usefull_card = (float)nb_usefull_card / (float)nb_remaining_card;
+        Debug.Log(nb_usefull_card);
+        Debug.Log(nb_remaining_card);
+        if (dealer_card.value >= 10){
+            if (odds_of_usefull_card >= 0.4)
             {
                 pige = true;
             }
         }
         else
         {
-            if (odds_of_usefull_card => 0.5)
+            if (odds_of_usefull_card >= 0.5)
             {
                 pige = true;
             }
@@ -97,20 +112,33 @@ public class AIDecision: MonoBehaviour
 
 
 
-    pubic int HandValue(List<int> hand)
+    public int HandValue(List<int> hand)
     {
         int score = 0;
-
+        int nb_as = 0;
         foreach (int value in hand)
         {
+            if (value == 11)
+            {
+                nb_as += 1;
+            }
             if (value == 11 && score + value > 21)
             {
-                value = 1;
+                score += 1;
+            }
+            else
+            {
+                score += value;
             }
 
-            score += value;
+        
         }
-
+        while (score > 21 && nb_as != 0)
+        {
+            score -= 10;
+            nb_as -= 1;
+        }
+        Debug.Log(nb_as);
         return score;
     }
 
@@ -122,7 +150,7 @@ public class AIDecision: MonoBehaviour
 
     public List<int> CardValues(List<Card> cards)
     {
-        List<int> values = new List<int>;
+        List<int> values = new List<int>();
         foreach (Card card in cards)
         {
             values.Add(card.value);
