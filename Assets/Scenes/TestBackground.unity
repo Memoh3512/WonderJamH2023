@@ -721,6 +721,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5795099325641063940, guid: fc312eceecc80144baa24e6ab7df2c7f, type: 3}
+      propertyPath: speed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795099325641063940, guid: fc312eceecc80144baa24e6ab7df2c7f, type: 3}
       propertyPath: bounding_collider
       value: 
       objectReference: {fileID: 1266592708}
@@ -771,6 +775,14 @@ PrefabInstance:
     - target: {fileID: 5795099325641063961, guid: fc312eceecc80144baa24e6ab7df2c7f, type: 3}
       propertyPath: m_Name
       value: Bras
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795099325799375585, guid: fc312eceecc80144baa24e6ab7df2c7f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795099325799375585, guid: fc312eceecc80144baa24e6ab7df2c7f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.41
       objectReference: {fileID: 0}
     - target: {fileID: 5795099326305652023, guid: fc312eceecc80144baa24e6ab7df2c7f, type: 3}
       propertyPath: m_SortingOrder
@@ -836,15 +848,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 6.1959467, y: -3.0311835}
+    - - {x: 5.816188, y: -2.3982518}
       - {x: 5.210723, y: -1.7618438}
       - {x: 3.3496203, y: -0.72182274}
       - {x: 0.15328658, y: -0.2813607}
       - {x: -3.1705241, y: -0.60038054}
       - {x: -5.114044, y: -1.6117709}
       - {x: -5.815458, y: -2.6205475}
-      - {x: -5.934146, y: -4.235633}
-      - {x: 6.0526085, y: -4.151243}
+      - {x: -5.9763412, y: -3.3073332}
+      - {x: 6.136999, y: -3.3495295}
 --- !u!4 &1266592709
 Transform:
   m_ObjectHideFlags: 0
