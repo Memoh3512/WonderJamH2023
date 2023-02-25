@@ -9,7 +9,8 @@ public class CardClickController : MonoBehaviour
     Color hoverColor;
     SpriteRenderer sr;
 
-    static bool handFull = false;
+    public static CardClickController heldCard;
+
     bool held = false;
     public bool inHolder = false;
     GameObject hand;
@@ -26,8 +27,35 @@ public class CardClickController : MonoBehaviour
         // hoverColor = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
     }
 
+    public void OnMouseEnter()
+    {
+        if (holder != null)
+        {
+            holder.GetComponent<CardHolder>().OnMouseEnter();
+        }
+    }
+
+    public void OnMouseExit()
+    {
+        if (holder != null)
+        {
+            holder.GetComponent<CardHolder>().OnMouseExit();
+        }
+    }
+
     public void OnMouseDown()
     {
+
+        if(holder == null && heldCard == null)
+        {
+            PickUpCard();
+        }
+        if(holder != null)
+        {
+            holder.GetComponent<CardHolder>().OnMouseDown();
+        }
+        
+        /*
         if (!held && !inHolder && !handFull)
         {
             //pickup card
@@ -35,28 +63,52 @@ public class CardClickController : MonoBehaviour
             gameObject.transform.parent = hand.transform;
             handFull = true;
             held = true;
-
+            HeldCard = gameObject;
             if (holder != null)
             {
                 if (holder.GetComponent<CardHolder>().owner != null)
                 {
                     DeckManager.PlayerCards[holder.GetComponent<CardHolder>().owner].Remove(cardRep.card);
-                }   
+                }
             }
 
         }
-        else if(holder != null)
+        else if(holder != null && holder.GetComponent<CardHolder>().hovered)
         {
             //drop card
             gameObject.transform.position = holder.transform.position;
             gameObject.transform.parent = holder.transform;
-            held = false;
             handFull = false;
             inHolder = true;
+            held = true;
             holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
 
-        }
+        }*/
         
+    }
+
+    public void PickUpCard()
+    {
+        gameObject.transform.position = hand.transform.position;
+        gameObject.transform.parent = hand.transform;
+        heldCard = this;
+        if (holder != null)
+        {
+            if (holder.GetComponent<CardHolder>().owner != null)
+            {
+                DeckManager.PlayerCards[holder.GetComponent<CardHolder>().owner].Remove(cardRep.card);
+            }
+        }
+
+    }
+
+
+    public void PutDownCard(GameObject holder)
+    {
+        gameObject.transform.position = holder.transform.position;
+        gameObject.transform.parent = holder.transform;
+        heldCard = null;
+        holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
     }
 
 }
