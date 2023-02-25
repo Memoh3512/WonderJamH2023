@@ -92,6 +92,7 @@ public class BlackJackManager : MonoBehaviour
                     {
                         waitAmount++;
                         decisions.Add(player, decision);
+                        player.RemoveDecideEndListener();
                     });
                 }
                 yield return new WaitUntil(() => waitAmount == players.Length);
@@ -117,7 +118,7 @@ public class BlackJackManager : MonoBehaviour
                     }
                 }
 
-                yield return new WaitUntil(() => waitAmount == toWait);   
+                yield return new WaitUntil(() => waitAmount == toWait);
             }
 
             //croupier
