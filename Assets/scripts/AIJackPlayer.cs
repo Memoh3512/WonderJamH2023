@@ -21,7 +21,8 @@ public class AIJackPlayer : JackPlayer
         expressionManager = transform.GetComponentInChildren<FacialExpressionManager>();
         handGestureManager = transform.GetComponentInChildren<HandGestureManager>();
 
-        StartCoroutine(testHitMiss());
+        //StartCoroutine(testHitMiss());
+        StartCoroutine(SuspicionCooldown());
     }
 
     IEnumerator testHitMiss()
@@ -74,6 +75,40 @@ public class AIJackPlayer : JackPlayer
     public void Lose()
     {
         lost = true;
+    }
+
+    public void WitnessIllegalAction()
+    {
+        suspicion += (100 - distractionLevel);
+        if (suspicion > 100)
+        {
+            suspicion = 100;
+        }
+
+        if (suspicion >= 100)
+        {
+            BlackJackManager.GameEnd(false);
+        }
+
+        if (suspicion > 25)
+        {
+            expressionManager.StressedExpression();
+        } else if (suspicion > 50)
+        {
+            expressionManager.SusExpression();
+        }
+    }
+
+    IEnumerator SuspicionCooldown()
+    {
+        while (!lost)
+        {
+            if (suspicion > 0)
+            {
+                suspicion -= 2;
+            }
+            yield return new WaitForSeconds(1);
+        }
     }
 
     #region Events
