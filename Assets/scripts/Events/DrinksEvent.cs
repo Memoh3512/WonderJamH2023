@@ -40,7 +40,7 @@ public class DrinksEvent : JackEvent
             timeElapsed += Time.deltaTime;
             waiter.transform.position = new Vector3( walkingXCurve.Evaluate(timeElapsed), walkingYCurve.Evaluate(timeElapsed), posInitiale.z);
         }
-        posX = -2;
+        posX = -4;
 
         BlackJackManager.DistractAll(10);
         yield return new WaitForSeconds(1);

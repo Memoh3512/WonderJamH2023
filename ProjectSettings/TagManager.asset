@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Card
   - DrinkGuySpawn
+  - Glass1Spawn
+  - Glass2Spawn
+  - Glass3Spawn
   layers:
   - Default
   - TransparentFX
