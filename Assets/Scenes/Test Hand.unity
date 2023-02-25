@@ -453,8 +453,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 3.1794295, y: 1.0536144}
-      - {x: -2.9634256, y: 1.0424216}
+    - - {x: 1.7567136, y: -0.5345334}
+      - {x: -1.9046606, y: -0.3472079}
       - {x: -2.980464, y: -4.4466105}
       - {x: 3.3521, y: -4.446611}
 --- !u!4 &856296287
@@ -808,9 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5130a466fbd1e4eb36f60837c087c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bras_target: {fileID: 1229906828}
-  rotation_base_obj: {fileID: 1577090717}
-  actual_hand_transform: {fileID: 1118051071}
+  bras_target_transform: {fileID: 1229906829}
   bounding_collider: {fileID: 856296286}
 --- !u!1 &2085188821
 GameObject:

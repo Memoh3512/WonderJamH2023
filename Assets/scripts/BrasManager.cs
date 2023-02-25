@@ -9,17 +9,17 @@ public class BrasManager : MonoBehaviour
     private bool canMove = true;
     private Camera camera;
     private Transform rotation_base;
-    private Transform bras_target_transform;
-    public GameObject bras_target;
-    public GameObject rotation_base_obj;
-    public Transform actual_hand_transform;
+    public Transform bras_target_transform;
     public PolygonCollider2D bounding_collider;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        bras_target_transform.position = bounding_collider.ClosestPoint(bras_target_transform.position);
+    }
     void Start()
     {
         camera = Camera.main;
-        rotation_base = camera.GetComponent<Transform>();
-        bras_target_transform = bras_target.GetComponent<Transform>();
     }
 
     // Update is called once per frame
