@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DeckManager
 {
+    public static List<Card> OgDeck;
     public static List<Card> Deck;
     public static List<Card> KnownCards;
 
@@ -21,6 +22,7 @@ public class DeckManager
 
     public static Card DrawCard(JackPlayer player)
     {
+        if (Deck.Count == 0) ResetDeck();
         int cardIndex = Random.Range(0, Deck.Count - 1);
         if (cardIndex < 0 || cardIndex >= Deck.Count)
         {
@@ -35,6 +37,12 @@ public class DeckManager
 
         return cardToDraw;
 
+    }
+
+    public static void ResetDeck()
+    {
+        Deck = new List<Card>(OgDeck);
+        PlayerCards.Clear();
     }
 
     public static List<Card> GetCardsForPlayer(JackPlayer player)
