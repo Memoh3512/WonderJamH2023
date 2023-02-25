@@ -23,6 +23,7 @@ public class BlackJackManager : MonoBehaviour
     
     IEnumerator GameRoutine()
     {
+        yield return new WaitForSeconds(2);
         AIJackPlayer[] players = FindObjectsOfType<AIJackPlayer>();
         GameObject selfObject = GameObject.FindGameObjectWithTag("Player");
         if (selfObject == null) Debug.LogError("SELFObject NULL DANS GAME ROUTINE T CON");
@@ -44,7 +45,11 @@ public class BlackJackManager : MonoBehaviour
             {
                 player.AddOnLoseListener(() => lostPlayers++);
                 player.Bet(10);
-                player.AddOnBetEndListener(() => waitAmount++);
+                player.AddOnBetEndListener(() =>
+                {
+                    waitAmount++;
+                    Debug.Log("Bet end");
+                });
             }
             yield return new WaitUntil(() => waitAmount == players.Length);
 
@@ -155,21 +160,50 @@ public class BlackJackManager : MonoBehaviour
     public static void Distract(AIJackPlayer player, float distractionValue)
     {
         //distraction
-        player.distractionLevel = distractionValue;
+        if (player.distractionLevel + distractionValue > 100)
+        {
+            player.distractionLevel = 100;
+        }
+        else
+        {
+            player.distractionLevel = distractionValue;
+        }
     }
 
     public static void DistractAll(float distractionValue)
     {
-        AIJackPlayer[] ais = Object.FindObjectsOfType<AIJackPlayer>();
+        AIJackPlayer[] ais = FindObjectsOfType<AIJackPlayer>();
         foreach (AIJackPlayer player in ais)
         {
             Distract(player, distractionValue);
         }
     }
 
-    static void GameEnd()
+    public static void DoIllegalAction()
     {
-        
+        AIJackPlayer[] ais = FindObjectsOfType<AIJackPlayer>();
+        foreach (AIJackPlayer player in ais)
+        {
+            Sussify(player);
+        }
+    }
+
+    public static void Sussify(AIJackPlayer player)
+    {
+        player.WitnessIllegalAction();
+    }
+
+    public static void GameEnd(bool win)
+    {
+        if (win)
+        {
+            //TODO load win scene
+        }
+        else
+        {
+            //TODO SFX Get beaten up
+            //TODO load lose scene
+        }
     }
 
 }

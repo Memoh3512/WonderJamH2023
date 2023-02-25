@@ -42,30 +42,39 @@ public class JackPlayer : MonoBehaviour
 
         int score = 0;
         int nb_as = 0;
+        int nb_as_un = 0;
+        int nb_as_onze = 0;
 
         foreach (int value in values)
         {
             if (value == 11)
+
             {
                 nb_as += 1;
             }
             if (value == 11 && score + value > 21)
             {
                 score += 1;
+                nb_as_un += 1;
             }
             else
             {
                 score += value;
             }
-
-
         }
-        while (score > 21 && nb_as != 0)
+        nb_as_onze = nb_as - nb_as_un;
+
+
+        if (nb_as_onze != 0)
         {
-            score -= 10;
-            nb_as -= 1;
+            while (score > 21 && nb_as_onze != 0)
+            {
+                score -= 10;
+                nb_as_onze -= 1;
+            }
+
         }
-        Debug.Log(nb_as);
+
         return score;
     }
 
