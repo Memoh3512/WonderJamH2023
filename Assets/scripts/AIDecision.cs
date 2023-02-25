@@ -84,7 +84,7 @@ public class AIDecision: MonoBehaviour
         Debug.Log(nb_usefull_card);
         Debug.Log(nb_remaining_card);
         float rng = Random.Range(0f, 1);
-        Debug.Log(lol);
+        Debug.Log(rng);
         if (dealer_card.value >= 10){
             if (odds_of_usefull_card >= rng * 0.8 )
             {
