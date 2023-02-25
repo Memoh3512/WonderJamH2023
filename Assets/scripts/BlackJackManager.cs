@@ -116,24 +116,26 @@ public class BlackJackManager : MonoBehaviour
             }
 
             //croupier
+            //if GetHandValue >= 17, fini le tour, sinon ask for card
             waitAmount = 0;
             TurnIndicator.SetText("Draw self cards");
-            //if GetHandValue >= 17, fini le tour, sinon ask for card
-            
-            self.AskForCards(1);
-            self.AddOnCardAskCompleteListener(() =>
+            if (self.HandValue(DeckManager.GetCardsForPlayer(self)) < 17)
             {
-                waitAmount++;
-                self.RemoveCardAskListener();
-            });
+                self.AskForCards(1);
+                self.AddOnCardAskCompleteListener(() =>
+                {
+                    waitAmount++;
+                    self.RemoveCardAskListener();
+                });
+                yield return new WaitUntil(() => waitAmount == 1);
+            }
 
-            yield return new WaitUntil(() => waitAmount == 1);
-            
             //end turn
             foreach (AIJackPlayer player in players)
             {
                 player.RemoveRoundListeners();
-                //TODO call ramassage de cartes
+                //TODO call ramassage de cartes ici
+                DeckManager.ResetDeck();
             }
         }
         yield return null;
