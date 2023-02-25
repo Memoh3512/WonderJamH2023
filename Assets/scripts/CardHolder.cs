@@ -8,7 +8,6 @@ public class CardHolder : MonoBehaviour
     Color originialColor;
     Color hoverColor;
     SpriteRenderer sr;
-    List<GameObject> hoveredCards;
     private CardRepresentation cardRep;
     private JackPlayer owner;
 
@@ -19,15 +18,12 @@ public class CardHolder : MonoBehaviour
 
     public bool active = false;
     public bool required = false;
-    public bool hovered = false;
-    public bool clicked = false;
     private void Start()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
         cardRep = GetComponent<CardRepresentation>();
         originialColor = new Color(sr.color.r, sr.color.g, sr.color.b, 0.75f);
         hoverColor = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
-        hoveredCards = new List<GameObject>();
     }
 
     public void SetOwner(JackPlayer newOwner)
@@ -40,7 +36,7 @@ public class CardHolder : MonoBehaviour
         this.holdersManager = holdersManager;
     }
 
-    public void OnMouseDown()
+    public virtual void OnMouseDown()
     {
         if(heldCard == null)
         {
@@ -53,7 +49,7 @@ public class CardHolder : MonoBehaviour
         }
         else if(CardClickController.heldCard == null)
         {
-            heldCard.PickUpCard();
+            heldCard.PickUpCard(gameObject);
             heldCard = null;
             holdersManager.CardRemoved();
         }
@@ -61,24 +57,9 @@ public class CardHolder : MonoBehaviour
         {
             CardClickController temp = CardClickController.heldCard;
             CardClickController.heldCard.PutDownCard(gameObject);
-            heldCard.PickUpCard();
+            heldCard.PickUpCard(gameObject);
             heldCard = temp;
         }
-       /* clicked = true;
-        cardRep.card = null;
-        if (hoveredCards.Count == 2) CardClickController.handFull = false;
-        foreach(GameObject c in hoveredCards)
-        {
-            CardClickController ccc = c.GetComponent<CardClickController>();
-            ccc.inHolder = false;
-            ccc.OnMouseDown();
-        }
-        if (hoveredCards.Count == 1)
-        {
-            if (CardClickController.handFull) holdersManager.CardRemoved();
-            else holdersManager.CardAdded();
-        }
-        clicked = false;*/
 
     }
 
@@ -99,15 +80,13 @@ public class CardHolder : MonoBehaviour
     {
         sr.color = originialColor;
         if(CardClickController.heldCard != null)
-        CardClickController.heldCard.holder = null;
-        hovered = false;
+            CardClickController.heldCard.holder = null;
     }
     public void OnMouseEnter()
     {
         sr.color = hoverColor;
         if (CardClickController.heldCard != null)
             CardClickController.heldCard.holder = gameObject;
-        hovered = true;
     }
 
 
