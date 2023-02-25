@@ -14,6 +14,10 @@ public class DeckManager
         if (OgDeck == null) OgDeck = new List<Card>();
         if (Deck == null) Deck = new List<Card>();
         if (PlayerCards == null) PlayerCards = new Dictionary<JackPlayer, List<Card>>();
+        foreach (JackPlayer player in GameObject.FindObjectsOfType<JackPlayer>())
+        {
+            PlayerCards.Add(player, new List<Card>());
+        }
         Deck.Clear();
         PlayerCards.Clear();
     }
