@@ -15,6 +15,12 @@ public class DecorationFallingEvent : JackEvent
 
     }
 
+
+    public void Distract()
+    {
+        BlackJackManager.StartGlobalCoroutine(Distraction());
+    }
+
     IEnumerator Distraction()
     {
         BlackJackManager.DistractAll(10);
