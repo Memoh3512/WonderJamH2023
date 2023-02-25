@@ -7,14 +7,13 @@ public class AIJackPlayer : JackPlayer
 {
     public float suspicion;
     public float distractionLevel;
-    public int tokens = 50;
 
     public bool lost = false;
 
     public void Bet(int amount)
     {
-        tokens -= amount;
-        if (tokens < 0) Lose();
+        money -= amount;
+        if (money < 0) Lose();
     }
 
     public void Decide()
