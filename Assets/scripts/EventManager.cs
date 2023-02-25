@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    private List<int> EventList= new List<int>();
+    private List<JackEvent> EventList= new List<JackEvent>();
     public float minEventTime;
     public float maxEventTime;
     
     // Start is called before the first frame update
     void Start()
     {
-        EventList.Add(1);
-        EventList.Add(2);
+       //faire un add pour chaque type d'évent
         minEventTime = 20;
         maxEventTime = 45;
         StartCoroutine(EventRoutine());
@@ -33,8 +32,8 @@ public class EventManager : MonoBehaviour
         {
           
             yield return new WaitForSeconds( Random.Range(minEventTime, maxEventTime));
-            //le toString est pas la bonne chose j'ai juste pas encore le Event dans la list
-            EventList[Random.Range(0, EventList.Count - 1)].ToString();
+           
+            EventList[Random.Range(0, EventList.Count - 1)].ExecuteEvent();
 
 
 
