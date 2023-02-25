@@ -16,7 +16,10 @@ public class AIDecision: MonoBehaviour
     int score = HandValue(ai_values);
 
     
+    public void Start()
+    {
 
+    }
        
     
     public bool Pige() 
