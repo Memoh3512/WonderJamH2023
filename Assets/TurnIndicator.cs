@@ -13,7 +13,7 @@ public class TurnIndicator : MonoBehaviour
        instance = this; 
     }
     
-    static void SetText(string text)
+    public static void SetText(string text)
     {
         if (instance != null)
         {

@@ -10,13 +10,15 @@ public class DeckInitializer : MonoBehaviour
     void Start()
     {
         if (allCards == null) return;
+        DeckManager.ResetDeck();
         for (int i = 0; i < nbDecks; i++)
         {
             foreach (Card card in allCards)
             {
-                DeckManager.Deck.Add(new Card(card.value, card.sprite));
-            }   
+                DeckManager.OgDeck.Add(new Card(card.value, card.sprite));
+            }
         }
+        DeckManager.Deck.AddRange(DeckManager.OgDeck);
     }
 
     // Update is called once per frame
