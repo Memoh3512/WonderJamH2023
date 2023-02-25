@@ -12,7 +12,15 @@ public class DecorationFallingEvent : JackEvent
 
     public override void ExecuteEvent()
     {
+        List<GameObject> decorations = new List<GameObject>(GameObject.FindGameObjectsWithTag("Decoration"));
+        if (decorations.Count == 0) return;
 
+        GameObject deco = decorations[Random.Range(0, decorations.Count)];
+
+        shaker s = deco.AddComponent<shaker>();
+
+        s.addListenerShakeEnded(Distract);
+        
     }
 
 

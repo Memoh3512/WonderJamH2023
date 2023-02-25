@@ -10,34 +10,44 @@ public class shaker : MonoBehaviour
     public float shakeTime = 0;
     public float fallTime = 0;
     private float timeFalling = 0;
+    private bool falling = false;
     public AnimationCurve shakeCurve;
     private bool stop = false;
 
     private UnityEvent onShakeEnded;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void Update()
     {
+        if (shakeCurve == null) return;
         if (!stop)
         {
             timeElapsed += Time.deltaTime;
-            if (canFall) timeFalling += Time.deltaTime;
+            if (falling) timeFalling += Time.deltaTime;
             if (timeElapsed >= shakeTime)
             {
-                canFall = true;
-                if (timeFalling >= fallTime)
+                if (!canFall)
                 {
-                    transform.position += new Vector3(0, timeFalling, 0);
                     stop = true;
-                    onShakeEnded.Invoke();
-
-
+                    if (onShakeEnded != null) onShakeEnded.Invoke();
+                    Destroy(gameObject);
                 }
+                else
+                {
+                    falling = true;
+                    if (timeFalling >= fallTime)
+                    {
+                        stop = true;
+                        if (onShakeEnded != null) onShakeEnded.Invoke();
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        transform.position -= new Vector3(0, timeFalling, 0);
+                    }
+                }
+
 
             }
             else
