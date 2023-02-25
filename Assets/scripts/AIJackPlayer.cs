@@ -10,24 +10,19 @@ public class AIJackPlayer : JackPlayer
     public float distractionLevel;
     public bool intel = true;
     public AIDecision aiDecision;
-
-    public void Start()
-    {
-        aiDecision = new AIDecision(intel);
-    }
-
+    
     public bool lost = false;
 
     public FacialExpressionManager expressionManager;
     public HandGestureManager handGestureManager;
 
-    private void Start()
+    public void Start()
     {
+        aiDecision = new AIDecision(intel);
         expressionManager = transform.GetComponentInChildren<FacialExpressionManager>();
         handGestureManager = transform.GetComponentInChildren<HandGestureManager>();
 
         StartCoroutine(testHitMiss());
-
     }
 
     IEnumerator testHitMiss()
