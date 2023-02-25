@@ -33,6 +33,8 @@ public class EventManager : MonoBehaviour
         {
           
             yield return new WaitForSeconds( Random.Range(minEventTime, maxEventTime));
+            //le toString est pas la bonne chose j'ai juste pas encore le Event dans la list
+            EventList[Random.Range(0, EventList.Count - 1)].ToString();
 
 
 
