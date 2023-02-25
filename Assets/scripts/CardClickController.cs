@@ -5,10 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(CardRepresentation))]
 public class CardClickController : MonoBehaviour
 {
-    Color originialColor;
-    Color hoverColor;
-    SpriteRenderer sr;
-
     public static CardClickController heldCard;
 
     bool held = false;
@@ -17,14 +13,10 @@ public class CardClickController : MonoBehaviour
     public GameObject holder;
 
     private CardRepresentation cardRep;
-    // Start is called before the first frame update
     void Start()
     {
         hand = GameObject.Find("Hand");
-        //sr = gameObject.GetComponent<SpriteRenderer>();
         cardRep = GetComponent<CardRepresentation>();
-        // originialColor = new Color(sr.color.r, sr.color.g, sr.color.b, 0.75f);
-        // hoverColor = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
     }
 
     public void OnMouseEnter()
@@ -54,40 +46,10 @@ public class CardClickController : MonoBehaviour
         {
             holder.GetComponent<CardHolder>().OnMouseDown();
         }
-        
-        /*
-        if (!held && !inHolder && !handFull)
-        {
-            //pickup card
-            gameObject.transform.position = hand.transform.position;
-            gameObject.transform.parent = hand.transform;
-            handFull = true;
-            held = true;
-            HeldCard = gameObject;
-            if (holder != null)
-            {
-                if (holder.GetComponent<CardHolder>().owner != null)
-                {
-                    DeckManager.PlayerCards[holder.GetComponent<CardHolder>().owner].Remove(cardRep.card);
-                }
-            }
-
-        }
-        else if(holder != null && holder.GetComponent<CardHolder>().hovered)
-        {
-            //drop card
-            gameObject.transform.position = holder.transform.position;
-            gameObject.transform.parent = holder.transform;
-            handFull = false;
-            inHolder = true;
-            held = true;
-            holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
-
-        }*/
-        
+               
     }
 
-    public void PickUpCard()
+    public void PickUpCard(GameObject holder = null)
     {
         gameObject.transform.position = hand.transform.position;
         gameObject.transform.parent = hand.transform;
