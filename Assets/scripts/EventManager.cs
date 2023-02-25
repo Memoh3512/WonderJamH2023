@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
     private List<JackEvent> EventList= new List<JackEvent>();
     public float minEventTime;
     public float maxEventTime;
+    private bool firstEvent;
     
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,7 @@ public class EventManager : MonoBehaviour
         minEventTime = 20;
         maxEventTime = 45;
         StartCoroutine(EventRoutine());
+        firstEvent = true;
         
     }
 
@@ -30,10 +32,17 @@ public class EventManager : MonoBehaviour
 
         while(true)
         {
-          
-            yield return new WaitForSeconds( Random.Range(minEventTime, maxEventTime));
-           
+            if (firstEvent)
+            {
+                yield return new WaitForSeconds( Random.Range(minEventTime, maxEventTime));
+                firstEvent = false;
+
+            }
+
+
             EventList[Random.Range(0, EventList.Count - 1)].ExecuteEvent();
+            yield return new WaitForSeconds(Random.Range(minEventTime, maxEventTime));
+           
 
 
 
