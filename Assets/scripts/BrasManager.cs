@@ -7,7 +7,7 @@ using UnityEngine;
 public class BrasManager : MonoBehaviour
 {
     private bool canMove = true;
-    private Camera camera;
+    private Camera world_camera;
     private Transform rotation_base;
     public Transform bras_target_transform;
     public PolygonCollider2D bounding_collider;
@@ -19,7 +19,7 @@ public class BrasManager : MonoBehaviour
     }
     void Start()
     {
-        camera = Camera.main;
+        world_camera = Camera.main;
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class BrasManager : MonoBehaviour
     {
         if (canMove)
         {
-            Vector3 world_mouse_pos = camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 world_mouse_pos = world_camera.ScreenToWorldPoint(Input.mousePosition);
             world_mouse_pos.z = 0;
 
             float speed = 5f;
