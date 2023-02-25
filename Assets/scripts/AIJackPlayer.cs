@@ -6,5 +6,5 @@ public class AIJackPlayer : JackPlayer
 {
     public float suspicion;
     public float distractionLevel;
-
+    
 }
