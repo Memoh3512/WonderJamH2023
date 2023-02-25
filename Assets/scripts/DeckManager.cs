@@ -9,8 +9,9 @@ public class DeckManager
 
     public static Dictionary<JackPlayer, List<Card>> PlayerCards;
 
-    public void Reset()
+    public static void Reset()
     {
+        if (OgDeck == null) OgDeck = new List<Card>();
         if (Deck == null) Deck = new List<Card>();
         if (PlayerCards == null) PlayerCards = new Dictionary<JackPlayer, List<Card>>();
         Deck.Clear();
