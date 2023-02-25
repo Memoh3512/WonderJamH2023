@@ -12,11 +12,16 @@ public class CardClickController : MonoBehaviour
     GameObject hand;
     public GameObject holder;
 
-    private CardRepresentation cardRep;
+    public SpriteRenderer side1;
+    public SpriteRenderer side2;
+
+    public CardRepresentation cardRep;
     void Start()
     {
         hand = GameObject.Find("Hand");
         cardRep = GetComponent<CardRepresentation>();
+        side1 = transform.Find("Side1").GetComponent<SpriteRenderer>();
+        side2 = transform.Find("Side2").GetComponent<SpriteRenderer>();
     }
 
     public void OnMouseEnter()
@@ -49,10 +54,18 @@ public class CardClickController : MonoBehaviour
                
     }
 
+    public void flipCard()
+    {
+        Sprite temp = side1.sprite;
+        side1.sprite = side2.sprite;
+        side2.sprite = temp;
+    }
+
     public void PickUpCard(GameObject holder = null)
     {
-        gameObject.transform.position = hand.transform.position;
-        gameObject.transform.parent = hand.transform;
+        transform.position = hand.transform.position;
+        transform.rotation = hand.transform.rotation;
+        transform.parent = hand.transform;
         heldCard = this;
         if (holder != null)
         {
@@ -67,8 +80,9 @@ public class CardClickController : MonoBehaviour
 
     public void PutDownCard(GameObject holder)
     {
-        gameObject.transform.position = holder.transform.position;
-        gameObject.transform.parent = holder.transform;
+        transform.position = holder.transform.position;
+        transform.rotation = holder.transform.rotation;
+        transform.parent = holder.transform;
         heldCard = null;
         holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
     }

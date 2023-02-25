@@ -18,8 +18,6 @@ public class CardHolder : MonoBehaviour
 
     public bool active = false;
     public bool required = false;
-    public bool hovered = false;
-    public bool clicked = false;
     private void Start()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -82,15 +80,13 @@ public class CardHolder : MonoBehaviour
     {
         sr.color = originialColor;
         if(CardClickController.heldCard != null)
-        CardClickController.heldCard.holder = null;
-        hovered = false;
+            CardClickController.heldCard.holder = null;
     }
     public void OnMouseEnter()
     {
         sr.color = hoverColor;
         if (CardClickController.heldCard != null)
             CardClickController.heldCard.holder = gameObject;
-        hovered = true;
     }
 
 

@@ -17,8 +17,12 @@ public class Deck : CardHolder
             }
             else
             {
-                //Give new generated card to CardClickController.heldCard
-
+                Card newCard = DeckManager.DrawCard();
+                GameObject card = Instantiate<GameObject>(Resources.Load<GameObject>("Card"));
+                card.GetComponent<CardClickController>().side1.sprite = Resources.Load<Sprite>("BackCard");
+                card.GetComponent<CardClickController>().side2.sprite = newCard.sprite;
+                card.GetComponent<CardClickController>().cardRep.card = newCard;
+                card.GetComponent<CardClickController>().PickUpCard();
             }
         }
         else
