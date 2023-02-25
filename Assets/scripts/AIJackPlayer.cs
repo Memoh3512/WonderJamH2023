@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,33 @@ public class AIJackPlayer : JackPlayer
     public float distractionLevel;
     public bool intel = true;
     public AIDecision aiDecision;
+    
+    public bool lost = false;
+
+    public FacialExpressionManager expressionManager;
+    public HandGestureManager handGestureManager;
 
     public void Start()
     {
         aiDecision = new AIDecision(intel);
+        expressionManager = transform.GetComponentInChildren<FacialExpressionManager>();
+        handGestureManager = transform.GetComponentInChildren<HandGestureManager>();
+
+        StartCoroutine(testHitMiss());
     }
 
-    public bool lost = false;
+    IEnumerator testHitMiss()
+    {
+        handGestureManager.HitGesture();
+
+        yield return new WaitForSeconds(3);
+        
+        handGestureManager.HoldGesture();
+
+        yield return new WaitForSeconds(3);
+        
+        handGestureManager.HitGesture();
+    }
 
     public void Bet(int amount)
     {
@@ -28,6 +49,7 @@ public class AIJackPlayer : JackPlayer
         //TODO decider si hit or miss
         //bool pick = aiDecision.Pige(hand, table_hand, dealer_hand); //table_hand inclut la main du joueur et du dealer
 
+        handGestureManager.HitGesture();
     }
 
     public void Lose()
