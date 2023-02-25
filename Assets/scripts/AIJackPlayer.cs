@@ -27,6 +27,7 @@ public class AIJackPlayer : JackPlayer
     public void Decide()
     {
         //TODO decider si hit or miss
+        bool pick = aiDecision.Pige(hand, table_hand,dealer_hand) //table_hand inclut la main du joueur et du dealer
 
     }
 
