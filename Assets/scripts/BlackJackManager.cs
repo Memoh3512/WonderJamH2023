@@ -19,7 +19,9 @@ public class BlackJackManager : MonoBehaviour
     IEnumerator GameRoutine()
     {
         AIJackPlayer[] players = FindObjectsOfType<AIJackPlayer>();
-        JackPlayer self = GameObject.FindGameObjectWithTag("Player").GetComponent<JackPlayer>();
+        GameObject selfObject = GameObject.FindGameObjectWithTag("Player");
+        if (selfObject == null) Debug.LogError("SELFObject NULL DANS GAME ROUTINE T CON");
+        JackPlayer self = selfObject.GetComponent<JackPlayer>();
         if (self == null)
         {
             Debug.LogError("SELF NULL DANS GAME ROUTINE T CON");
