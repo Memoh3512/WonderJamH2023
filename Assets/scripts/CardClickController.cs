@@ -49,6 +49,7 @@ public class CardClickController : MonoBehaviour
         {
             //drop card
             gameObject.transform.position = holder.transform.position;
+            gameObject.transform.position = gameObject.transform.Find("Side1").transform.position;
             gameObject.transform.parent = holder.transform;
             held = false;
             handFull = false;
