@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FacialExpressionManager : MonoBehaviour
 {
+
+    public AIJackPlayer jackPlayer;
     // Start is called before the first frame update
     void Start()
     {

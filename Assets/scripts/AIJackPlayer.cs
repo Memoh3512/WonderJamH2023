@@ -7,19 +7,27 @@ public class AIJackPlayer : JackPlayer
 {
     public float suspicion;
     public float distractionLevel;
-    public int tokens = 50;
+    public bool intel = true;
+    public AIDecision aiDecision;
+
+    public void Start()
+    {
+        aiDecision = new AIDecision(intel);
+    }
 
     public bool lost = false;
 
     public void Bet(int amount)
     {
-        tokens -= amount;
-        if (tokens < 0) Lose();
+        money -= amount;
+        if (money < 0) Lose();
     }
 
     public void Decide()
     {
         //TODO decider si hit or miss
+        //bool pick = aiDecision.Pige(hand, table_hand, dealer_hand); //table_hand inclut la main du joueur et du dealer
+
     }
 
     public void Lose()
