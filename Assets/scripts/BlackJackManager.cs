@@ -1,12 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-public class BlackJackManager
+public class BlackJackManager : MonoBehaviour
 {
+
+    public static BlackJackManager instance;
+    public static bool GameOngoing = false;
+    
+    private void Start()
+    {
+        instance = this;
+        StartCoroutine(GameRoutine());
+    }
+    
     IEnumerator GameRoutine()
     {
-        yield return new WaitForSeconds(0);
+        AIJackPlayer[] playersQueried = FindObjectsOfType<AIJackPlayer>();
+        GameOngoing = true;
+        yield return null;
+
+    }
+
+    static void StartGlobalCoroutine(IEnumerator routine)
+    {
+        if (instance != null)
+        {
+            instance.StartCoroutine(routine);
+        }
     }
 
     public static void Distract(AIJackPlayer player, float distractionValue)
@@ -23,4 +46,10 @@ public class BlackJackManager
             Distract(player, distractionValue);
         }
     }
+
+    static void GameEnd()
+    {
+        
+    }
+
 }
