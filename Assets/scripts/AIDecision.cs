@@ -83,15 +83,17 @@ public class AIDecision: MonoBehaviour
         float odds_of_usefull_card = (float)nb_usefull_card / (float)nb_remaining_card;
         Debug.Log(nb_usefull_card);
         Debug.Log(nb_remaining_card);
+        float rng = Random.Range(0f, 1);
+        Debug.Log(lol);
         if (dealer_card.value >= 10){
-            if (odds_of_usefull_card >= 0.4)
+            if (odds_of_usefull_card >= rng * 0.8 )
             {
                 pige = true;
             }
         }
         else
         {
-            if (odds_of_usefull_card >= 0.5)
+            if (odds_of_usefull_card >= rng)
             {
                 pige = true;
             }
@@ -112,11 +114,18 @@ public class AIDecision: MonoBehaviour
 
 
 
-    public int HandValue(List<int> hand)
+    public int HandValue(List<Card> hand)
     {
+        List<int> values = new List<int>();
+        foreach (Card card in hand)
+        {
+            values.Add(card.value);
+        }
+       
         int score = 0;
         int nb_as = 0;
-        foreach (int value in hand)
+
+        foreach (int value in values)
         {
             if (value == 11)
             {
