@@ -11,6 +11,8 @@ public class BrasManager : MonoBehaviour
     private Transform rotation_base;
     public Transform bras_target_transform;
     public PolygonCollider2D bounding_collider;
+    public float speed = 20f;
+    public Vector2 offsetFromHand = new Vector2(1.3f, -2);
     // Start is called before the first frame update
 
     private void Awake()
@@ -30,9 +32,9 @@ public class BrasManager : MonoBehaviour
             Vector3 world_mouse_pos = world_camera.ScreenToWorldPoint(Input.mousePosition);
             world_mouse_pos.z = 0;
 
-            float speed = 5f;
+            
             float step = speed * Time.deltaTime;
-            Vector2 closet_point = bounding_collider.ClosestPoint(world_mouse_pos);
+            Vector2 closet_point = bounding_collider.ClosestPoint(world_mouse_pos) + offsetFromHand;
             bras_target_transform.position = Vector3.Lerp(bras_target_transform.position, closet_point, step);
 
             //TODO rotation fix

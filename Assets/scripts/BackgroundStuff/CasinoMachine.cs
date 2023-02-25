@@ -69,6 +69,7 @@ public class CasinoMachine : MonoBehaviour
         }
         
         yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(Random.Range(1f,10f));
         is_running = false;
     }
 }
