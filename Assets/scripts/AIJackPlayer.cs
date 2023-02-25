@@ -8,6 +8,13 @@ public class AIJackPlayer : JackPlayer
 {
     public float suspicion;
     public float distractionLevel;
+    public bool intel = true;
+    public AIDecision aiDecision;
+
+    public void Start()
+    {
+        aiDecision = new AIDecision(intel);
+    }
 
     public bool lost = false;
 
@@ -45,6 +52,8 @@ public class AIJackPlayer : JackPlayer
     public void Decide()
     {
         //TODO decider si hit or miss
+        //bool pick = aiDecision.Pige(hand, table_hand, dealer_hand); //table_hand inclut la main du joueur et du dealer
+
         handGestureManager.HitGesture();
     }
 
