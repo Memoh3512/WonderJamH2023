@@ -31,6 +31,7 @@ public class shaker : MonoBehaviour
                 {
                     stop = true;
                     if (onShakeEnded != null) onShakeEnded.Invoke();
+                    Destroy(gameObject);
                 }
                 else
                 {
@@ -39,6 +40,7 @@ public class shaker : MonoBehaviour
                     {
                         stop = true;
                         if (onShakeEnded != null) onShakeEnded.Invoke();
+                        Destroy(gameObject);
                     }
                     else
                     {
