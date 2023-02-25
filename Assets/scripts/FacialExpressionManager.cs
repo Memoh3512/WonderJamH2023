@@ -33,35 +33,35 @@ public class FacialExpressionManager : MonoBehaviour
         yield return null;
     }
 
-    void SusExpression()
+    public void SusExpression()
     {
         //TODO SFX Sus
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(susFace));
     }
 
-    void StressedExpression()
+    public void StressedExpression()
     {
         //TODO SFX Stressed
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(stressedFace));
     }
 
-    void HappyExpression()
+    public void HappyExpression()
     {
         //TODO SFX Happy
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(happyFace));
     }
 
-    void SadExpression()
+    public void SadExpression()
     {
         //TODO SFX Sad
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(sadFace));
     }
 
-    void FiouExpression()
+    public void FiouExpression()
     {
         //TODO SFX Fiou
         StopAllCoroutines();

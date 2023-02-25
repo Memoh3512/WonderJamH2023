@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +21,8 @@ public class AIJackPlayer : JackPlayer
         expressionManager = transform.GetComponentInChildren<FacialExpressionManager>();
         handGestureManager = transform.GetComponentInChildren<HandGestureManager>();
 
-        StartCoroutine(testHitMiss());
+        //StartCoroutine(testHitMiss());
+        StartCoroutine(SuspicionCooldown());
     }
 
     IEnumerator testHitMiss()
@@ -40,21 +40,75 @@ public class AIJackPlayer : JackPlayer
 
     public void Bet(int amount)
     {
+        StartCoroutine(BetRoutine(amount));
+    }
+
+    IEnumerator BetRoutine(int amount)
+    {
+        yield return new WaitForSeconds(Random.Range(1, 4));
         money -= amount;
         if (money < 0) Lose();
+        //TODO SFX Bet
+        OnBetEnd.Invoke();
     }
 
     public void Decide()
     {
-        //TODO decider si hit or miss
-        //bool pick = aiDecision.Pige(hand, table_hand, dealer_hand); //table_hand inclut la main du joueur et du dealer
+        StartCoroutine(DecideRoutine());
+    }
 
+    IEnumerator DecideRoutine()
+    {
+        //TODO decider si hit or miss
+        //TODO SFX Hummmmm
+        yield return new WaitForSeconds(Random.Range(10, 20));
+        //TODO SFX Haha!
+        Card dealerCard = DeckManager.GetDealerCards()[0];
+        if (dealerCard == null) Debug.LogError("DEALER A PAS DE CARTE WTFF");
+        bool hit = aiDecision.Pige(hand, DeckManager.GetAllCardsOnTable(), dealerCard); //table_hand inclut la main du joueur et du dealer
+        JackDecision decision = hit ? JackDecision.Hit : JackDecision.Hold;
+        OnDecideEnd.Invoke(decision);
+        
         handGestureManager.HitGesture();
     }
 
     public void Lose()
     {
         lost = true;
+    }
+
+    public void WitnessIllegalAction()
+    {
+        suspicion += (100 - distractionLevel);
+        if (suspicion > 100)
+        {
+            suspicion = 100;
+        }
+
+        if (suspicion >= 100)
+        {
+            BlackJackManager.GameEnd(false);
+        }
+
+        if (suspicion > 25)
+        {
+            expressionManager.StressedExpression();
+        } else if (suspicion > 50)
+        {
+            expressionManager.SusExpression();
+        }
+    }
+
+    IEnumerator SuspicionCooldown()
+    {
+        while (!lost)
+        {
+            if (suspicion > 0)
+            {
+                suspicion -= 2;
+            }
+            yield return new WaitForSeconds(1);
+        }
     }
 
     #region Events
