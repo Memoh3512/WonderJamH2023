@@ -24,7 +24,7 @@ public class BlackJackManager : MonoBehaviour
 
     }
 
-    static void StartGlobalCoroutine(IEnumerator routine)
+    public static void StartGlobalCoroutine(IEnumerator routine)
     {
         if (instance != null)
         {
