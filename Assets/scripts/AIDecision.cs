@@ -20,11 +20,18 @@ public class AIDecision
         //do nothing
         }
     else if (intelligent){
-        SmartPigeCheck(score, table_values, dealer_card)
-        }else
-        {
-         DumbPigeCheck()
+        if (SmartPigeCheck(score, table_values, dealer_card)){
+        //pige
         }
+        else
+        {
+        //do nothing
+        }
+    }else
+    {
+        //if (DumbPigeCheck()) pige
+        //else do nothing
+    }
 
        
     
