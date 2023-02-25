@@ -17,9 +17,9 @@ public class DecorationFallingEvent : JackEvent
 
         GameObject deco = decorations[Random.Range(0, decorations.Count)];
 
-        //ajouter le script de fall à la deco.
+        shaker s = deco.AddComponent<shaker>();
 
-
+        s.addListenerShakeEnded(Distract);
         
     }
 
