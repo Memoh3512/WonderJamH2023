@@ -10,11 +10,17 @@ public class CardHolder : MonoBehaviour
     SpriteRenderer sr;
     List<GameObject> hoveredCards;
     private CardRepresentation cardRep;
-    public JackPlayer owner;
+    private JackPlayer owner;
+
+    public int holderNumber;
+    public HoldersManager holdersManager;
+
+    public CardClickController heldCard;
 
     public bool active = false;
     public bool required = false;
-
+    public bool hovered = false;
+    public bool clicked = false;
     private void Start()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -23,54 +29,95 @@ public class CardHolder : MonoBehaviour
         hoverColor = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
         hoveredCards = new List<GameObject>();
     }
-    public void OnMouseEnter()
+
+    public void SetOwner(JackPlayer newOwner)
     {
-        sr.color = hoverColor;
+        owner = newOwner;
+    }
+    public void InitManager(int holderNumber, HoldersManager holdersManager)
+    {
+        this.holderNumber = holderNumber;
+        this.holdersManager = holdersManager;
     }
 
     public void OnMouseDown()
     {
+        if(heldCard == null)
+        {
+            if(CardClickController.heldCard != null)
+            {
+                heldCard = CardClickController.heldCard;
+                CardClickController.heldCard.PutDownCard(gameObject);
+                holdersManager.CardAdded();
+            }
+        }
+        else if(CardClickController.heldCard == null)
+        {
+            heldCard.PickUpCard();
+            heldCard = null;
+            holdersManager.CardRemoved();
+        }
+        else
+        {
+            CardClickController temp = CardClickController.heldCard;
+            CardClickController.heldCard.PutDownCard(gameObject);
+            heldCard.PickUpCard();
+            heldCard = temp;
+        }
+       /* clicked = true;
         cardRep.card = null;
+        if (hoveredCards.Count == 2) CardClickController.handFull = false;
         foreach(GameObject c in hoveredCards)
         {
             CardClickController ccc = c.GetComponent<CardClickController>();
             ccc.inHolder = false;
             ccc.OnMouseDown();
         }
+        if (hoveredCards.Count == 1)
+        {
+            if (CardClickController.handFull) holdersManager.CardRemoved();
+            else holdersManager.CardAdded();
+        }
+        clicked = false;*/
 
     }
+
+    public void Activate(bool required)
+    {
+        active = true;
+        this.required = required;
+    }
+
+    public void Deactivate()
+    {
+        active = false;
+        this.required = false;
+    }
+
 
     public void OnMouseExit()
     {
         sr.color = originialColor;
+        if(CardClickController.heldCard != null)
+        CardClickController.heldCard.holder = null;
+        hovered = false;
+    }
+    public void OnMouseEnter()
+    {
+        sr.color = hoverColor;
+        if (CardClickController.heldCard != null)
+            CardClickController.heldCard.holder = gameObject;
+        hovered = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Card")
-        {
-            collision.GetComponent<CardClickController>().holder = gameObject;
-            hoveredCards.Add(collision.gameObject);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Card")
-        {
-            collision.GetComponent<CardClickController>().holder = null;
-            hoveredCards.Remove(collision.gameObject);
-        }
-    }
 
     public void SwapCard(Card newCard)
     {
-        if (owner == null)
+        if (owner != null)
         {
-            Debug.LogError("T CON OWNER NULL OLDER");
+            DeckManager.PlayerCards[owner].Remove(GetComponent<CardRepresentation>().card);
+            DeckManager.PlayerCards[owner].Add(newCard);
         }
-        DeckManager.PlayerCards[owner].Remove(GetComponent<CardRepresentation>().card); //TODO maybe si ca casse c'est la
         GetComponent<CardRepresentation>().card = newCard;
-        DeckManager.PlayerCards[owner].Add(newCard);
     }
 }
