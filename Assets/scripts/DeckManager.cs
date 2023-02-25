@@ -50,4 +50,27 @@ public class DeckManager
         if (PlayerCards.ContainsKey(player)) return PlayerCards[player];
         return new List<Card>();
     }
+
+    public static List<Card> GetAllCardsOnTable()
+    {
+        List<Card> cardsOnTable = new List<Card>();
+        foreach (List<Card> cardList in PlayerCards.Values)
+        {
+            cardsOnTable.AddRange(cardList);
+        }
+
+        return cardsOnTable;
+    }
+
+    public static List<Card> GetDealerCards()
+    {
+        foreach (KeyValuePair<JackPlayer, List<Card>> elem in PlayerCards)
+        {
+            if (!(elem.Key is AIJackPlayer))
+            {
+                return elem.Value;
+            }
+        }
+        return new List<Card>();
+    }
 }
