@@ -94,9 +94,9 @@ public class CardClickController : MonoBehaviour
         heldCard = this;
         if (holder != null)
         {
-            if (holder.GetComponent<CardHolder>().owner != null)
+            if (holder.GetComponent<CardHolder>().holdersManager.owner != null)
             {
-                DeckManager.PlayerCards[holder.GetComponent<CardHolder>().owner].Remove(cardRep.card);
+                DeckManager.PlayerCards[holder.GetComponent<CardHolder>().holdersManager.owner].Remove(cardRep.card);
             }
         }
 

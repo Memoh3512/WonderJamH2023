@@ -6,6 +6,9 @@ public class HoldersManager : MonoBehaviour
 {
     List<GameObject> holders;
     int currentHolderIndex = 0;
+
+    [SerializeField]
+    public JackPlayer owner;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,7 @@ public class HoldersManager : MonoBehaviour
             holders.Add(gameObject.transform.Find("Holder (" + i + ")").gameObject);
             holders[i].SetActive(false);
             holders[i].GetComponent<CardHolder>().InitManager(i, this);
+            holders[i].GetComponent<CardHolder>().SetOwner(owner);
 
         }
     }

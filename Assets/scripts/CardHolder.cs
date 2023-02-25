@@ -10,7 +10,7 @@ public class CardHolder : MonoBehaviour
     SpriteRenderer sr;
     List<GameObject> hoveredCards;
     private CardRepresentation cardRep;
-    public JackPlayer owner;
+    private JackPlayer owner;
 
     public int holderNumber;
     public HoldersManager holdersManager;
@@ -30,7 +30,10 @@ public class CardHolder : MonoBehaviour
         hoveredCards = new List<GameObject>();
     }
 
-
+    public void SetOwner(JackPlayer newOwner)
+    {
+        owner = newOwner;
+    }
     public void InitManager(int holderNumber, HoldersManager holdersManager)
     {
         this.holderNumber = holderNumber;
@@ -112,11 +115,9 @@ public class CardHolder : MonoBehaviour
     {
         if (owner != null)
         {
-           // Debug.LogError("T CON OWNER NULL OLDER");
             DeckManager.PlayerCards[owner].Remove(GetComponent<CardRepresentation>().card);
             DeckManager.PlayerCards[owner].Add(newCard);
         }
-        //TODO maybe si ca casse c'est la
         GetComponent<CardRepresentation>().card = newCard;
     }
 }
