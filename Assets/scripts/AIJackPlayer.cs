@@ -134,6 +134,11 @@ public class AIJackPlayer : JackPlayer
         if (OnDecideEnd == null) OnDecideEnd = new UnityEvent<JackDecision>();
         OnDecideEnd.AddListener(action);
     }
+    
+    public void RemoveDecideEndListener()
+    {
+        OnDecideEnd.RemoveAllListeners();
+    }
 
     public override void RemoveRoundListeners()
     {
