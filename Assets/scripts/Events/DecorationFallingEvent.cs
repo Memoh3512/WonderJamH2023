@@ -14,4 +14,12 @@ public class DecorationFallingEvent : JackEvent
     {
 
     }
+
+    IEnumerator Distraction()
+    {
+        BlackJackManager.DistractAll(10);
+        yield return new WaitForSeconds(5);
+        BlackJackManager.DistractAll(0);
+        EventEnded();
+    }
 }
