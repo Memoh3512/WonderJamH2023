@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CasinoMachine : MonoBehaviour
+public class FortuneWheel : MonoBehaviour
 {
-    public GameObject machine;
-    public GameObject lever;
+    public GameObject FortuneWheelGameObject;
+    private Animator FortuneWheelAnimator;
     public Sprite[] bad_results;
     private bool is_running = false;
     
     // Start is called before the first frame update
     void Start()
     {
-        machine.GetComponent<Animator>().enabled = false;
-        lever.GetComponent<Animator>().enabled = false;
+        FortuneWheelAnimator = FortuneWheelGameObject.GetComponent<Animator>();
+        FortuneWheelAnimator.enabled = false;
     }
 
     // Update is called once per frame
@@ -36,36 +36,34 @@ public class CasinoMachine : MonoBehaviour
         //ARTIFICIAL
         
         is_running = true;
-        lever.GetComponent<Animator>().Play("PullBras",0,0f);
-        yield return new WaitForSeconds(1);
-        machine.GetComponent<Animator>().enabled = true;
-        //TODO SFX CasinoRolling
-        machine.GetComponent<Animator>().Play("Rolling");
-        machine.GetComponent<Animator>().SetTrigger("Roll");
-        machine.GetComponent<Animator>().ResetTrigger("Roll");
+        FortuneWheelAnimator.enabled = true;
+        //TODO SFX FortuneWheelRolling
+        FortuneWheelAnimator.Play("Rolling");
+        FortuneWheelAnimator.SetTrigger("Roll");
+        FortuneWheelAnimator.ResetTrigger("Roll");
         
-        yield return new WaitForSeconds(Random.Range(1.8f,3f));
+        yield return new WaitForSeconds(2);
         int random = Random.Range(0, 10);
         if (random<2)
         {
-            //TODO SFX CasinoMachineWin
+            //TODO SFX FortuneWheelWin
             //Debug.Log("Winner");
             //WINNER
-            machine.GetComponent<Animator>().SetTrigger("Winner");
+            FortuneWheelAnimator.SetTrigger("Winner");
             
             yield return new WaitForSeconds(3);
             //machine.GetComponent<Animator>().enabled = false;
-            machine.GetComponent<Animator>().ResetTrigger("Winner");
-            machine.GetComponent<Animator>().enabled = false;
-            BlackJackManager.DistractAll(60);
+            FortuneWheelAnimator.ResetTrigger("Winner");
+            FortuneWheelAnimator.enabled = false;
+            BlackJackManager.DistractAll(40);
         }
         else
         {
             //Debug.Log("NOPE");
             //NOPPERS
-            machine.GetComponent<Animator>().enabled = false;
+            FortuneWheelAnimator.enabled = false;
             Sprite chosenResult = bad_results[Random.Range(0, bad_results.Length)];
-            machine.GetComponent<SpriteRenderer>().sprite = chosenResult;
+            FortuneWheelGameObject.GetComponent<SpriteRenderer>().sprite = chosenResult;
         }
         
         yield return new WaitForSeconds(2);
