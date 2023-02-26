@@ -95,7 +95,7 @@ public class CardClickController : MonoBehaviour
     }
 
 
-    public void PutDownCard(GameObject holder)
+    public void PutDownCard(GameObject holder, bool isDeck = false)
     {
         transform.position = holder.transform.position;
         transform.rotation = holder.transform.rotation;
@@ -103,7 +103,7 @@ public class CardClickController : MonoBehaviour
         hand.GetComponent<SpriteRenderer>().sprite = handNormal;
         
         heldCard = null;
-        holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
+        if (!isDeck) holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
         if (!flipped) flipCard();
     }
 
