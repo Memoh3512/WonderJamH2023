@@ -42,7 +42,8 @@ public class BlackJackManager : MonoBehaviour
             player.AddOnLoseListener(() => lostPlayers++);
         }
 
-        while (lostPlayers < players.Count)
+        int PlayersToLose = players.Count;
+        while (lostPlayers < PlayersToLose)
         {
             //bet
             TurnIndicator.SetText("Mise");
@@ -151,18 +152,17 @@ public class BlackJackManager : MonoBehaviour
             foreach (AIJackPlayer player in players)
             {
                 int playerhand = player.HandValue();
-                if (playerhand < selfHand && selfHand <= 21)
+                if (playerhand > 21 || (playerhand < selfHand && selfHand <= 21))
                 {
                     player.money -= 10;
                     player.expressionManager.SadExpression();
-                    PlayersDead.Add(player);
                     if (!player.intel && player.money <= 0)
                     {
                         GameEnd(false);
-                    }
+                    } else if (player.money <= 0) PlayersDead.Add(player);
 
                 }
-                else if(playerhand > selfHand || selfHand > 21)
+                else if(playerhand < 21 && playerhand > selfHand || selfHand > 21)
                 {
                     player.money += 20;
                     player.expressionManager.HappyExpression();
@@ -173,7 +173,7 @@ public class BlackJackManager : MonoBehaviour
                 }
             }
             TurnIndicator.SetText("");
-            yield return new WaitForSeconds(6);
+            yield return new WaitForSeconds(3);
             
             //end turn
             foreach (AIJackPlayer player in players)
