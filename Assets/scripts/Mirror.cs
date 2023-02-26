@@ -10,10 +10,12 @@ public class Mirror : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag != "Card") return;
-        suslevel += Time.deltaTime*susrate;
-        if(suslevel == 1)
+        suslevel += Time.fixedDeltaTime*susrate;
+        if(suslevel >= 1)
         {
             BlackJackManager.DoIllegalAction(1);
+            suslevel = 0;
         }
+        
     }
 }

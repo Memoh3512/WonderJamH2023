@@ -35,7 +35,10 @@ public class TokenPile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (owner.money < 20)
+        if (owner.money <= 0)
+        {
+            sr.sprite = null;
+        } else if (owner.money < 20)
         {
             sr.sprite = smallToken;
         } else if (owner.money < 150)

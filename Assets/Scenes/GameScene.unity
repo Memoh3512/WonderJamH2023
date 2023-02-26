@@ -822,6 +822,7 @@ GameObject:
   - component: {fileID: 150637033}
   - component: {fileID: 150637035}
   - component: {fileID: 150637034}
+  - component: {fileID: 150637036}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -916,6 +917,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &150637036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150637032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53902b8f18c3a974fb5267b12ae31af5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &212089930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,6 +2746,10 @@ PrefabInstance:
       propertyPath: mediumToken
       value: 
       objectReference: {fileID: 21300000, guid: 271a15880ac8ea041a65692e2635c20b, type: 3}
+    - target: {fileID: 8366953078514066337, guid: 0a84f3ba470601d4dba8f6383866e1e0, type: 3}
+      propertyPath: tokenOffset.x
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8366953078514066398, guid: 0a84f3ba470601d4dba8f6383866e1e0, type: 3}
       propertyPath: m_Name
       value: MCtokens
@@ -3521,6 +3538,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3027841135201948998, guid: 95350f13d194fc34fba36166ca56e4aa, type: 3}
+      propertyPath: susrate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5466505920820705332, guid: 95350f13d194fc34fba36166ca56e4aa, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3592,6 +3613,10 @@ PrefabInstance:
     - target: {fileID: 5466505920820705339, guid: 95350f13d194fc34fba36166ca56e4aa, type: 3}
       propertyPath: m_Name
       value: mirror
+      objectReference: {fileID: 0}
+    - target: {fileID: 9006884685687129982, guid: 95350f13d194fc34fba36166ca56e4aa, type: 3}
+      propertyPath: m_Radius
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95350f13d194fc34fba36166ca56e4aa, type: 3}
@@ -4307,7 +4332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -330.31, y: 347.1}
+  m_AnchoredPosition: {x: -328, y: 393}
   m_SizeDelta: {x: 1166.21, y: 265.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1971460660
