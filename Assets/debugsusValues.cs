@@ -8,11 +8,6 @@ public class debugsusValues : MonoBehaviour
     private static bool debug = true;
 
     public AIJackPlayer owner;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -20,6 +15,10 @@ public class debugsusValues : MonoBehaviour
         if (debug && owner != null)
         {
             GetComponent<TextMeshProUGUI>().text = $"sus: {owner.suspicion}\ndistraction: {owner.distractionLevel}";
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }
