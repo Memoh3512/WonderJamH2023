@@ -91,6 +91,9 @@ public class AIJackPlayer : JackPlayer
     {
         if (holds)
         {
+            yield return new WaitForSeconds(1);
+            handGestureManager.HoldGesture();
+            yield return new WaitForSeconds(1);
             OnDecideEnd.Invoke(JackDecision.Hold);
             yield break;
         }
