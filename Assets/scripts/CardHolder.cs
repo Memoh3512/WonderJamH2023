@@ -38,10 +38,11 @@ public class CardHolder : MonoBehaviour
 
     public void ResetHolder() 
     { 
-     if(heldCard != null)
+        if(heldCard != null)
         {
             Destroy(heldCard.gameObject);
             heldCard = null;
+            GetComponent<CardRepresentation>().card = new Card(0, null);
         }
     }
     public virtual void OnMouseDown()
