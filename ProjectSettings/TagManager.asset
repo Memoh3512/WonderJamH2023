@@ -11,6 +11,7 @@ TagManager:
   - Glass3Spawn
   - ActiveGlass
   - droplet
+  - Decoration
   layers:
   - Default
   - TransparentFX
