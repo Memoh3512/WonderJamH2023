@@ -43,7 +43,8 @@ public class HoldersManager : MonoBehaviour
 
     public void CardAdded()
     {
-        //TODO SFX DropCard
+        
+        SoundPlayer.instance.PlaySFX("sfx/Drop card");
         if (currentHolderIndex >= askedHolderIndex)
         {
             owner.FireCardAskEnd();
@@ -62,9 +63,7 @@ public class HoldersManager : MonoBehaviour
             DisableLastHolder();
 
         cardCount--;
-       
-
-
+        SoundPlayer.instance.PlaySFX("sfx/Pickup card");
     }
 
     public void EnableNextHolder(bool required)
