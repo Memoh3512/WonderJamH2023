@@ -39,8 +39,8 @@ public class CasinoMachine : MonoBehaviour
         lever.GetComponent<Animator>().Play("PullBras",0,0f);
         yield return new WaitForSeconds(1);
         machine.GetComponent<Animator>().enabled = true;
-        
-        SoundPlayer.instance.PlaySFX("sfx/Slot machine rolling")
+
+        SoundPlayer.instance.PlaySFX("sfx/Slot machine rolling");
         machine.GetComponent<Animator>().Play("Rolling");
         machine.GetComponent<Animator>().SetTrigger("Roll");
         machine.GetComponent<Animator>().ResetTrigger("Roll");
@@ -60,6 +60,8 @@ public class CasinoMachine : MonoBehaviour
             machine.GetComponent<Animator>().ResetTrigger("Winner");
             machine.GetComponent<Animator>().enabled = false;
             BlackJackManager.DistractAll(60);
+            yield return new WaitForSeconds(3);
+            BlackJackManager.DistractAll(0);
         }
         else
         {
@@ -72,6 +74,7 @@ public class CasinoMachine : MonoBehaviour
         
         yield return new WaitForSeconds(2);
         yield return new WaitForSeconds(Random.Range(1f,10f));
+        
         is_running = false;
     }
 }

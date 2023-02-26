@@ -6,7 +6,8 @@ public class SpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public enum ButtonType
     {
         Quit,
-        Start
+        Start,
+        ReStart,
     }
     public GameObject showOnHover;
     public ButtonType button_type;
@@ -19,21 +20,33 @@ public class SpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             DoorOpen.enabled = false;
         }
+        if (showOnHover)
+        {
+            showOnHover.SetActive(false);
+        }
+        if (Camera.main.GetComponent<Animator>())
+        {
+            Camera.main.GetComponent<Animator>().enabled = false;
+        }
         
-        showOnHover.SetActive(false);
-        Camera.main.GetComponent<Animator>().enabled = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("Pointer Enter");
-        showOnHover.SetActive(true);
+        if (showOnHover)
+        {
+            showOnHover.SetActive(true);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("Pointer Exit");
-        showOnHover.SetActive(false);
+        if (showOnHover)
+        {
+            showOnHover.SetActive(false);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -46,15 +59,16 @@ public class SpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 if (DoorOpen)
                 {
                     DoorOpen.enabled = enabled;
+                    //TODO SFX door open
                 }
                 SoundPlayer.instance.SetMusic(Songs.gameplay, 2f, TransitionBehavior.Stop);
                 Destroy(allMenu);
                 break;
+            case ButtonType.ReStart:
+                SceneChanger.ChangeScene(SceneTypes.MainMenu);
+                break;
+                
         }
         // Handle the button click event here
-    }
-    public void StartGame()
-    {
-        GetComponent<SceneChanger>().ChangeScene();
     }
 }

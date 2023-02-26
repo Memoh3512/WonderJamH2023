@@ -30,7 +30,7 @@ public class TurnOffLightsEvent : JackEvent
 
     IEnumerator Distraction(GameObject effect)
     {
-        BlackJackManager.DistractAll(20);
+        BlackJackManager.DistractAll(40);
         yield return new WaitForSeconds(5);
         
 

@@ -36,6 +36,12 @@ public class BlackJackManager : MonoBehaviour
 
         //start of game loop
         int lostPlayers = 0;
+
+        foreach (AIJackPlayer player in players)
+        {        
+            player.AddOnLoseListener(() => lostPlayers++);
+        }
+
         while (lostPlayers < players.Length)
         {
             //bet
@@ -43,7 +49,6 @@ public class BlackJackManager : MonoBehaviour
             int waitAmount = 0;
             foreach (AIJackPlayer player in players)
             {
-                player.AddOnLoseListener(() => lostPlayers++);
                 player.Bet(10);
                 player.AddOnBetEndListener(() =>
                 {
@@ -110,10 +115,6 @@ public class BlackJackManager : MonoBehaviour
                         {
                             waitAmount++;
                             elem.Key.RemoveCardAskListener();
-                            if (elem.Key.HandValue() > 21)
-                            {
-                                elem.Key.LoseRound();
-                            }
                         });
                     } else
                     {
