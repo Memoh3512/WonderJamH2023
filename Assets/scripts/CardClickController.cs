@@ -29,7 +29,7 @@ public class CardClickController : MonoBehaviour
         hand = GameObject.Find("Hand");
         cardRep = GetComponent<CardRepresentation>();
         side1 = transform.Find("Side1").GetComponent<SpriteRenderer>();
-        side2 = transform.Find("Side2").GetComponent<SpriteRenderer>();
+        side2 = side1.transform.Find("Side2").GetComponent<SpriteRenderer>();
     }
 
     public void OnMouseEnter()
@@ -92,7 +92,7 @@ public class CardClickController : MonoBehaviour
     public void PutDownCard(GameObject holder)
     {
         transform.rotation = holder.transform.rotation;
-        transform.position = holder.transform.position - side1.transform.localPosition;
+        transform.position = holder.transform.position;
         transform.parent = holder.transform;
         heldCard = null;
         holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
