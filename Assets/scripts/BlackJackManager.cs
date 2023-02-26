@@ -110,6 +110,10 @@ public class BlackJackManager : MonoBehaviour
                         {
                             waitAmount++;
                             elem.Key.RemoveCardAskListener();
+                            if (elem.Key.HandValue() > 21)
+                            {
+                                elem.Key.LoseRound();
+                            }
                         });
                     } else
                     {
@@ -122,7 +126,6 @@ public class BlackJackManager : MonoBehaviour
 
             //croupier
             //if GetHandValue >= 17, fini le tour, sinon ask for card
-            ;
             TurnIndicator.SetText("Pige ma carte");
             while (self.HandValue(DeckManager.GetCardsForPlayer(self)) < 17)
             {
@@ -135,22 +138,40 @@ public class BlackJackManager : MonoBehaviour
                 });
                 yield return new WaitUntil(() => waitAmount == 1);
             }
+            
+            //realisation
+            TurnIndicator.SetText("Résultat");
+            int selfHand = self.HandValue();
+            foreach (AIJackPlayer player in players)
+            {
+                int playerhand = player.HandValue();
+                if (playerhand < selfHand && selfHand <= 21)
+                {
+                    player.money -= 10;
+                    player.expressionManager.SadExpression();
 
+                }
+                else if(playerhand > selfHand || selfHand > 21)
+                {
+                    player.money += 20;
+                    player.expressionManager.HappyExpression();
+                }
+            }
+            yield return new WaitForSeconds(6);
+            
             //end turn
             foreach (AIJackPlayer player in players)
             {
                 player.RemoveRoundListeners();
-                //TODO call ramassage de cartes ici
-                foreach (HoldersManager holder in FindObjectsOfType<HoldersManager>())
-                {
-                    holder.ResetHolders();
-                }
-                DeckManager.ResetDeck();
             }
+            foreach (HoldersManager holder in FindObjectsOfType<HoldersManager>())
+            {
+                holder.ResetHolders();
+            }
+            DeckManager.ResetDeck();
         }
-        yield return null;
-
         GameOngoing = false;
+        GameEnd(false);
 
     }
 
@@ -184,18 +205,18 @@ public class BlackJackManager : MonoBehaviour
         }
     }
 
-    public static void DoIllegalAction()
+    public static void DoIllegalAction(float actionValue = 0)
     {
         AIJackPlayer[] ais = FindObjectsOfType<AIJackPlayer>();
         foreach (AIJackPlayer player in ais)
         {
-            Sussify(player);
+            Sussify(player, actionValue);
         }
     }
 
-    public static void Sussify(AIJackPlayer player)
+    public static void Sussify(AIJackPlayer player, float actionValue)
     {
-        player.WitnessIllegalAction();
+        player.WitnessIllegalAction(actionValue);
     }
 
     public static void GameEnd(bool win)

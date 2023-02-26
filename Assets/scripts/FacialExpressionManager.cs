@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FaceType
+{
+    sad, neutral
+}
 public class FacialExpressionManager : MonoBehaviour
 {
 
@@ -16,6 +20,7 @@ public class FacialExpressionManager : MonoBehaviour
     public Sprite happyFace;
     public Sprite sadFace;
     public Sprite fiouFace;
+    public Sprite angryFace;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,8 +76,31 @@ public class FacialExpressionManager : MonoBehaviour
         StartCoroutine(ExpressionRoutine(fiouFace));
     }
 
+    public void AngryExpression()
+    {
+        //TODO SFX angry
+        StopAllCoroutines();
+        if (angryFace != null) StartCoroutine(ExpressionRoutine(angryFace));
+        else StartCoroutine(ExpressionRoutine(susFace));
+    }
+
+    public void SetFace(FaceType type)
+    {
+        switch (type)
+        {
+            case FaceType.sad:
+                SoundPlayer.instance.PlaySFX("sfx/exp_Sad");
+                faceRenderer.sprite = sadFace;
+                break;
+            case FaceType.neutral:
+                faceRenderer.sprite = neutralFace;
+                break;
+        }
+    }
+
     IEnumerator ExpressionRoutine(Sprite expression)
     {
+        if (jackPlayer.lost) yield break;
         faceRenderer.sprite = expression;
         yield return new WaitForSeconds(Random.Range(2, 6));
         faceRenderer.sprite = neutralFace;
