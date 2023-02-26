@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class debugsusValues : MonoBehaviour
 {
-    private static bool debug = true;
+    private static bool debug = false;
 
     public AIJackPlayer owner;
 
