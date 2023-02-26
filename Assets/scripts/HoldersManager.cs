@@ -29,8 +29,19 @@ public class HoldersManager : MonoBehaviour
             holders[i].SetActive(false);
             holders[i].GetComponent<CardHolder>().InitManager(i, this);
             holders[i].GetComponent<CardHolder>().SetOwner(owner);
-
         }
+    }
+
+    public void ResetHolders()
+    {
+        foreach (GameObject h in holders) 
+        {
+            h.GetComponent<CardHolder>().ResetHolder();
+            h.SetActive(false);
+        } 
+        askedHolderIndex = 0;
+        currentHolderIndex = 0;
+        cardCount = 0;
     }
 
     public void AskForCards(int cardNb)
