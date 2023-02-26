@@ -16,8 +16,8 @@ public class SusBar : MonoBehaviour
     void Update()
     {
         
-        float yValue = startY + (endY - startY) * player.suspicion / 100f;
+        float yValue = startY + ((endY - startY) * (player.suspicion / 100f));
         Vector3 target = new Vector3(transform.localPosition.x, yValue, transform.localPosition.z);
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, lerpSpeed);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, lerpSpeed*Time.deltaTime);
     }
 }
