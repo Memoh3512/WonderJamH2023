@@ -82,7 +82,7 @@ public class FacialExpressionManager : MonoBehaviour
 
     public void AngryExpression()
     {
-        //TODO SFX angry
+        SoundPlayer.instance.PlaySFX("sfx/Perso fache");
         StopAllCoroutines();
         if (angryFace != null) StartCoroutine(ExpressionRoutine(angryFace));
         else StartCoroutine(ExpressionRoutine(susFace));
