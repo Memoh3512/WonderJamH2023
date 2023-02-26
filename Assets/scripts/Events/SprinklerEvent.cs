@@ -61,7 +61,8 @@ public class SprinklerEvent : JackEvent
             
             }
         }
-        Debug.Log("destroy");
+        yield return new WaitForSeconds(5);
+        //Debug.Log("destroy");
         BlackJackManager.DistractAll(0);
 
         EventEnded();
