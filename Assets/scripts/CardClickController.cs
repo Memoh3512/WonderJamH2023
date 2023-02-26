@@ -17,6 +17,9 @@ public class CardClickController : MonoBehaviour
     public SpriteRenderer side1;
     public SpriteRenderer side2;
 
+    public Sprite handPick;
+    public Sprite handNormal;
+
     public CardRepresentation cardRep;
     void Start()
     {
@@ -78,6 +81,7 @@ public class CardClickController : MonoBehaviour
         transform.position = hand.transform.position;
         transform.rotation = hand.transform.rotation;
         GetComponent<FollowObject>().target = hand.transform;
+        hand.GetComponent<SpriteRenderer>().sprite = handPick;
 
         heldCard = this;
         if (holder != null)
@@ -96,6 +100,7 @@ public class CardClickController : MonoBehaviour
         transform.position = holder.transform.position;
         transform.rotation = holder.transform.rotation;
         GetComponent<FollowObject>().target = null;
+        hand.GetComponent<SpriteRenderer>().sprite = handNormal;
         
         heldCard = null;
         holder.GetComponent<CardHolder>().SwapCard(cardRep.card);

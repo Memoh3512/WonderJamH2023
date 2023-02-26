@@ -138,8 +138,10 @@ MonoBehaviour:
   money: 50
   suspicion: 0
   distractionLevel: 0
+  attentiveness: 2
   intel: 1
   lost: 0
+  lostRound: 0
   expressionManager: {fileID: 0}
   handGestureManager: {fileID: 0}
 --- !u!95 &9066703484132260731
@@ -363,3 +365,4 @@ MonoBehaviour:
   happyFace: {fileID: 21300000, guid: 6f2b9d25be40439478f2d3fc058395a0, type: 3}
   sadFace: {fileID: 21300000, guid: 39e3755ad031f3d49847f4a2c7ae575f, type: 3}
   fiouFace: {fileID: 21300000, guid: 25f992cb2fe2dd5498b5f14e7b971801, type: 3}
+  angryFace: {fileID: 0}
