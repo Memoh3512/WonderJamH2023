@@ -141,7 +141,10 @@ public class BlackJackManager : MonoBehaviour
             {
                 player.RemoveRoundListeners();
                 //TODO call ramassage de cartes ici
-                
+                foreach (HoldersManager holder in FindObjectsOfType<HoldersManager>())
+                {
+                    holder.ResetHolders();
+                }
                 DeckManager.ResetDeck();
             }
         }
