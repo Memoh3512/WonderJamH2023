@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2303973186624056674}
   - component: {fileID: 2303973186624056672}
-  - component: {fileID: 2303973186624056673}
-  - component: {fileID: 7398100261979980214}
   m_Layer: 0
   m_Name: Arms
   m_TagString: Untagged
@@ -27,9 +25,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2303973186624056675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.73, z: 0}
-  m_LocalScale: {x: 3.5276, y: 3.5276, z: 3.5276}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 3.48, y: 0.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2303973188513267822}
   m_RootOrder: 2
@@ -74,51 +72,18 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 12
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.6, y: 3.03}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2303973186624056673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2303973186624056675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba246d75221fc94a8a83a8298ba8177, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jackPlayer: {fileID: 2303973188513267823}
---- !u!95 &7398100261979980214
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2303973186624056675}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f3a919c72a97a764789419de155ae4d7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &2303973187494285138
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +188,8 @@ MonoBehaviour:
   happyFace: {fileID: 21300000, guid: 425ca113fee1bb2438f43a967b4e2fd6, type: 3}
   sadFace: {fileID: 21300000, guid: ad28fd946b8e7f14283a337222392aa4, type: 3}
   fiouFace: {fileID: 21300000, guid: b8e7461290d54f84eab987953b1bde08, type: 3}
+  angryFace: {fileID: 21300000, guid: b49a0c1e34163be459ab7dd09e21777f, type: 3}
+  distractedFace: {fileID: 21300000, guid: d3ac1eb2a2af58649900ab97f72c789d, type: 3}
 --- !u!1 &2303973187790577190
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +284,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2303973188513267822}
   - component: {fileID: 2303973188513267823}
+  - component: {fileID: 7899580839710436490}
+  - component: {fileID: 3137196069310160566}
   m_Layer: 0
   m_Name: Chara2JackPlayer
   m_TagString: Untagged
@@ -354,13 +323,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae77a0fa03c6284ca8ee7b0343ce3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: []
   holders: []
   holderManager: {fileID: 0}
-  money: 50
+  money: 30
   suspicion: 0
   distractionLevel: 0
+  attentiveness: 1
   intel: 1
   lost: 0
+  lostRound: 0
   expressionManager: {fileID: 0}
   handGestureManager: {fileID: 0}
+--- !u!95 &7899580839710436490
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2303973188513267792}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 74019275f223bb24c8261b9f56cc3c1a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &3137196069310160566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2303973188513267792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba246d75221fc94a8a83a8298ba8177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jackPlayer: {fileID: 2303973188513267823}

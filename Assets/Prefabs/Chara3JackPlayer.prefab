@@ -138,10 +138,13 @@ MonoBehaviour:
   money: 50
   suspicion: 0
   distractionLevel: 0
+  attentiveness: 2
   intel: 1
   lost: 0
+  lostRound: 0
   expressionManager: {fileID: 0}
   handGestureManager: {fileID: 0}
+  tokenPile: {fileID: 0}
 --- !u!95 &9066703484132260731
 Animator:
   serializedVersion: 5
@@ -152,7 +155,7 @@ Animator:
   m_GameObject: {fileID: 3080371517826573299}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f3a919c72a97a764789419de155ae4d7, type: 2}
+  m_Controller: {fileID: 22100000, guid: b0e76bca380585747b3f7161664deaab, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -200,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3080371518120873664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.73, z: 0}
+  m_LocalPosition: {x: -2.57, y: -1.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -247,9 +250,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 12
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.04513645, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -363,3 +366,5 @@ MonoBehaviour:
   happyFace: {fileID: 21300000, guid: 6f2b9d25be40439478f2d3fc058395a0, type: 3}
   sadFace: {fileID: 21300000, guid: 39e3755ad031f3d49847f4a2c7ae575f, type: 3}
   fiouFace: {fileID: 21300000, guid: 25f992cb2fe2dd5498b5f14e7b971801, type: 3}
+  angryFace: {fileID: 21300000, guid: ee0adaaae3f5cbc4bbaa3b5b8f0abb03, type: 3}
+  distractedFace: {fileID: 21300000, guid: 1a6bc34223d77364a9273471153ef2ac, type: 3}

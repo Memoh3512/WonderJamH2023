@@ -17,6 +17,9 @@ public class CardClickController : MonoBehaviour
     public SpriteRenderer side1;
     public SpriteRenderer side2;
 
+    public Sprite handPick;
+    public Sprite handNormal;
+
     public CardRepresentation cardRep;
     void Start()
     {
@@ -77,7 +80,9 @@ public class CardClickController : MonoBehaviour
     {
         transform.position = hand.transform.position;
         transform.rotation = hand.transform.rotation;
-        transform.parent = hand.transform;
+        GetComponent<FollowObject>().target = hand.transform;
+        hand.GetComponent<SpriteRenderer>().sprite = handPick;
+
         heldCard = this;
         if (holder != null)
         {
@@ -90,13 +95,15 @@ public class CardClickController : MonoBehaviour
     }
 
 
-    public void PutDownCard(GameObject holder)
+    public void PutDownCard(GameObject holder, bool isDeck = false)
     {
-        transform.rotation = holder.transform.rotation;
         transform.position = holder.transform.position;
-        transform.parent = holder.transform;
+        transform.rotation = holder.transform.rotation;
+        GetComponent<FollowObject>().target = null;
+        hand.GetComponent<SpriteRenderer>().sprite = handNormal;
+        
         heldCard = null;
-        holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
+        if (!isDeck) holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
         if (!flipped) flipCard();
     }
 

@@ -39,7 +39,7 @@ public class BlackJackManager : MonoBehaviour
         while (lostPlayers < players.Length)
         {
             //bet
-            TurnIndicator.SetText("Betting");
+            TurnIndicator.SetText("Misage");
             int waitAmount = 0;
             foreach (AIJackPlayer player in players)
             {
@@ -53,7 +53,7 @@ public class BlackJackManager : MonoBehaviour
             yield return new WaitUntil(() => waitAmount == players.Length);
 
             //draw basic cards
-            TurnIndicator.SetText("Draw 2 cards for each");
+            TurnIndicator.SetText("Donner 2 cartes à chacun");
             waitAmount = 0;
             foreach (AIJackPlayer player in players)
             {
@@ -67,7 +67,7 @@ public class BlackJackManager : MonoBehaviour
             yield return new WaitUntil(() => waitAmount == players.Length);
             
             //Draw my card
-            TurnIndicator.SetText("Draw your card");
+            TurnIndicator.SetText("Pige ta carte");
             waitAmount = 0;
             self.AskForCards(1);
             self.AddOnCardAskCompleteListener(() =>
@@ -81,7 +81,7 @@ public class BlackJackManager : MonoBehaviour
             while (done < players.Length)
             {
                 //decide
-                TurnIndicator.SetText("Deciding");
+                TurnIndicator.SetText("Réflexion...");
                 waitAmount = 0;
                 Dictionary<AIJackPlayer, JackDecision> decisions = new Dictionary<AIJackPlayer, JackDecision>();
                 foreach (AIJackPlayer player in players)
@@ -97,7 +97,7 @@ public class BlackJackManager : MonoBehaviour
                 yield return new WaitUntil(() => waitAmount == players.Length);
             
                 //reaction aux choix
-                TurnIndicator.SetText("Draw cards");
+                TurnIndicator.SetText("Donner des cartes à ceux qui en veulent");
                 waitAmount = 0;
                 int toWait = 0;
                 foreach (KeyValuePair<AIJackPlayer, JackDecision> elem in decisions)
@@ -110,6 +110,10 @@ public class BlackJackManager : MonoBehaviour
                         {
                             waitAmount++;
                             elem.Key.RemoveCardAskListener();
+                            if (elem.Key.HandValue() > 21)
+                            {
+                                elem.Key.LoseRound();
+                            }
                         });
                     } else
                     {
@@ -122,10 +126,10 @@ public class BlackJackManager : MonoBehaviour
 
             //croupier
             //if GetHandValue >= 17, fini le tour, sinon ask for card
-            waitAmount = 0;
-            TurnIndicator.SetText("Draw self cards");
-            if (self.HandValue(DeckManager.GetCardsForPlayer(self)) < 17)
+            TurnIndicator.SetText("Pige ma carte");
+            while (self.HandValue(DeckManager.GetCardsForPlayer(self)) < 17)
             {
+                waitAmount = 0;
                 self.AskForCards(1);
                 self.AddOnCardAskCompleteListener(() =>
                 {
@@ -134,18 +138,44 @@ public class BlackJackManager : MonoBehaviour
                 });
                 yield return new WaitUntil(() => waitAmount == 1);
             }
+            
+            //realisation
+            TurnIndicator.SetText("Résultat");
+            int selfHand = self.HandValue();
+            foreach (AIJackPlayer player in players)
+            {
+                int playerhand = player.HandValue();
+                if (playerhand < selfHand && selfHand <= 21)
+                {
+                    player.money -= 10;
+                    player.expressionManager.SadExpression();
 
+                }
+                else if(playerhand > selfHand || selfHand > 21)
+                {
+                    player.money += 20;
+                    player.expressionManager.HappyExpression();
+                    if (player.intel && player.money >= 200)
+                    {
+                        GameEnd(true);
+                    }
+                }
+            }
+            yield return new WaitForSeconds(6);
+            
             //end turn
             foreach (AIJackPlayer player in players)
             {
                 player.RemoveRoundListeners();
-                //TODO call ramassage de cartes ici
-                DeckManager.ResetDeck();
             }
+            foreach (HoldersManager holder in FindObjectsOfType<HoldersManager>())
+            {
+                holder.ResetHolders();
+            }
+            DeckManager.ResetDeck();
         }
-        yield return null;
-
         GameOngoing = false;
+        GameEnd(false);
 
     }
 
@@ -160,7 +190,8 @@ public class BlackJackManager : MonoBehaviour
     public static void Distract(AIJackPlayer player, float distractionValue)
     {
         //distraction
-        if (player.distractionLevel + distractionValue > 100)
+        player.expressionManager.DistractedExpression();
+        if (player.distractionLevel > 100)
         {
             player.distractionLevel = 100;
         }
@@ -179,30 +210,31 @@ public class BlackJackManager : MonoBehaviour
         }
     }
 
-    public static void DoIllegalAction()
+    public static void DoIllegalAction(float actionValue = 0)
     {
         AIJackPlayer[] ais = FindObjectsOfType<AIJackPlayer>();
         foreach (AIJackPlayer player in ais)
         {
-            Sussify(player);
+            Sussify(player, actionValue);
         }
     }
 
-    public static void Sussify(AIJackPlayer player)
+    public static void Sussify(AIJackPlayer player, float actionValue)
     {
-        player.WitnessIllegalAction();
+        player.WitnessIllegalAction(actionValue);
     }
 
     public static void GameEnd(bool win)
     {
+        SoundPlayer.instance.SetMusic(Songs.winlose, 2f, TransitionBehavior.Stop);
         if (win)
         {
-            //TODO load win scene
+            SceneChanger.ChangeScene(SceneTypes.WinScene);
         }
         else
         {
             //TODO SFX Get beaten up
-            //TODO load lose scene
+            SceneChanger.ChangeScene(SceneTypes.LoseScene);
         }
     }
 
