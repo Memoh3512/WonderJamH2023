@@ -60,6 +60,8 @@ public class CasinoMachine : MonoBehaviour
             machine.GetComponent<Animator>().ResetTrigger("Winner");
             machine.GetComponent<Animator>().enabled = false;
             BlackJackManager.DistractAll(60);
+            yield return new WaitForSeconds(3);
+            BlackJackManager.DistractAll(0);
         }
         else
         {
@@ -72,6 +74,7 @@ public class CasinoMachine : MonoBehaviour
         
         yield return new WaitForSeconds(2);
         yield return new WaitForSeconds(Random.Range(1f,10f));
+        
         is_running = false;
     }
 }
