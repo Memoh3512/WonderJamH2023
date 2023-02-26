@@ -334,6 +334,7 @@ MonoBehaviour:
   lostRound: 0
   expressionManager: {fileID: 0}
   handGestureManager: {fileID: 0}
+  tokenPile: {fileID: 0}
 --- !u!95 &7899580839710436490
 Animator:
   serializedVersion: 5
