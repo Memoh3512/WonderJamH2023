@@ -44,7 +44,8 @@ public class FacialExpressionManager : MonoBehaviour
 
     public void SusExpression()
     {
-        //TODO SFX Sus
+        
+        SoundPlayer.instance.PlaySFX("sfx/Sus");
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(susFace));
     }
