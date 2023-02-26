@@ -22,10 +22,13 @@ public class FacialExpressionManager : MonoBehaviour
     public Sprite fiouFace;
     public Sprite angryFace;
     public Sprite distractedFace;
+
+    private Sprite faceNormal;
     // Start is called before the first frame update
     void Start()
     {
         faceRenderer = GetComponent<SpriteRenderer>();
+        faceNormal = neutralFace;
     }
 
     // Update is called once per frame
@@ -100,9 +103,11 @@ public class FacialExpressionManager : MonoBehaviour
             case FaceType.sad:
                 SoundPlayer.instance.PlaySFX("sfx/exp_Sad");
                 faceRenderer.sprite = sadFace;
+                faceNormal = sadFace;
                 break;
             case FaceType.neutral:
                 faceRenderer.sprite = neutralFace;
+                faceNormal = neutralFace;
                 break;
         }
     }
@@ -112,7 +117,7 @@ public class FacialExpressionManager : MonoBehaviour
         if (jackPlayer.lost) yield break;
         faceRenderer.sprite = expression;
         yield return new WaitForSeconds(Random.Range(2, 6));
-        faceRenderer.sprite = neutralFace;
+        faceRenderer.sprite = faceNormal;
     }
 
 }
