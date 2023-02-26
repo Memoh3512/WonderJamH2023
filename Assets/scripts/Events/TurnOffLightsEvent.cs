@@ -12,7 +12,7 @@ public class TurnOffLightsEvent : JackEvent
     }
     public override void ExecuteEvent()
     {
-
+        //todo SFX panne de courant
         GameObject effectPrefab = Resources.Load<GameObject>("LightsOffEffect");
         if (effectPrefab != null)
         {
