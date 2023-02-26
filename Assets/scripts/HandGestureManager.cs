@@ -20,7 +20,8 @@ public class HandGestureManager : MonoBehaviour
 
     public void PlayHitSFX()
     {
-        //TODO SFX cogne table (Hit)
+        
+        SoundPlayer.instance.PlaySFX("sfx/Cogne table");
     }
 
     public void HoldGesture()

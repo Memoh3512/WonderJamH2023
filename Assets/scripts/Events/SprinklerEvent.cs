@@ -18,7 +18,8 @@ public class SprinklerEvent : JackEvent
     public override void ExecuteEvent()
     {
         timeElapsed = 0;
-        //todo SFX alarme d'incendie
+        
+        SoundPlayer.instance.PlaySFX("sfx/Alarme feu");
         GameObject dropletPrefab = Resources.Load<GameObject>("Droplet");
         if (dropletPrefab != null)
         {
