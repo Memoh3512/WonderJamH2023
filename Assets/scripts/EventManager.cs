@@ -39,7 +39,7 @@ public class EventManager : MonoBehaviour
                 randomEvent.addListenerEventEnded(() => {
                     StartCoroutine(EventRoutine());
                     randomEvent.ClearListeners();
-
+                    Debug.Log("bhnjkl");
                 });
                 decorationFell = true;
             }
