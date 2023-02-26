@@ -11,10 +11,15 @@ public class SpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public GameObject showOnHover;
     public ButtonType button_type;
     public Animator DoorOpen;
+    public GameObject allMenu;
     
     private void Start()
     {
-        DoorOpen.enabled = false;
+        if (DoorOpen)
+        {
+            DoorOpen.enabled = false;
+        }
+        
         showOnHover.SetActive(false);
         Camera.main.GetComponent<Animator>().enabled = false;
     }
@@ -38,7 +43,11 @@ public class SpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             case ButtonType.Quit: Application.Quit();break;
             case ButtonType.Start: 
                 Camera.main.GetComponent<Animator>().enabled = true;
-                DoorOpen.enabled = enabled;
+                if (DoorOpen)
+                {
+                    DoorOpen.enabled = enabled;
+                }
+                Destroy(allMenu);
                 break;
         }
         // Handle the button click event here
