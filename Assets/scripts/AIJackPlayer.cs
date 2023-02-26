@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.PostProcessing;
@@ -15,6 +16,7 @@ public class AIJackPlayer : JackPlayer
     
     public bool lost = false;
     public bool lostRound = false;
+    private bool holds = false;
 
     public FacialExpressionManager expressionManager;
     public HandGestureManager handGestureManager;
@@ -55,6 +57,10 @@ public class AIJackPlayer : JackPlayer
         {
             StartCoroutine(BlackJackRoutine());
         }
+        else if (handvalue > 21)
+        {
+            StartCoroutine(LostRoutine());
+        }
         else
         {
             StartCoroutine(DecideRoutine());
@@ -70,8 +76,24 @@ public class AIJackPlayer : JackPlayer
 
     }
 
+    IEnumerator LostRoutine()
+    {
+        expressionManager.AngryExpression();
+        LoseRound();
+        yield return new WaitForSeconds(Random.Range(1.0f,2.0f));
+        handGestureManager.HoldGesture();
+        yield return new WaitForSeconds(1);
+        OnDecideEnd.Invoke(JackDecision.Hold);
+
+    }
+
     IEnumerator DecideRoutine()
     {
+        if (holds)
+        {
+            OnDecideEnd.Invoke(JackDecision.Hold);
+            yield break;
+        }
         //TODO SFX Hummmmm
         expressionManager.StressedExpression();
         yield return new WaitForSeconds(Random.Range(10, 20));
@@ -86,9 +108,11 @@ public class AIJackPlayer : JackPlayer
                 handGestureManager.HitGesture();
                 break;
             case JackDecision.Hold:
+                holds = true;
                 handGestureManager.HoldGesture();
                 break;
         }
+        yield return new WaitForSeconds(1);
         OnDecideEnd.Invoke(decision);
     }
 
@@ -109,6 +133,7 @@ public class AIJackPlayer : JackPlayer
         if (lost) return;
         expressionManager.SetFace(FaceType.neutral);
         lostRound = false;
+        holds = false;
         tokenPile.Reset();
     }
 
@@ -147,6 +172,7 @@ public class AIJackPlayer : JackPlayer
             {
                 suspicion -= 2*(1.0f/attentiveness);
             }
+            suspicion = Mathf.Clamp(suspicion, 0, 100);
             yield return new WaitForSeconds(1);
         }
     }
