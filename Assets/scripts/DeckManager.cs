@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DeckManager
@@ -39,6 +40,10 @@ public class DeckManager
     {
         Deck = new List<Card>(OgDeck);
         PlayerCards.Clear();
+        foreach (JackPlayer player in GameObject.FindObjectsOfType<JackPlayer>())
+        {
+            PlayerCards.Add(player, new List<Card>());
+        }
     }
 
     public static List<Card> GetCardsForPlayer(JackPlayer player)
@@ -53,6 +58,11 @@ public class DeckManager
         foreach (List<Card> cardList in PlayerCards.Values)
         {
             cardsOnTable.AddRange(cardList);
+        }
+        
+        if (cardsOnTable.Count(i => i.value <= 1) > 0)
+        {
+            int i = 0;
         }
 
         return cardsOnTable;

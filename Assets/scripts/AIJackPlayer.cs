@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.PostProcessing;
 
 public class AIJackPlayer : JackPlayer
 {
     public float suspicion;
     public float distractionLevel;
+    [Range(0.1f, 10)]
+    public float attentiveness = 1;
     public bool intel = true;
     public AIDecision aiDecision;
     
     public bool lost = false;
+    public bool lostRound = false;
 
     public FacialExpressionManager expressionManager;
     public HandGestureManager handGestureManager;
+    public TokenPile tokenPile;
 
     public void Start()
     {
@@ -23,19 +28,6 @@ public class AIJackPlayer : JackPlayer
 
         //StartCoroutine(testHitMiss());
         StartCoroutine(SuspicionCooldown());
-    }
-
-    IEnumerator testHitMiss()
-    {
-        handGestureManager.HitGesture();
-
-        yield return new WaitForSeconds(3);
-        
-        handGestureManager.HoldGesture();
-
-        yield return new WaitForSeconds(3);
-        
-        handGestureManager.HitGesture();
     }
 
     public void Bet(int amount)
@@ -48,6 +40,7 @@ public class AIJackPlayer : JackPlayer
     {
         yield return new WaitForSeconds(Random.Range(1, 4));
         money -= amount;
+        tokenPile.Bet();
         if (money < 0) Lose();
         SoundPlayer.instance.PlaySFX("sfx/Deplacement jeton");
         expressionManager.HappyExpression();
@@ -56,13 +49,31 @@ public class AIJackPlayer : JackPlayer
 
     public void Decide()
     {
-        expressionManager.StressedExpression();
-        StartCoroutine(DecideRoutine());
+        int handvalue = HandValue();
+        Debug.Log($"{name} HAS {handvalue}");
+        if (handvalue == 21)
+        {
+            StartCoroutine(BlackJackRoutine());
+        }
+        else
+        {
+            StartCoroutine(DecideRoutine());
+        }
+    }
+
+    IEnumerator BlackJackRoutine()
+    {
+        expressionManager.HappyExpression();
+        yield return new WaitForSeconds(2);
+        handGestureManager.HoldGesture();
+        OnDecideEnd.Invoke(JackDecision.Hold);
+
     }
 
     IEnumerator DecideRoutine()
     {
         //TODO SFX Hummmmm
+        expressionManager.StressedExpression();
         yield return new WaitForSeconds(Random.Range(10, 20));
         //TODO SFX Haha!
         Card dealerCard = DeckManager.GetDealerCards()[0];
@@ -79,18 +90,32 @@ public class AIJackPlayer : JackPlayer
                 break;
         }
         OnDecideEnd.Invoke(decision);
-        
-        handGestureManager.HitGesture();
     }
 
     public void Lose()
     {
         lost = true;
+        expressionManager.SetFace(FaceType.sad);
     }
 
-    public void WitnessIllegalAction()
+    public void LoseRound()
     {
-        suspicion += (100 - distractionLevel);
+        expressionManager.SetFace(FaceType.sad);
+        lostRound = true;
+    }
+
+    public void NewRound()
+    {
+        if (lost) return;
+        expressionManager.SetFace(FaceType.neutral);
+        lostRound = false;
+        tokenPile.Reset();
+    }
+
+    public void WitnessIllegalAction(float actionValue)
+    {
+        
+        suspicion += actionValue + (100 - distractionLevel);
         if (suspicion > 100)
         {
             suspicion = 100;
@@ -98,6 +123,7 @@ public class AIJackPlayer : JackPlayer
 
         if (suspicion >= 100)
         {
+            //Debug.Log("SUS = 100, LOSE");
             BlackJackManager.GameEnd(false);
         }
 
@@ -107,6 +133,9 @@ public class AIJackPlayer : JackPlayer
         } else if (suspicion > 50)
         {
             expressionManager.SusExpression();
+        } else if (suspicion > 75)
+        {
+            expressionManager.AngryExpression();
         }
     }
 
@@ -116,7 +145,7 @@ public class AIJackPlayer : JackPlayer
         {
             if (suspicion > 0)
             {
-                suspicion -= 2;
+                suspicion -= 2*(1.0f/attentiveness);
             }
             yield return new WaitForSeconds(1);
         }

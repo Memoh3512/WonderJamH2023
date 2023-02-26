@@ -54,10 +54,13 @@ MonoBehaviour:
   money: 50
   suspicion: 0
   distractionLevel: 0
+  attentiveness: 0.5
   intel: 1
   lost: 0
+  lostRound: 0
   expressionManager: {fileID: 0}
   handGestureManager: {fileID: 0}
+  tokenPile: {fileID: 0}
 --- !u!95 &4274494428015742634
 Animator:
   serializedVersion: 5
@@ -279,6 +282,8 @@ MonoBehaviour:
   happyFace: {fileID: 21300000, guid: d102d200b3afb09458a58909c0eef8c2, type: 3}
   sadFace: {fileID: 21300000, guid: a1dcdacdbe011664eacb084fa5050430, type: 3}
   fiouFace: {fileID: 21300000, guid: 49c59aecf3062bf48afc897aad2b7e57, type: 3}
+  angryFace: {fileID: 21300000, guid: e4237bb3d61091f41872a8f52a3d391e, type: 3}
+  distractedFace: {fileID: 21300000, guid: 8b591b13a3645664cbed51b9870a9f91, type: 3}
 --- !u!1 &286951188560989799
 GameObject:
   m_ObjectHideFlags: 0

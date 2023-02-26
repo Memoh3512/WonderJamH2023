@@ -38,10 +38,11 @@ public class CardHolder : MonoBehaviour
 
     public void ResetHolder() 
     { 
-     if(heldCard != null)
+        if(heldCard != null)
         {
             Destroy(heldCard.gameObject);
             heldCard = null;
+            GetComponent<CardRepresentation>().card = new Card(0, null);
         }
     }
     public virtual void OnMouseDown()
@@ -59,6 +60,7 @@ public class CardHolder : MonoBehaviour
         {
             heldCard.PickUpCard(gameObject);
             heldCard = null;
+            GetComponent<CardRepresentation>().card = new Card(0, null);
             holdersManager.CardRemoved();
         }
         else
@@ -102,7 +104,13 @@ public class CardHolder : MonoBehaviour
     {
         if (owner != null)
         {
-            DeckManager.PlayerCards[owner].Remove(GetComponent<CardRepresentation>().card);
+            Card myCard = GetComponent<CardRepresentation>().card;
+            DeckManager.PlayerCards[owner].Remove(myCard);
+            if (GetComponent<CardRepresentation>().card != newCard && myCard.value != 0)
+            {
+                BlackJackManager.DoIllegalAction();
+                Debug.Log("ILLEGAL ACTION");
+            }
             DeckManager.PlayerCards[owner].Add(newCard);
         }
         GetComponent<CardRepresentation>().card = newCard;

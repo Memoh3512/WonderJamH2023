@@ -35,13 +35,6 @@ public class LevelLoader : MonoBehaviour
         
     }
 
-    private void Start()
-    {
-        
-        SoundPlayer.instance.SetMusic(Songs.ADRENALINE);
-        
-    }
-
     public void LoadScene(SceneTypes scene, TransitionTypes transition)
     {
 
