@@ -43,7 +43,7 @@ public class FacialExpressionManager : MonoBehaviour
     public void StressedExpression()
     {
         
-        SoundPlayer.instance.PlaySFX("sfx/Stressed");
+        SoundPlayer.instance.PlaySFX("sfx/exp_Stressed");
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(stressedFace));
     }
