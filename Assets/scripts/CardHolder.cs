@@ -36,6 +36,14 @@ public class CardHolder : MonoBehaviour
         this.holdersManager = holdersManager;
     }
 
+    public void ResetHolder() 
+    { 
+     if(heldCard != null)
+        {
+            Destroy(heldCard.gameObject);
+            heldCard = null;
+        }
+    }
     public virtual void OnMouseDown()
     {
         if(heldCard == null)
