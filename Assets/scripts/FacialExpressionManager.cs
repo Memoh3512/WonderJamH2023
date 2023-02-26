@@ -44,7 +44,8 @@ public class FacialExpressionManager : MonoBehaviour
 
     public void SusExpression()
     {
-        //TODO SFX Sus
+        
+        SoundPlayer.instance.PlaySFX("sfx/Sus");
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(susFace));
     }
@@ -82,7 +83,7 @@ public class FacialExpressionManager : MonoBehaviour
 
     public void AngryExpression()
     {
-        //TODO SFX angry
+        SoundPlayer.instance.PlaySFX("sfx/Perso fache");
         StopAllCoroutines();
         if (angryFace != null) StartCoroutine(ExpressionRoutine(angryFace));
         else StartCoroutine(ExpressionRoutine(susFace));
