@@ -69,6 +69,15 @@ public class AIJackPlayer : JackPlayer
         if (dealerCard == null) Debug.LogError("DEALER A PAS DE CARTE WTFF");
         bool hit = aiDecision.Pige(DeckManager.GetCardsForPlayer(this), DeckManager.GetAllCardsOnTable(), dealerCard); //table_hand inclut la main du joueur et du dealer
         JackDecision decision = hit ? JackDecision.Hit : JackDecision.Hold;
+        switch (decision)
+        {
+            case JackDecision.Hit:
+                handGestureManager.HitGesture();
+                break;
+            case JackDecision.Hold:
+                handGestureManager.HoldGesture();
+                break;
+        }
         OnDecideEnd.Invoke(decision);
         
         handGestureManager.HitGesture();

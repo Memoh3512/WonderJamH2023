@@ -18,6 +18,11 @@ public class HandGestureManager : MonoBehaviour
         anim.SetTrigger("Hit");
     }
 
+    public void PlayHitSFX()
+    {
+        //TODO SFX cogne table (Hit)
+    }
+
     public void HoldGesture()
     {
         anim.SetTrigger("Hold");   
