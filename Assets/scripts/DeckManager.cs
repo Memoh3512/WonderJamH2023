@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DeckManager
@@ -56,6 +57,10 @@ public class DeckManager
         List<Card> cardsOnTable = new List<Card>();
         foreach (List<Card> cardList in PlayerCards.Values)
         {
+            if (cardList.Where(i => i.value == 0).Count() > 0)
+            {
+                int i = 0;
+            }
             cardsOnTable.AddRange(cardList);
         }
 
