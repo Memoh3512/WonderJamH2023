@@ -44,7 +44,7 @@ public class DrinksEvent : JackEvent
         }
         posX = -4;
 
-        BlackJackManager.DistractAll(50);
+        BlackJackManager.DistractAll(60);
         yield return new WaitForSeconds(1);
         if (firstTime)
         {

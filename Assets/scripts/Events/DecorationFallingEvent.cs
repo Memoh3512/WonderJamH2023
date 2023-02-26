@@ -32,7 +32,7 @@ public class DecorationFallingEvent : JackEvent
     IEnumerator Distraction()
     {
         BlackJackManager.DistractAll(80);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(10);
         BlackJackManager.DistractAll(0);
         EventEnded();
     }

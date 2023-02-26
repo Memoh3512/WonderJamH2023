@@ -30,8 +30,8 @@ public class TurnOffLightsEvent : JackEvent
 
     IEnumerator Distraction(GameObject effect)
     {
-        BlackJackManager.DistractAll(40);
-        yield return new WaitForSeconds(5);
+        BlackJackManager.DistractAll(100);
+        yield return new WaitForSeconds(12);
         
         
         SoundPlayer.instance.PlaySFX("sfx/Power cord connecting");
