@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -97,10 +98,12 @@ public class AIJackPlayer : JackPlayer
             OnDecideEnd.Invoke(JackDecision.Hold);
             yield break;
         }
-        //TODO SFX Hummmmm
+        
+        SoundPlayer.instance.PlaySFX("sfx/Perso reflechit");
         expressionManager.StressedExpression();
         yield return new WaitForSeconds(Random.Range(10, 20));
-        //TODO SFX Haha!
+        
+        SoundPlayer.instance.PlaySFX("sfx/Perso eureka");
         Card dealerCard = DeckManager.GetDealerCards()[0];
         if (dealerCard == null) Debug.LogError("DEALER A PAS DE CARTE WTFF");
         bool hit = aiDecision.Pige(DeckManager.GetCardsForPlayer(this), DeckManager.GetAllCardsOnTable(), dealerCard); //table_hand inclut la main du joueur et du dealer
@@ -115,7 +118,7 @@ public class AIJackPlayer : JackPlayer
                 handGestureManager.HoldGesture();
                 break;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         OnDecideEnd.Invoke(decision);
     }
 
@@ -142,8 +145,9 @@ public class AIJackPlayer : JackPlayer
 
     public void WitnessIllegalAction(float actionValue)
     {
-        
-        suspicion += actionValue + (100 - distractionLevel);
+        float mult = 100 - distractionLevel;
+        mult /= 100.0f;
+        suspicion += actionValue * mult;
         if (suspicion > 100)
         {
             suspicion = 100;
@@ -155,16 +159,13 @@ public class AIJackPlayer : JackPlayer
             BlackJackManager.GameEnd(false);
         }
 
-        if (suspicion > 25)
-        {
-            expressionManager.StressedExpression();
-        } else if (suspicion > 50)
-        {
-            expressionManager.SusExpression();
-        } else if (suspicion > 75)
+        if (suspicion > 75)
         {
             expressionManager.AngryExpression();
-        }
+        } else if (suspicion >= 50)
+        {
+            expressionManager.SusExpression();
+        } 
     }
 
     IEnumerator SuspicionCooldown()
