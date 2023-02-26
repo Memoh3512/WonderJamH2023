@@ -228,6 +228,7 @@ public class BlackJackManager : MonoBehaviour
         else
         {
             //TODO SFX Get beaten up
+            SceneChanger.ChangeScene();
             //TODO load lose scene
         }
     }
