@@ -18,6 +18,7 @@ public class AIJackPlayer : JackPlayer
 
     public FacialExpressionManager expressionManager;
     public HandGestureManager handGestureManager;
+    public TokenPile tokenPile;
 
     public void Start()
     {
@@ -39,6 +40,7 @@ public class AIJackPlayer : JackPlayer
     {
         yield return new WaitForSeconds(Random.Range(1, 4));
         money -= amount;
+        tokenPile.Bet();
         if (money < 0) Lose();
         SoundPlayer.instance.PlaySFX("sfx/Deplacement jeton");
         expressionManager.HappyExpression();
@@ -47,7 +49,9 @@ public class AIJackPlayer : JackPlayer
 
     public void Decide()
     {
-        if (HandValue() == 21)
+        int handvalue = HandValue();
+        Debug.Log($"{name} HAS {handvalue}");
+        if (handvalue == 21)
         {
             StartCoroutine(BlackJackRoutine());
         }
@@ -105,6 +109,7 @@ public class AIJackPlayer : JackPlayer
         if (lost) return;
         expressionManager.SetFace(FaceType.neutral);
         lostRound = false;
+        tokenPile.Reset();
     }
 
     public void WitnessIllegalAction(float actionValue)
@@ -118,7 +123,7 @@ public class AIJackPlayer : JackPlayer
 
         if (suspicion >= 100)
         {
-            Debug.Log("SUS = 100, LOSE");
+            //Debug.Log("SUS = 100, LOSE");
             BlackJackManager.GameEnd(false);
         }
 
