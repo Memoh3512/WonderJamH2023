@@ -10,37 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f3b5bf11b5cecb408ad318eafd63d04, type: 3}
-  m_Name: YWaiterCurve
+  m_Name: leavingWaiterY
   m_EditorClassIdentifier: 
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 3
-      inSlope: 0.0028692961
-      outSlope: 0.0028692961
+      value: 0
+      inSlope: 2.3622649
+      outSlope: 2.3622649
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.11663686
+      outWeight: 0.039185204
     - serializedVersion: 3
-      time: 3
+      time: 4
       value: 3
-      inSlope: -0.010331962
-      outSlope: -0.010331962
+      inSlope: 0.01213292
+      outSlope: 0.01213292
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.12815738
+      outWeight: 0.12683122
     - serializedVersion: 3
       time: 7
-      value: 0
-      inSlope: -1.6668533
-      outSlope: -1.6668533
+      value: 3
+      inSlope: -0.01523566
+      outSlope: -0.01523566
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.0902586
+      inWeight: 0.10100206
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
