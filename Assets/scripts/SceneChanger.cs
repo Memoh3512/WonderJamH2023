@@ -10,6 +10,7 @@ public enum SceneTypes
     GameplayScene = 1,
     WinScene = 2,
     LoseScene = 3,
+    RulesScene = 4,
     
 }
 

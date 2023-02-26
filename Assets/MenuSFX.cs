@@ -6,6 +6,7 @@ public class MenuSFX : MonoBehaviour
 {
     public void PlayClickSFX()
     {
-        //TODO SFX Clic menu
+        
+        SoundPlayer.instance.PlaySFX("sfx/Menu click");
     }
 }

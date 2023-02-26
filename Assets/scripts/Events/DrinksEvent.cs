@@ -44,7 +44,7 @@ public class DrinksEvent : JackEvent
         }
         posX = -4;
 
-        BlackJackManager.DistractAll(10);
+        BlackJackManager.DistractAll(50);
         yield return new WaitForSeconds(1);
         if (firstTime)
         {
@@ -52,19 +52,22 @@ public class DrinksEvent : JackEvent
             waiter.GetComponent<Animator>().StartPlayback();
             int firstGlass = Random.Range(0,3);
                 GameObject glass1 = GameObject.Instantiate(drinkPossibilities[firstGlass]);
-                //todo SFX bruit de verre qui se fait déposer sur une table
+                
+                SoundPlayer.instance.PlaySFX("sfx/Verre sur table");
                 glassList[0] = glass1;
                 glass1.transform.position = posGlass1;
                 yield return new WaitForSeconds(1);
                 int secondGlass = Random.Range(0, 3);
                 GameObject glass2 = GameObject.Instantiate(drinkPossibilities[secondGlass]);
-                //todo SFX bruit de verre qui se fait déposer sur une table
+              
+                SoundPlayer.instance.PlaySFX("sfx/Verre sur table");
                 glassList[1] = glass2;
                 glass2.transform.position = posGlass2;
                 yield return new WaitForSeconds(1);
                 int thirdGlass = Random.Range(0, 3);
                 GameObject glass3 = GameObject.Instantiate(drinkPossibilities[thirdGlass]);
-                //todo SFX bruit de verre qui se fait déposer sur une table
+              
+                SoundPlayer.instance.PlaySFX("sfx/Verre sur table");
                 glassList[2] = glass3;
                 glass3.transform.position = posGlass3;
                 yield return new WaitForSeconds(1);
@@ -78,13 +81,15 @@ public class DrinksEvent : JackEvent
             waiter.GetComponent<Animator>().StartPlayback();
             glassOnTable = !glassOnTable;
             glassList[0].SetActive(glassOnTable);
-            //todo SFX bruit de verre qui se fait déposer sur une table
+           
+            SoundPlayer.instance.PlaySFX("sfx/Verre sur table");
             yield return new WaitForSeconds(1);
             glassList[1].SetActive(glassOnTable);
-            //todo SFX bruit de verre qui se fait déposer sur une table
+            SoundPlayer.instance.PlaySFX("sfx/Verre sur table");
             yield return new WaitForSeconds(1);
             glassList[2].SetActive(glassOnTable);
-            //todo SFX bruit de verre qui se fait déposer sur une table
+           
+            SoundPlayer.instance.PlaySFX("sfx/Verre sur table");
             yield return new WaitForSeconds(1);
 
         }
