@@ -49,7 +49,7 @@ public class AIJackPlayer : JackPlayer
         yield return new WaitForSeconds(Random.Range(1, 4));
         money -= amount;
         if (money < 0) Lose();
-        //TODO SFX Bet
+        SoundPlayer.instance.PlaySFX("sfx/Deplacement jeton");
         expressionManager.HappyExpression();
         OnBetEnd.Invoke();
     }
