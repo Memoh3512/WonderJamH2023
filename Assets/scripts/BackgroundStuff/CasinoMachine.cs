@@ -39,8 +39,8 @@ public class CasinoMachine : MonoBehaviour
         lever.GetComponent<Animator>().Play("PullBras",0,0f);
         yield return new WaitForSeconds(1);
         machine.GetComponent<Animator>().enabled = true;
-        
-        SoundPlayer.instance.PlaySFX("sfx/Slot machine rolling")
+
+        SoundPlayer.instance.PlaySFX("sfx/Slot machine rolling");
         machine.GetComponent<Animator>().Play("Rolling");
         machine.GetComponent<Animator>().SetTrigger("Roll");
         machine.GetComponent<Animator>().ResetTrigger("Roll");
