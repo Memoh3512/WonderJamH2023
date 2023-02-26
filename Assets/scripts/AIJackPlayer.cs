@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -97,10 +98,12 @@ public class AIJackPlayer : JackPlayer
             OnDecideEnd.Invoke(JackDecision.Hold);
             yield break;
         }
-        //TODO SFX Hummmmm
+        
+        SoundPlayer.instance.PlaySFX("sfx/Perso reflechit");
         expressionManager.StressedExpression();
         yield return new WaitForSeconds(Random.Range(10, 20));
-        //TODO SFX Haha!
+        
+        SoundPlayer.instance.PlaySFX("sfx/Perso eureka");
         Card dealerCard = DeckManager.GetDealerCards()[0];
         if (dealerCard == null) Debug.LogError("DEALER A PAS DE CARTE WTFF");
         bool hit = aiDecision.Pige(DeckManager.GetCardsForPlayer(this), DeckManager.GetAllCardsOnTable(), dealerCard); //table_hand inclut la main du joueur et du dealer
