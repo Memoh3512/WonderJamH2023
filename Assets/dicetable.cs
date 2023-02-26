@@ -6,6 +6,7 @@ public class dicetable : MonoBehaviour
 {
     public void PlayDiceSFX()
     {
-        //TODO SFX DICE
+        
+        SoundPlayer.instance.PlaySFX("sfx/Roll dice");
     }
 }
