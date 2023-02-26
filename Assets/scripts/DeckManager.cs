@@ -39,6 +39,10 @@ public class DeckManager
     {
         Deck = new List<Card>(OgDeck);
         PlayerCards.Clear();
+        foreach (JackPlayer player in GameObject.FindObjectsOfType<JackPlayer>())
+        {
+            PlayerCards.Add(player, new List<Card>());
+        }
     }
 
     public static List<Card> GetCardsForPlayer(JackPlayer player)

@@ -39,7 +39,7 @@ public class BlackJackManager : MonoBehaviour
         while (lostPlayers < players.Length)
         {
             //bet
-            TurnIndicator.SetText("Betting");
+            TurnIndicator.SetText("Misage");
             int waitAmount = 0;
             foreach (AIJackPlayer player in players)
             {
@@ -53,7 +53,7 @@ public class BlackJackManager : MonoBehaviour
             yield return new WaitUntil(() => waitAmount == players.Length);
 
             //draw basic cards
-            TurnIndicator.SetText("Draw 2 cards for each");
+            TurnIndicator.SetText("Donner 2 cartes à chacun");
             waitAmount = 0;
             foreach (AIJackPlayer player in players)
             {
@@ -67,7 +67,7 @@ public class BlackJackManager : MonoBehaviour
             yield return new WaitUntil(() => waitAmount == players.Length);
             
             //Draw my card
-            TurnIndicator.SetText("Draw your card");
+            TurnIndicator.SetText("Pige ta carte");
             waitAmount = 0;
             self.AskForCards(1);
             self.AddOnCardAskCompleteListener(() =>
@@ -81,7 +81,7 @@ public class BlackJackManager : MonoBehaviour
             while (done < players.Length)
             {
                 //decide
-                TurnIndicator.SetText("Deciding");
+                TurnIndicator.SetText("Réflexion...");
                 waitAmount = 0;
                 Dictionary<AIJackPlayer, JackDecision> decisions = new Dictionary<AIJackPlayer, JackDecision>();
                 foreach (AIJackPlayer player in players)
@@ -97,7 +97,7 @@ public class BlackJackManager : MonoBehaviour
                 yield return new WaitUntil(() => waitAmount == players.Length);
             
                 //reaction aux choix
-                TurnIndicator.SetText("Draw cards");
+                TurnIndicator.SetText("Donner des cartes à ceux qui en veulent");
                 waitAmount = 0;
                 int toWait = 0;
                 foreach (KeyValuePair<AIJackPlayer, JackDecision> elem in decisions)
@@ -122,10 +122,11 @@ public class BlackJackManager : MonoBehaviour
 
             //croupier
             //if GetHandValue >= 17, fini le tour, sinon ask for card
-            waitAmount = 0;
-            TurnIndicator.SetText("Draw self cards");
+            ;
+            TurnIndicator.SetText("Pige ma carte");
             while (self.HandValue(DeckManager.GetCardsForPlayer(self)) < 17)
             {
+                waitAmount = 0;
                 self.AskForCards(1);
                 self.AddOnCardAskCompleteListener(() =>
                 {
@@ -140,7 +141,10 @@ public class BlackJackManager : MonoBehaviour
             {
                 player.RemoveRoundListeners();
                 //TODO call ramassage de cartes ici
-                
+                foreach (HoldersManager holder in FindObjectsOfType<HoldersManager>())
+                {
+                    holder.ResetHolders();
+                }
                 DeckManager.ResetDeck();
             }
         }
