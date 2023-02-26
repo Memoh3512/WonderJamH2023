@@ -49,7 +49,7 @@ public class SprinklerEvent : JackEvent
 
     IEnumerator Distraction()
     {
-        BlackJackManager.DistractAll(20);
+        BlackJackManager.DistractAll(40);
         while (timeElapsed < animationTime)
         {
            
