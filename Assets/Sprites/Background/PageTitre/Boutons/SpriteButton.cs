@@ -16,6 +16,7 @@ public class SpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         DoorOpen.enabled = false;
         showOnHover.SetActive(false);
+        Camera.main.GetComponent<Animator>().enabled = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -36,7 +37,7 @@ public class SpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             case ButtonType.Quit: Application.Quit();break;
             case ButtonType.Start: 
-                
+                Camera.main.GetComponent<Animator>().enabled = true;
                 DoorOpen.enabled = enabled;
                 break;
         }

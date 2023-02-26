@@ -358,6 +358,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showOnHover: {fileID: 1648972106}
+  button_type: 1
+  DoorOpen: {fileID: 840499127}
 --- !u!61 &176582365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -459,6 +461,7 @@ GameObject:
   - component: {fileID: 346758776}
   - component: {fileID: 346758779}
   - component: {fileID: 346758780}
+  - component: {fileID: 346758781}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -581,6 +584,26 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!95 &346758781
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346758775}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &578544365
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,8 +761,10 @@ GameObject:
   m_Component:
   - component: {fileID: 840499126}
   - component: {fileID: 840499125}
+  - component: {fileID: 840499127}
+  - component: {fileID: 840499128}
   m_Layer: 0
-  m_Name: PortesOuvrent0
+  m_Name: Portes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -812,6 +837,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &840499127
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840499124}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 877270ef61f29dd40949793cff1173f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &840499128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840499124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2cba9c8a368d5b4f85e8029372b38dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScene: 1
+  transition: 0
 --- !u!1 &859621051
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,6 +971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showOnHover: {fileID: 1831046596}
+  button_type: 0
+  DoorOpen: {fileID: 0}
 --- !u!61 &859621055
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1182,7 +1243,6 @@ GameObject:
   - component: {fileID: 1232316291}
   - component: {fileID: 1232316290}
   - component: {fileID: 1232316289}
-  - component: {fileID: 1232316293}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1361,7 +1421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1648972107
 Transform:
   m_ObjectHideFlags: 0
@@ -1611,7 +1671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1831046597
 Transform:
   m_ObjectHideFlags: 0
