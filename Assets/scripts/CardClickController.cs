@@ -10,6 +10,7 @@ public class CardClickController : MonoBehaviour
     bool held = false;
     public bool inHolder = false;
     private bool flipped = false;
+    public Vector2 offsetHolder;
     GameObject hand;
     public GameObject holder;
 
@@ -88,8 +89,8 @@ public class CardClickController : MonoBehaviour
 
     public void PutDownCard(GameObject holder)
     {
-        transform.position = holder.transform.position;
         transform.rotation = holder.transform.rotation;
+        transform.position = holder.transform.position - side1.transform.localPosition;
         transform.parent = holder.transform;
         heldCard = null;
         holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
