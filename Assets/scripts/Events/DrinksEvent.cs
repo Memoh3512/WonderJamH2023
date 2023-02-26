@@ -7,9 +7,11 @@ public class DrinksEvent : JackEvent
     public AnimationCurve walkingXCurve;
     public AnimationCurve walkingYCurve;
     public Vector3 posInitiale = GameObject.FindGameObjectWithTag("DrinkGuySpawn").transform.position;
+    public AnimationCurve leavingXCurve;
+    public AnimationCurve leavingYCurve;
     private float timeElapsed;
     public float animationTime = 7;
-    public float leavingTime = 3;
+    public float leavingTime = 4;
     public Vector3 posGlass1;
     public Vector3 posGlass2;
     public Vector3 posGlass3;
@@ -81,11 +83,12 @@ public class DrinksEvent : JackEvent
         }
         
         timeElapsed = 0;
+        waiter.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("BackgroundCasino0");
         while(timeElapsed < leavingTime)
         {
             yield return null;
             timeElapsed += Time.deltaTime;
-            waiter.transform.position = new Vector3(posX, waiter.transform.position.y + Time.deltaTime*3, posInitiale.z);
+            waiter.transform.position = new Vector3(leavingXCurve.Evaluate(timeElapsed), leavingYCurve.Evaluate(timeElapsed), posInitiale.z);
         }
         
         //Debug.Log("destroy");
@@ -107,7 +110,9 @@ public class DrinksEvent : JackEvent
 
         walkingXCurve = Resources.Load<AnimationCurveAsset>("waiterCurve");
         walkingYCurve = Resources.Load<AnimationCurveAsset>("YWaiterCurve");
-        
+        leavingXCurve = Resources.Load<AnimationCurveAsset>("leavingWaiterX");
+        leavingYCurve = Resources.Load<AnimationCurveAsset>("leavingWaiterY");
+
         GameObject waiterPrefab = Resources.Load<GameObject>("Waiter");
         drinkPossibilities[0] = Resources.Load<GameObject>("wine");
         drinkPossibilities[1] = Resources.Load<GameObject>("Champagne");        
