@@ -40,6 +40,7 @@ public class AIJackPlayer : JackPlayer
 
     public void Bet(int amount)
     {
+        expressionManager.StressedExpression();
         StartCoroutine(BetRoutine(amount));
     }
 
@@ -49,11 +50,13 @@ public class AIJackPlayer : JackPlayer
         money -= amount;
         if (money < 0) Lose();
         //TODO SFX Bet
+        expressionManager.HappyExpression();
         OnBetEnd.Invoke();
     }
 
     public void Decide()
     {
+        expressionManager.StressedExpression();
         StartCoroutine(DecideRoutine());
     }
 

@@ -19,7 +19,7 @@ public class FacialExpressionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        faceRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
