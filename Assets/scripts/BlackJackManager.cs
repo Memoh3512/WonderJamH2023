@@ -124,7 +124,7 @@ public class BlackJackManager : MonoBehaviour
             //if GetHandValue >= 17, fini le tour, sinon ask for card
             waitAmount = 0;
             TurnIndicator.SetText("Draw self cards");
-            if (self.HandValue(DeckManager.GetCardsForPlayer(self)) < 17)
+            while (self.HandValue(DeckManager.GetCardsForPlayer(self)) < 17)
             {
                 self.AskForCards(1);
                 self.AddOnCardAskCompleteListener(() =>
@@ -140,6 +140,7 @@ public class BlackJackManager : MonoBehaviour
             {
                 player.RemoveRoundListeners();
                 //TODO call ramassage de cartes ici
+                
                 DeckManager.ResetDeck();
             }
         }
