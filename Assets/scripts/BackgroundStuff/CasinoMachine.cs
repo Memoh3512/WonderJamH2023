@@ -39,7 +39,8 @@ public class CasinoMachine : MonoBehaviour
         lever.GetComponent<Animator>().Play("PullBras",0,0f);
         yield return new WaitForSeconds(1);
         machine.GetComponent<Animator>().enabled = true;
-        //TODO SFX CasinoRolling
+        
+        SoundPlayer.instance.PlaySFX("sfx/Slot machine rolling")
         machine.GetComponent<Animator>().Play("Rolling");
         machine.GetComponent<Animator>().SetTrigger("Roll");
         machine.GetComponent<Animator>().ResetTrigger("Roll");
@@ -48,7 +49,8 @@ public class CasinoMachine : MonoBehaviour
         int random = Random.Range(0, 10);
         if (random<2)
         {
-            //TODO SFX CasinoMachineWin
+            //TODO sfx a changer
+            SoundPlayer.instance.PlaySFX("sfx/Jackpot");
             //Debug.Log("Winner");
             //WINNER
             machine.GetComponent<Animator>().SetTrigger("Winner");
