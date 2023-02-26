@@ -188,7 +188,8 @@ MonoBehaviour:
   happyFace: {fileID: 21300000, guid: 425ca113fee1bb2438f43a967b4e2fd6, type: 3}
   sadFace: {fileID: 21300000, guid: ad28fd946b8e7f14283a337222392aa4, type: 3}
   fiouFace: {fileID: 21300000, guid: b8e7461290d54f84eab987953b1bde08, type: 3}
-  angryFace: {fileID: 0}
+  angryFace: {fileID: 21300000, guid: b49a0c1e34163be459ab7dd09e21777f, type: 3}
+  distractedFace: {fileID: 21300000, guid: d3ac1eb2a2af58649900ab97f72c789d, type: 3}
 --- !u!1 &2303973187790577190
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,8 +328,10 @@ MonoBehaviour:
   money: 30
   suspicion: 0
   distractionLevel: 0
+  attentiveness: 1
   intel: 1
   lost: 0
+  lostRound: 0
   expressionManager: {fileID: 0}
   handGestureManager: {fileID: 0}
 --- !u!95 &7899580839710436490

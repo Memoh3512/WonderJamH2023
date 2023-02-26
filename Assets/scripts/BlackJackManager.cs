@@ -155,6 +155,10 @@ public class BlackJackManager : MonoBehaviour
                 {
                     player.money += 20;
                     player.expressionManager.HappyExpression();
+                    if (player.intel && player.money >= 200)
+                    {
+                        GameEnd(true);
+                    }
                 }
             }
             yield return new WaitForSeconds(6);
@@ -186,7 +190,8 @@ public class BlackJackManager : MonoBehaviour
     public static void Distract(AIJackPlayer player, float distractionValue)
     {
         //distraction
-        if (player.distractionLevel + distractionValue > 100)
+        player.expressionManager.DistractedExpression();
+        if (player.distractionLevel > 100)
         {
             player.distractionLevel = 100;
         }
@@ -221,6 +226,7 @@ public class BlackJackManager : MonoBehaviour
 
     public static void GameEnd(bool win)
     {
+        SoundPlayer.instance.SetMusic(Songs.winlose, 2f, TransitionBehavior.Stop);
         if (win)
         {
             SceneChanger.ChangeScene(SceneTypes.WinScene);

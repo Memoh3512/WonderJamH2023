@@ -47,6 +47,7 @@ public class SpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 {
                     DoorOpen.enabled = enabled;
                 }
+                SoundPlayer.instance.SetMusic(Songs.gameplay, 2f, TransitionBehavior.Stop);
                 Destroy(allMenu);
                 break;
         }
