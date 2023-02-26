@@ -108,7 +108,7 @@ public class CardHolder : MonoBehaviour
             DeckManager.PlayerCards[owner].Remove(myCard);
             if (GetComponent<CardRepresentation>().card != newCard && myCard.value != 0)
             {
-                BlackJackManager.DoIllegalAction();
+                BlackJackManager.DoIllegalAction(100);
                 Debug.Log("ILLEGAL ACTION");
             }
             DeckManager.PlayerCards[owner].Add(newCard);

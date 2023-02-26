@@ -115,7 +115,7 @@ public class AIJackPlayer : JackPlayer
                 handGestureManager.HoldGesture();
                 break;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         OnDecideEnd.Invoke(decision);
     }
 
@@ -142,8 +142,9 @@ public class AIJackPlayer : JackPlayer
 
     public void WitnessIllegalAction(float actionValue)
     {
-        
-        suspicion += actionValue + (100 - distractionLevel);
+        float mult = 100 - distractionLevel;
+        mult /= 100.0f;
+        suspicion += actionValue * mult;
         if (suspicion > 100)
         {
             suspicion = 100;
@@ -155,16 +156,13 @@ public class AIJackPlayer : JackPlayer
             BlackJackManager.GameEnd(false);
         }
 
-        if (suspicion > 25)
-        {
-            expressionManager.StressedExpression();
-        } else if (suspicion > 50)
-        {
-            expressionManager.SusExpression();
-        } else if (suspicion > 75)
+        if (suspicion > 75)
         {
             expressionManager.AngryExpression();
-        }
+        } else if (suspicion >= 50)
+        {
+            expressionManager.SusExpression();
+        } 
     }
 
     IEnumerator SuspicionCooldown()

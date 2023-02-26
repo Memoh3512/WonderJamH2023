@@ -24,7 +24,7 @@ public class BlackJackManager : MonoBehaviour
     IEnumerator GameRoutine()
     {
         yield return new WaitForSeconds(2);
-        AIJackPlayer[] players = FindObjectsOfType<AIJackPlayer>();
+        List<AIJackPlayer> players = new List<AIJackPlayer>(FindObjectsOfType<AIJackPlayer>());
         GameObject selfObject = GameObject.FindGameObjectWithTag("Player");
         if (selfObject == null) Debug.LogError("SELFObject NULL DANS GAME ROUTINE T CON");
         JackPlayer self = selfObject.GetComponent<JackPlayer>();
@@ -42,7 +42,7 @@ public class BlackJackManager : MonoBehaviour
             player.AddOnLoseListener(() => lostPlayers++);
         }
 
-        while (lostPlayers < players.Length)
+        while (lostPlayers < players.Count)
         {
             //bet
             TurnIndicator.SetText("Mise");
@@ -55,7 +55,7 @@ public class BlackJackManager : MonoBehaviour
                     waitAmount++;
                 });
             }
-            yield return new WaitUntil(() => waitAmount == players.Length);
+            yield return new WaitUntil(() => waitAmount == players.Count);
 
             //draw basic cards
             TurnIndicator.SetText("Donner 2 cartes à chacun");
@@ -69,7 +69,7 @@ public class BlackJackManager : MonoBehaviour
                     player.RemoveCardAskListener();
                 });
             }
-            yield return new WaitUntil(() => waitAmount == players.Length);
+            yield return new WaitUntil(() => waitAmount == players.Count);
             
             //Draw my card
             TurnIndicator.SetText("Pige ta carte");
@@ -82,9 +82,12 @@ public class BlackJackManager : MonoBehaviour
             });
             yield return new WaitUntil(() => waitAmount == 1);
 
+            TurnIndicator.SetText("");
             int done = 0;
-            while (done < players.Length)
+            while (done < players.Count)
             {
+
+                yield return new WaitForSeconds(1);
                 //decide
                 TurnIndicator.SetText("Réflexion...");
                 waitAmount = 0;
@@ -99,7 +102,7 @@ public class BlackJackManager : MonoBehaviour
                         player.RemoveDecideEndListener();
                     });
                 }
-                yield return new WaitUntil(() => waitAmount == players.Length);
+                yield return new WaitUntil(() => waitAmount == players.Count);
             
                 //reaction aux choix
                 TurnIndicator.SetText("Donner des cartes à ceux qui en veulent");
@@ -124,7 +127,7 @@ public class BlackJackManager : MonoBehaviour
 
                 yield return new WaitUntil(() => waitAmount == toWait);
             }
-
+            yield return new WaitForSeconds(3);
             //croupier
             //if GetHandValue >= 17, fini le tour, sinon ask for card
             TurnIndicator.SetText("Pige ma carte");
@@ -139,10 +142,12 @@ public class BlackJackManager : MonoBehaviour
                 });
                 yield return new WaitUntil(() => waitAmount == 1);
             }
+            TurnIndicator.SetText("");
             
             //realisation
             TurnIndicator.SetText("Résultat");
             int selfHand = self.HandValue();
+            List<AIJackPlayer> PlayersDead = new List<AIJackPlayer>();
             foreach (AIJackPlayer player in players)
             {
                 int playerhand = player.HandValue();
@@ -150,18 +155,24 @@ public class BlackJackManager : MonoBehaviour
                 {
                     player.money -= 10;
                     player.expressionManager.SadExpression();
+                    PlayersDead.Add(player);
+                    if (!player.intel && player.money <= 0)
+                    {
+                        GameEnd(false);
+                    }
 
                 }
                 else if(playerhand > selfHand || selfHand > 21)
                 {
                     player.money += 20;
                     player.expressionManager.HappyExpression();
-                    if (player.intel && player.money >= 200)
+                    if (!player.intel && player.money >= 200)
                     {
                         GameEnd(true);
                     }
                 }
             }
+            TurnIndicator.SetText("");
             yield return new WaitForSeconds(6);
             
             //end turn
@@ -169,6 +180,11 @@ public class BlackJackManager : MonoBehaviour
             {
                 player.RemoveRoundListeners();
                 player.NewRound();
+            }
+
+            foreach (AIJackPlayer player in PlayersDead)
+            {
+                players.Remove(player);
             }
             foreach (HoldersManager holder in FindObjectsOfType<HoldersManager>())
             {
@@ -212,7 +228,7 @@ public class BlackJackManager : MonoBehaviour
         }
     }
 
-    public static void DoIllegalAction(float actionValue = 0)
+    public static void DoIllegalAction(float actionValue)
     {
         AIJackPlayer[] ais = FindObjectsOfType<AIJackPlayer>();
         foreach (AIJackPlayer player in ais)
