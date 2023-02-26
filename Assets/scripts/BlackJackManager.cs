@@ -48,7 +48,6 @@ public class BlackJackManager : MonoBehaviour
                 player.AddOnBetEndListener(() =>
                 {
                     waitAmount++;
-                    Debug.Log("Bet end");
                 });
             }
             yield return new WaitUntil(() => waitAmount == players.Length);

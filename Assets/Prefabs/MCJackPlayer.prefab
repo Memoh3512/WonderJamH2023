@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 286951187244524394}
   - component: {fileID: 286951187244524395}
+  - component: {fileID: 4274494428015742634}
+  - component: {fileID: 6172426105315557579}
   m_Layer: 0
   m_Name: MCJackPlayer
   m_TagString: Untagged
@@ -47,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae77a0fa03c6284ca8ee7b0343ce3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: []
   holders: []
   holderManager: {fileID: 0}
   money: 50
@@ -57,6 +58,39 @@ MonoBehaviour:
   lost: 0
   expressionManager: {fileID: 0}
   handGestureManager: {fileID: 0}
+--- !u!95 &4274494428015742634
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286951187244524372}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: b05c8a6d0d401cd49b4ef51896b57091, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &6172426105315557579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286951187244524372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba246d75221fc94a8a83a8298ba8177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jackPlayer: {fileID: 286951187244524395}
 --- !u!1 &286951187394444578
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,8 +289,6 @@ GameObject:
   m_Component:
   - component: {fileID: 286951188560989798}
   - component: {fileID: 286951188560989796}
-  - component: {fileID: 286951188560989797}
-  - component: {fileID: 8838730984674763442}
   m_Layer: 0
   m_Name: Arms
   m_TagString: Untagged
@@ -272,7 +304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286951188560989799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.95, y: 0.11, z: 0}
+  m_LocalPosition: {x: 4.98, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -319,7 +351,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 12
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -331,36 +363,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &286951188560989797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286951188560989799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba246d75221fc94a8a83a8298ba8177, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jackPlayer: {fileID: 286951187244524395}
---- !u!95 &8838730984674763442
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286951188560989799}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f3a919c72a97a764789419de155ae4d7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0

@@ -40,6 +40,7 @@ public class AIJackPlayer : JackPlayer
 
     public void Bet(int amount)
     {
+        expressionManager.StressedExpression();
         StartCoroutine(BetRoutine(amount));
     }
 
@@ -48,25 +49,35 @@ public class AIJackPlayer : JackPlayer
         yield return new WaitForSeconds(Random.Range(1, 4));
         money -= amount;
         if (money < 0) Lose();
-        //TODO SFX Bet
+        SoundPlayer.instance.PlaySFX("sfx/Deplacement jeton");
+        expressionManager.HappyExpression();
         OnBetEnd.Invoke();
     }
 
     public void Decide()
     {
+        expressionManager.StressedExpression();
         StartCoroutine(DecideRoutine());
     }
 
     IEnumerator DecideRoutine()
     {
-        //TODO decider si hit or miss
         //TODO SFX Hummmmm
         yield return new WaitForSeconds(Random.Range(10, 20));
         //TODO SFX Haha!
         Card dealerCard = DeckManager.GetDealerCards()[0];
         if (dealerCard == null) Debug.LogError("DEALER A PAS DE CARTE WTFF");
-        bool hit = aiDecision.Pige(hand, DeckManager.GetAllCardsOnTable(), dealerCard); //table_hand inclut la main du joueur et du dealer
+        bool hit = aiDecision.Pige(DeckManager.GetCardsForPlayer(this), DeckManager.GetAllCardsOnTable(), dealerCard); //table_hand inclut la main du joueur et du dealer
         JackDecision decision = hit ? JackDecision.Hit : JackDecision.Hold;
+        switch (decision)
+        {
+            case JackDecision.Hit:
+                handGestureManager.HitGesture();
+                break;
+            case JackDecision.Hold:
+                handGestureManager.HoldGesture();
+                break;
+        }
         OnDecideEnd.Invoke(decision);
         
         handGestureManager.HitGesture();
@@ -113,7 +124,6 @@ public class AIJackPlayer : JackPlayer
 
     #region Events
     protected UnityEvent OnBetEnd;
-    protected UnityEvent OnDrawCardEnd;
     protected UnityEvent<JackDecision> OnDecideEnd;
     protected UnityEvent OnLose;
 
@@ -121,12 +131,6 @@ public class AIJackPlayer : JackPlayer
     {
         if (OnBetEnd == null) OnBetEnd = new UnityEvent();
         OnBetEnd.AddListener(action);
-    }
-
-    public void AddOnDrawCardEndListener(UnityAction action)
-    {
-        if (OnDrawCardEnd == null) OnDrawCardEnd = new UnityEvent();
-        OnDrawCardEnd.AddListener(action);
     }
 
     public void AddOnDecideEndListener(UnityAction<JackDecision> action)
@@ -144,7 +148,6 @@ public class AIJackPlayer : JackPlayer
     {
         base.RemoveRoundListeners();
         OnBetEnd.RemoveAllListeners();
-        OnDrawCardEnd.RemoveAllListeners();
         OnDecideEnd.RemoveAllListeners();
         OnCardAskComplete.RemoveAllListeners();
     }

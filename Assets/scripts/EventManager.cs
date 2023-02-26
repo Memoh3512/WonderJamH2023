@@ -12,10 +12,10 @@ public class EventManager : MonoBehaviour
     {
         //faire un add pour chaque type d'évent
         //EventList.Add(new DecorationFallingEvent());
-        EventList.Add(new SprinklerEvent());
+       EventList.Add(new SprinklerEvent());
 
        EventList.Add(new DrinksEvent());
-       EventList.Add(new TurnOffLightsEvent());
+       //EventList.Add(new TurnOffLightsEvent());
         StartCoroutine(EventRoutine());
     }
 

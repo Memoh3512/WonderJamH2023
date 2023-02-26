@@ -17,7 +17,6 @@ public class DeckManager
         PlayerCards.Clear();
         foreach (JackPlayer player in GameObject.FindObjectsOfType<JackPlayer>())
         {
-            Debug.Log($"Add {player.name} To PlayerCards");
             PlayerCards.Add(player, new List<Card>());
         }
         Deck.Clear();
