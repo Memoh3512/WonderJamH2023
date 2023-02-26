@@ -59,6 +59,8 @@ public class SpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 if (DoorOpen)
                 {
                     DoorOpen.enabled = enabled;
+                    
+                    SoundPlayer.instance.PlaySFX("sfx/Porte de casino ouvre");
                 }
                 SoundPlayer.instance.SetMusic(Songs.gameplay, 2f, TransitionBehavior.Stop);
                 Destroy(allMenu);

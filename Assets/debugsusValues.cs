@@ -14,7 +14,7 @@ public class debugsusValues : MonoBehaviour
     {
         if (debug && owner != null)
         {
-            GetComponent<TextMeshProUGUI>().text = $"sus: {owner.suspicion}\ndistraction: {owner.distractionLevel}";
+            GetComponent<TextMeshProUGUI>().text = $"sus: {owner.suspicion}\ndistraction: {owner.distractionLevel}\nmoney: {owner.money}";
         }
         else
         {
