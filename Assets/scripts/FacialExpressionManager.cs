@@ -90,7 +90,8 @@ public class FacialExpressionManager : MonoBehaviour
 
     public void DistractedExpression()
     {
-        //TODO SFX Distracted
+        
+        SoundPlayer.instance.PlaySFX("sfx/exp_Distracted");
         StopAllCoroutines();
         if (distractedFace != null) StartCoroutine(ExpressionRoutine(distractedFace));
         else StartCoroutine(ExpressionRoutine(susFace));

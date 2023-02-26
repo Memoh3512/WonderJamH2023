@@ -234,7 +234,8 @@ public class BlackJackManager : MonoBehaviour
         }
         else
         {
-            //TODO SFX Get beaten up
+            
+            SoundPlayer.instance.PlaySFX("sfx/Slime tabasser");
             SceneChanger.ChangeScene(SceneTypes.LoseScene);
         }
     }
