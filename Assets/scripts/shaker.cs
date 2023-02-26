@@ -13,13 +13,19 @@ public class shaker : MonoBehaviour
     private bool falling = false;
     public AnimationCurve shakeCurve;
     private bool stop = false;
+    bool started = false;
 
     private UnityEvent onShakeEnded;
    
+    public void StartShake()
+    {
+        started = true;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (!started) return;
         if (shakeCurve == null) return;
         if (!stop)
         {
@@ -44,7 +50,7 @@ public class shaker : MonoBehaviour
                     }
                     else
                     {
-                        transform.position -= new Vector3(0, timeFalling, 0);
+                        transform.position -= new Vector3(0, timeFalling/2, 0);
                     }
                 }
 
