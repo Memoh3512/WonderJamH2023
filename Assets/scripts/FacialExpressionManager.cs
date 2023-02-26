@@ -42,28 +42,31 @@ public class FacialExpressionManager : MonoBehaviour
 
     public void StressedExpression()
     {
-        //TODO SFX Stressed
+        
+        SoundPlayer.instance.PlaySFX("sfx/exp_Stressed");
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(stressedFace));
     }
 
     public void HappyExpression()
     {
-        //TODO SFX Happy
+        
+        SoundPlayer.instance.PlaySFX("sfx/exp_Happy");
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(happyFace));
     }
 
     public void SadExpression()
     {
-        //TODO SFX Sad
+        
+        SoundPlayer.instance.PlaySFX("sfx/exp_Sad");
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(sadFace));
     }
 
     public void FiouExpression()
     {
-        //TODO SFX Fiou
+        SoundPlayer.instance.PlaySFX("sfx/exp_Fiou");
         StopAllCoroutines();
         StartCoroutine(ExpressionRoutine(fiouFace));
     }
