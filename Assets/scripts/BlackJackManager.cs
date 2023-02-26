@@ -145,13 +145,13 @@ public class BlackJackManager : MonoBehaviour
             foreach (AIJackPlayer player in players)
             {
                 int playerhand = player.HandValue();
-                if (playerhand < selfHand)
+                if (playerhand < selfHand && selfHand <= 21)
                 {
                     player.money -= 10;
                     player.expressionManager.SadExpression();
 
                 }
-                else if(playerhand > selfHand)
+                else if(playerhand > selfHand || selfHand > 21)
                 {
                     player.money += 20;
                     player.expressionManager.HappyExpression();

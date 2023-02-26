@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.PostProcessing;
 
 public class AIJackPlayer : JackPlayer
 {
     public float suspicion;
     public float distractionLevel;
+    [Range(0.1f, 10)]
+    public float attentiveness = 1;
     public bool intel = true;
     public AIDecision aiDecision;
     
@@ -44,13 +47,29 @@ public class AIJackPlayer : JackPlayer
 
     public void Decide()
     {
-        expressionManager.StressedExpression();
-        StartCoroutine(DecideRoutine());
+        if (HandValue() == 21)
+        {
+            StartCoroutine(BlackJackRoutine());
+        }
+        else
+        {
+            StartCoroutine(DecideRoutine());
+        }
+    }
+
+    IEnumerator BlackJackRoutine()
+    {
+        expressionManager.HappyExpression();
+        yield return new WaitForSeconds(2);
+        handGestureManager.HoldGesture();
+        OnDecideEnd.Invoke(JackDecision.Hold);
+
     }
 
     IEnumerator DecideRoutine()
     {
         //TODO SFX Hummmmm
+        expressionManager.StressedExpression();
         yield return new WaitForSeconds(Random.Range(10, 20));
         //TODO SFX Haha!
         Card dealerCard = DeckManager.GetDealerCards()[0];
@@ -67,8 +86,6 @@ public class AIJackPlayer : JackPlayer
                 break;
         }
         OnDecideEnd.Invoke(decision);
-        
-        handGestureManager.HitGesture();
     }
 
     public void Lose()
@@ -123,7 +140,7 @@ public class AIJackPlayer : JackPlayer
         {
             if (suspicion > 0)
             {
-                suspicion -= 2;
+                suspicion -= 2*(1.0f/attentiveness);
             }
             yield return new WaitForSeconds(1);
         }
