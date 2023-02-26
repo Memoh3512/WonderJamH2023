@@ -45,7 +45,7 @@ public class BlackJackManager : MonoBehaviour
         while (lostPlayers < players.Length)
         {
             //bet
-            TurnIndicator.SetText("Misage");
+            TurnIndicator.SetText("Mise");
             int waitAmount = 0;
             foreach (AIJackPlayer player in players)
             {
@@ -168,6 +168,7 @@ public class BlackJackManager : MonoBehaviour
             foreach (AIJackPlayer player in players)
             {
                 player.RemoveRoundListeners();
+                player.NewRound();
             }
             foreach (HoldersManager holder in FindObjectsOfType<HoldersManager>())
             {
