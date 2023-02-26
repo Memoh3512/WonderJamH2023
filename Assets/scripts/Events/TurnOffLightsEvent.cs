@@ -33,7 +33,8 @@ public class TurnOffLightsEvent : JackEvent
         BlackJackManager.DistractAll(100);
         yield return new WaitForSeconds(12);
         
-        //TODO SFX Connect power cord
+        
+        SoundPlayer.instance.PlaySFX("sfx/Power cord connecting");
         BlackJackManager.DistractAll(0);
        EventEnded();
     }
