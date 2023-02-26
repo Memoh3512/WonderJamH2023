@@ -21,6 +21,7 @@ public class FacialExpressionManager : MonoBehaviour
     public Sprite sadFace;
     public Sprite fiouFace;
     public Sprite angryFace;
+    public Sprite distractedFace;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +82,14 @@ public class FacialExpressionManager : MonoBehaviour
         //TODO SFX angry
         StopAllCoroutines();
         if (angryFace != null) StartCoroutine(ExpressionRoutine(angryFace));
+        else StartCoroutine(ExpressionRoutine(susFace));
+    }
+
+    public void DistractedExpression()
+    {
+        //TODO SFX Distracted
+        StopAllCoroutines();
+        if (distractedFace != null) StartCoroutine(ExpressionRoutine(distractedFace));
         else StartCoroutine(ExpressionRoutine(susFace));
     }
 

@@ -190,7 +190,8 @@ public class BlackJackManager : MonoBehaviour
     public static void Distract(AIJackPlayer player, float distractionValue)
     {
         //distraction
-        if (player.distractionLevel + distractionValue > 100)
+        player.expressionManager.DistractedExpression();
+        if (player.distractionLevel > 100)
         {
             player.distractionLevel = 100;
         }
