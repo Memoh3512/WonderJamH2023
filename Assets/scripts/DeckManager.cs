@@ -57,11 +57,12 @@ public class DeckManager
         List<Card> cardsOnTable = new List<Card>();
         foreach (List<Card> cardList in PlayerCards.Values)
         {
-            if (cardList.Where(i => i.value == 0).Count() > 0)
-            {
-                int i = 0;
-            }
             cardsOnTable.AddRange(cardList);
+        }
+        
+        if (cardsOnTable.Count(i => i.value <= 1) > 0)
+        {
+            int i = 0;
         }
 
         return cardsOnTable;
