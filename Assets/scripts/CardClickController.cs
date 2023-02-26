@@ -78,7 +78,6 @@ public class CardClickController : MonoBehaviour
         transform.position = hand.transform.position;
         transform.rotation = hand.transform.rotation;
         GetComponent<FollowObject>().target = hand.transform;
-        GetComponent<FollowObject>().offset = Vector3.zero;
 
         heldCard = this;
         if (holder != null)
@@ -94,10 +93,10 @@ public class CardClickController : MonoBehaviour
 
     public void PutDownCard(GameObject holder)
     {
-        transform.rotation = holder.transform.rotation;
         transform.position = holder.transform.position;
-        GetComponent<FollowObject>().target = holder.transform;
-        GetComponent<FollowObject>().offset = new Vector3(0.203f,-0.04f,0);
+        transform.rotation = holder.transform.rotation;
+        GetComponent<FollowObject>().target = null;
+        
         heldCard = null;
         holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
         if (!flipped) flipCard();
