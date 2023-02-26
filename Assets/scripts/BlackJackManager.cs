@@ -226,6 +226,7 @@ public class BlackJackManager : MonoBehaviour
 
     public static void GameEnd(bool win)
     {
+        SoundPlayer.instance.SetMusic(Songs.winlose, 2f, TransitionBehavior.Stop);
         if (win)
         {
             SceneChanger.ChangeScene(SceneTypes.WinScene);
