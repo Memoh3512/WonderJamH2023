@@ -7,8 +7,10 @@ using UnityEngine;
 public enum Songs
 {
     
-    ADRENALINE,
-    GameplaySong
+    intro,
+    gameplay,
+    winlose,
+    
     
 }
 
@@ -63,13 +65,13 @@ public class SoundPlayer : MonoBehaviour
     IEnumerator testMusicCor()
     {
         yield return new WaitForSeconds(5f);
-        SetMusic(Songs.GameplaySong,2.5f, TransitionBehavior.Continue); //start wdib
+        SetMusic(Songs.gameplay,2.5f, TransitionBehavior.Continue); //start wdib
         yield return new WaitForSeconds(5f);
-        SetMusic(Songs.ADRENALINE, 2.5f, TransitionBehavior.Pause); // come back to continued adrenaline
+        SetMusic(Songs.gameplay, 2.5f, TransitionBehavior.Pause); // come back to continued adrenaline
         yield return new WaitForSeconds(5f);
-        SetMusic(Songs.GameplaySong, 2.5f, TransitionBehavior.Stop); //start from last place in wdib
+        SetMusic(Songs.gameplay, 2.5f, TransitionBehavior.Stop); //start from last place in wdib
         yield return new WaitForSeconds(5f);
-        SetMusic(Songs.ADRENALINE, 2.5f, TransitionBehavior.Stop);//new start of adrenaline
+        SetMusic(Songs.gameplay, 2.5f, TransitionBehavior.Stop);//new start of adrenaline
 
     }
 
@@ -169,8 +171,9 @@ public class SoundPlayer : MonoBehaviour
         //put songs in this list
         songs = new Dictionary<Songs, AudioClip>()
         {
-            {Songs.ADRENALINE, Resources.Load<AudioClip>("Sound/Music/ADRENALINE")},
-            {Songs.GameplaySong, Resources.Load<AudioClip>("Sound/Music/Where Do I Belong")},
+            {Songs.intro, Resources.Load<AudioClip>("music/Intro")},
+            {Songs.gameplay, Resources.Load<AudioClip>("music/Casino_2")},
+            {Songs.winlose, Resources.Load<AudioClip>("music/Casino_1")},
             //...
         };
         

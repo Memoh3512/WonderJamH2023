@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Deck : CardHolder
 {
-    private CardClickController topCard;
+    private Stack<CardClickController> topCards = new();
     public override void OnMouseDown()
     {
-        if(topCard == null)
+        if(CardClickController.heldCard != null)
         {
-            if(CardClickController.heldCard != null)
-            {
-                topCard = CardClickController.heldCard;
-                CardClickController.heldCard.PutDownCard(gameObject);
-                topCard.gameObject.SetActive(false);
-            }
-            else
+            topCards.Push(CardClickController.heldCard);
+            topCards.Peek().PutDownCard(gameObject, true);
+            topCards.Peek().gameObject.SetActive(false);
+        }
+        else
+        {
+            if(topCards.Count == 0)
             {
                 Card newCard = DeckManager.DrawCard();
                 GameObject card = Instantiate<GameObject>(Resources.Load<GameObject>("Card"));
@@ -25,15 +25,13 @@ public class Deck : CardHolder
                 card.GetComponent<CardClickController>().cardRep.card = newCard;
                 card.GetComponent<CardClickController>().PickUpCard();
             }
-        }
-        else
-        {
-            if(CardClickController.heldCard == null)
+            else
             {
-                topCard.gameObject.SetActive(true);
-                topCard.PickUpCard();
-                topCard = null;
-            }
+                CardClickController newCard = topCards.Pop();
+                newCard.gameObject.SetActive(true);
+                newCard.PickUpCard();
+                newCard.flipCard();
+            }  
         }
     }
 }
