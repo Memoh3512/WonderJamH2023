@@ -154,16 +154,19 @@ public class BlackJackManager : MonoBehaviour
                 int playerhand = player.HandValue();
                 if (playerhand > 21 || (playerhand < selfHand && selfHand <= 21))
                 {
+                    //lose
                     player.money -= 10;
                     player.expressionManager.SadExpression();
-                    if (!player.intel && player.money <= 0)
+                    if (player.money <= 0)
                     {
-                        GameEnd(false);
-                    } else if (player.money <= 0) PlayersDead.Add(player);
+                        if (player.intel) PlayersDead.Add(player);
+                        else GameEnd(false);
+                    }
 
                 }
-                else if(playerhand < 21 && playerhand > selfHand || selfHand > 21)
+                else if((playerhand <= 21 && playerhand > selfHand) || selfHand > 21)
                 {
+                    //win
                     player.money += 20;
                     player.expressionManager.HappyExpression();
                     if (!player.intel && player.money >= 200)
