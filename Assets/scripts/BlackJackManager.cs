@@ -155,6 +155,10 @@ public class BlackJackManager : MonoBehaviour
                 {
                     player.money += 20;
                     player.expressionManager.HappyExpression();
+                    if (player.intel && player.money >= 200)
+                    {
+                        GameEnd(true);
+                    }
                 }
             }
             yield return new WaitForSeconds(6);
