@@ -31,21 +31,11 @@ public class TurnOffLightsEvent : JackEvent
     {
         BlackJackManager.DistractAll(20);
         yield return new WaitForSeconds(5);
-        Debug.Log("destroy");
+        
 
         BlackJackManager.DistractAll(0);
        EventEnded();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

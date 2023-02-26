@@ -1790,7 +1790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ca588125673e045856384e64acf0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: []
   holders: []
   holderManager: {fileID: 820395671}
   money: 0
@@ -2750,7 +2749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 286951187394444576, guid: 99d842b928a8c74499b9b6937dd9ee4c, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 286951188229958763, guid: 99d842b928a8c74499b9b6937dd9ee4c, type: 3}
       propertyPath: m_SortingOrder
@@ -3145,7 +3144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2303973187790577188, guid: c4e4cea875b85de47a35840e7531799f, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303973188513267792, guid: c4e4cea875b85de47a35840e7531799f, type: 3}
       propertyPath: m_Name
