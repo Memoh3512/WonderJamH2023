@@ -91,7 +91,7 @@ public class DrinksEvent : JackEvent
             waiter.transform.position = new Vector3(leavingXCurve.Evaluate(timeElapsed), leavingYCurve.Evaluate(timeElapsed), posInitiale.z);
         }
         
-        
+        //Debug.Log("destroy");
 
         BlackJackManager.DistractAll(0);
         EventEnded();

@@ -8,7 +8,7 @@ public class AIDecision //: MonoBehaviour
     public List<Card> ai_cards;
     public List<Card> table_cards;
     public Card dealer_card;
-    public bool intelligent;//Pour savoir si y pige de façon intelligente ou pas
+    public bool intelligent;//Pour savoir si y pige de fa?on intelligente ou pas
     public List<int> ai_values;
     public List<int> table_values;
     public int score;
@@ -65,7 +65,7 @@ public class AIDecision //: MonoBehaviour
     
     public bool PigeCheck(int score,List<int> hand_values,List<int> table_values, Card dealer_card, bool intel)
     {
-        //Créer le nombre de carte de chaque value (index 0 = nombre de value 2)
+        //Cr?er le nombre de carte de chaque value (index 0 = nombre de value 2)
         int[] all_cards = new int[] { 16, 16, 16, 16, 16, 16, 16, 16, 64, 16 };
         int[] remaining_cards = all_cards;
         bool pige = false;

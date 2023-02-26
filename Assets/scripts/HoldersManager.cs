@@ -6,6 +6,7 @@ public class HoldersManager : MonoBehaviour
 {
     List<GameObject> holders;
     int currentHolderIndex = 0;
+    int cardCount = 0;
     
     //ask cards
     private int askedHolderIndex = 0;
@@ -42,19 +43,28 @@ public class HoldersManager : MonoBehaviour
 
     public void CardAdded()
     {
+        //TODO SFX DropCard
         if (currentHolderIndex >= askedHolderIndex)
         {
             owner.FireCardAskEnd();
+            cardCount++;
         }
         else
         {
             EnableNextHolder(false);
+            cardCount++;
         }
     }
 
     public void CardRemoved()
     {
-        DisableLastHolder();
+        if (cardCount != currentHolderIndex)
+            DisableLastHolder();
+
+        cardCount--;
+       
+
+
     }
 
     public void EnableNextHolder(bool required)
