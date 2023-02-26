@@ -1790,7 +1790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ca588125673e045856384e64acf0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: []
   holders: []
   holderManager: {fileID: 820395671}
   money: 0
