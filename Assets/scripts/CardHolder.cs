@@ -59,9 +59,7 @@ public class CardHolder : MonoBehaviour
         {
             heldCard.PickUpCard(gameObject);
             heldCard = null;
-            Card myCard = GetComponent<CardRepresentation>().card;
-            myCard.value = 0;
-            myCard.sprite = null;
+            GetComponent<CardRepresentation>().card = new Card(0, null);
             holdersManager.CardRemoved();
         }
         else
