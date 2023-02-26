@@ -9,6 +9,8 @@ public class CardClickController : MonoBehaviour
 
     bool held = false;
     public bool inHolder = false;
+    private bool flipped = false;
+    public Vector2 offsetHolder;
     GameObject hand;
     public GameObject holder;
 
@@ -17,6 +19,12 @@ public class CardClickController : MonoBehaviour
 
     public CardRepresentation cardRep;
     void Start()
+    {
+
+        
+    }
+
+    public void Init()
     {
         hand = GameObject.Find("Hand");
         cardRep = GetComponent<CardRepresentation>();
@@ -59,6 +67,7 @@ public class CardClickController : MonoBehaviour
         Sprite temp = side1.sprite;
         side1.sprite = side2.sprite;
         side2.sprite = temp;
+        flipped = !flipped;
     }
 
     public void PickUpCard(GameObject holder = null)
@@ -80,11 +89,12 @@ public class CardClickController : MonoBehaviour
 
     public void PutDownCard(GameObject holder)
     {
-        transform.position = holder.transform.position;
         transform.rotation = holder.transform.rotation;
+        transform.position = holder.transform.position - side1.transform.localPosition;
         transform.parent = holder.transform;
         heldCard = null;
         holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
+        if (!flipped) flipCard();
     }
 
 }

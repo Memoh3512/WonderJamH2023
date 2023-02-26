@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1875071632222425016}
   - component: {fileID: 532824710751550761}
-  - component: {fileID: 7884643844672379287}
   - component: {fileID: 8513075342743216947}
   - component: {fileID: 3751322278716624587}
+  - component: {fileID: 8702822048485074863}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Untagged
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e2fc123e2af60664194466f3e808713a, type: 3}
+  m_SortingOrder: 4
+  m_Sprite: {fileID: 21300000, guid: 5b7b7d54bafd36347ba978fa63397c5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7884643844672379287
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9155815351128664396}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0
 --- !u!114 &8513075342743216947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +119,37 @@ MonoBehaviour:
   heldCard: {fileID: 0}
   active: 0
   required: 0
+--- !u!60 &8702822048485074863
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9155815351128664396}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5, y: 1.54}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.2075963, y: 0.7344346}
+      - {x: -0.657388, y: -0.19061852}
+      - {x: -0.64236355, y: -0.7166481}
+      - {x: 0.2854092, y: -0.71973825}
+      - {x: 0.57, y: -0.06}
+      - {x: 0.66248196, y: 0.23401424}
+      - {x: 0.65547484, y: 0.60598576}
+      - {x: 0.64948905, y: 0.6654751}
+      - {x: 0.59, y: 0.75}

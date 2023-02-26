@@ -9,12 +9,18 @@ public class DeckManager
 
     public static Dictionary<JackPlayer, List<Card>> PlayerCards;
 
-    public void Reset()
+    public static void Reset()
     {
+        if (OgDeck == null) OgDeck = new List<Card>();
         if (Deck == null) Deck = new List<Card>();
         if (PlayerCards == null) PlayerCards = new Dictionary<JackPlayer, List<Card>>();
-        Deck.Clear();
         PlayerCards.Clear();
+        foreach (JackPlayer player in GameObject.FindObjectsOfType<JackPlayer>())
+        {
+            Debug.Log($"Add {player.name} To PlayerCards");
+            PlayerCards.Add(player, new List<Card>());
+        }
+        Deck.Clear();
     }
 
     public static Card DrawCard()
