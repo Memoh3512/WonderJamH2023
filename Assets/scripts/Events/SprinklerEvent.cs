@@ -7,7 +7,7 @@ public class SprinklerEvent : JackEvent
     GameObject[] dropletList = new GameObject[18];
     GameObject[] positions = new GameObject[18];
     private float timeElapsed = 0;
-    private float animationTime = 7;
+    private float animationTime = 15;
     public AnimationCurve dropletCurve = Resources.Load<AnimationCurveAsset>("dropletCurve");
 
     public override void EventEnded()
@@ -50,7 +50,7 @@ public class SprinklerEvent : JackEvent
 
     IEnumerator Distraction()
     {
-        BlackJackManager.DistractAll(40);
+        BlackJackManager.DistractAll(100);
         while (timeElapsed < animationTime)
         {
            
