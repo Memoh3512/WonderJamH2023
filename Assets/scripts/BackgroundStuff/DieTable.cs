@@ -32,7 +32,7 @@ public class DieTable : MonoBehaviour
         DieTableAnimator.enabled = is_running;
         
         DieTableAnimator.Play("RollDices",0,0f);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(10);
         
         is_running = false;
         DieTableAnimator.enabled = is_running;

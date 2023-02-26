@@ -31,7 +31,7 @@ public class TurnOffLightsEvent : JackEvent
     {
         BlackJackManager.DistractAll(20);
         yield return new WaitForSeconds(5);
-        Debug.Log("destroy");
+        //Debug.Log("destroy");
 
         BlackJackManager.DistractAll(0);
        EventEnded();
