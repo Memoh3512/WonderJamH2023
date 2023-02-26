@@ -42,6 +42,7 @@ public class HoldersManager : MonoBehaviour
 
     public void CardAdded()
     {
+        //TODO SFX DropCard
         if (currentHolderIndex >= askedHolderIndex)
         {
             owner.FireCardAskEnd();
@@ -55,6 +56,7 @@ public class HoldersManager : MonoBehaviour
     public void CardRemoved()
     {
         DisableLastHolder();
+        //TODO SFX PickupCard
     }
 
     public void EnableNextHolder(bool required)

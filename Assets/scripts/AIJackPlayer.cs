@@ -62,7 +62,6 @@ public class AIJackPlayer : JackPlayer
 
     IEnumerator DecideRoutine()
     {
-        //TODO decider si hit or miss
         //TODO SFX Hummmmm
         yield return new WaitForSeconds(Random.Range(10, 20));
         //TODO SFX Haha!
