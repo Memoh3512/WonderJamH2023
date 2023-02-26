@@ -8,6 +8,8 @@ public enum SceneTypes
     
     MainMenu = 0,
     GameplayScene = 1,
+    WinScene = 2,
+    LoseScene = 3,
     
 }
 
