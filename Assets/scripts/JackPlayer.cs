@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class JackPlayer : MonoBehaviour
 {
-    public List<Card> hand;
     public List<CardHolder> holders;
+    public HoldersManager holderManager;
     public int money;
     
     protected UnityEvent OnCardAskComplete;
@@ -23,7 +23,13 @@ public class JackPlayer : MonoBehaviour
     
     public void AskForCards(int cardNb)
     {
-        //TODO
+        if (holderManager == null) Debug.LogError("T CON HOLDERMANAGER NULL DANS ASKFORCARDS");
+        holderManager.AskForCards(cardNb);
+    }
+
+    public void FireCardAskEnd()
+    {
+        OnCardAskComplete.Invoke();
     }
     
     public void AddOnCardAskCompleteListener(UnityAction action)

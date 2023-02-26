@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Card
+  - DrinkGuySpawn
+  - Glass1Spawn
+  - Glass2Spawn
+  - Glass3Spawn
+  - ActiveGlass
+  - droplet
   layers:
   - Default
   - TransparentFX
@@ -44,4 +50,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2388937911
     locked: 0

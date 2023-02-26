@@ -6,14 +6,18 @@ public class HoldersManager : MonoBehaviour
 {
     List<GameObject> holders;
     int currentHolderIndex = 0;
+    int cardCount = 0;
+    
+    //ask cards
+    private int askedHolderIndex = 0;
 
     [SerializeField]
     public JackPlayer owner;
-    // Start is called before the first frame update
+
     void Start()
-    {
+    {        
+        owner.holderManager = this;
         GetHolders();
-        EnableNextHolder(false);
     }
 
     private void GetHolders()
@@ -29,14 +33,37 @@ public class HoldersManager : MonoBehaviour
         }
     }
 
+    public void AskForCards(int cardNb)
+    {
+
+        askedHolderIndex = currentHolderIndex + cardNb;
+        EnableNextHolder(false);
+
+    }
+
     public void CardAdded()
     {
-        EnableNextHolder(false);
+        
+        SoundPlayer.instance.PlaySFX("sfx/Drop card");
+        if (currentHolderIndex >= askedHolderIndex)
+        {
+            owner.FireCardAskEnd();
+            cardCount++;
+        }
+        else
+        {
+            EnableNextHolder(false);
+            cardCount++;
+        }
     }
 
     public void CardRemoved()
     {
-        DisableLastHolder();
+        if (cardCount != currentHolderIndex)
+            DisableLastHolder();
+
+        cardCount--;
+        SoundPlayer.instance.PlaySFX("sfx/Pickup card");
     }
 
     public void EnableNextHolder(bool required)

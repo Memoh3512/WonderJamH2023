@@ -5,26 +5,31 @@ using UnityEngine;
 [RequireComponent(typeof(CardRepresentation))]
 public class CardClickController : MonoBehaviour
 {
-    Color originialColor;
-    Color hoverColor;
-    SpriteRenderer sr;
-
     public static CardClickController heldCard;
 
     bool held = false;
     public bool inHolder = false;
+    private bool flipped = false;
+    public Vector2 offsetHolder;
     GameObject hand;
     public GameObject holder;
 
-    private CardRepresentation cardRep;
-    // Start is called before the first frame update
+    public SpriteRenderer side1;
+    public SpriteRenderer side2;
+
+    public CardRepresentation cardRep;
     void Start()
     {
+
+        
+    }
+
+    public void Init()
+    {
         hand = GameObject.Find("Hand");
-        //sr = gameObject.GetComponent<SpriteRenderer>();
         cardRep = GetComponent<CardRepresentation>();
-        // originialColor = new Color(sr.color.r, sr.color.g, sr.color.b, 0.75f);
-        // hoverColor = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+        side1 = transform.Find("Side1").GetComponent<SpriteRenderer>();
+        side2 = side1.transform.Find("Side2").GetComponent<SpriteRenderer>();
     }
 
     public void OnMouseEnter()
@@ -54,43 +59,27 @@ public class CardClickController : MonoBehaviour
         {
             holder.GetComponent<CardHolder>().OnMouseDown();
         }
-        
-        /*
-        if (!held && !inHolder && !handFull)
-        {
-            //pickup card
-            gameObject.transform.position = hand.transform.position;
-            gameObject.transform.parent = hand.transform;
-            handFull = true;
-            held = true;
-            HeldCard = gameObject;
-            if (holder != null)
-            {
-                if (holder.GetComponent<CardHolder>().owner != null)
-                {
-                    DeckManager.PlayerCards[holder.GetComponent<CardHolder>().owner].Remove(cardRep.card);
-                }
-            }
-
-        }
-        else if(holder != null && holder.GetComponent<CardHolder>().hovered)
-        {
-            //drop card
-            gameObject.transform.position = holder.transform.position;
-            gameObject.transform.parent = holder.transform;
-            handFull = false;
-            inHolder = true;
-            held = true;
-            holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
-
-        }*/
-        
+               
     }
 
-    public void PickUpCard()
+    public void flipCard()
     {
-        gameObject.transform.position = hand.transform.position;
-        gameObject.transform.parent = hand.transform;
+        Sprite temp = side1.sprite;
+        side1.sprite = side2.sprite;
+        side2.sprite = temp;
+        flipped = !flipped;
+        
+        
+        SoundPlayer.instance.PlaySFX("sfx/Flip card");
+    }
+
+    public void PickUpCard(GameObject holder = null)
+    {
+        transform.position = hand.transform.position;
+        transform.rotation = hand.transform.rotation;
+        GetComponent<FollowObject>().target = hand.transform;
+        GetComponent<FollowObject>().offset = Vector3.zero;
+
         heldCard = this;
         if (holder != null)
         {
@@ -105,10 +94,13 @@ public class CardClickController : MonoBehaviour
 
     public void PutDownCard(GameObject holder)
     {
-        gameObject.transform.position = holder.transform.position;
-        gameObject.transform.parent = holder.transform;
+        transform.rotation = holder.transform.rotation;
+        transform.position = holder.transform.position;
+        GetComponent<FollowObject>().target = holder.transform;
+        GetComponent<FollowObject>().offset = new Vector3(0.203f,-0.04f,0);
         heldCard = null;
         holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
+        if (!flipped) flipCard();
     }
 
 }

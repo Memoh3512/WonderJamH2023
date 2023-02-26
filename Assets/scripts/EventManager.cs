@@ -11,8 +11,11 @@ public class EventManager : MonoBehaviour
     void Start()
     {
         //faire un add pour chaque type d'évent
-      //  EventList.Add(new DecorationFallingEvent());
-        EventList.Add(new TurnOffLightsEvent());
+        //EventList.Add(new DecorationFallingEvent());
+       EventList.Add(new SprinklerEvent());
+
+       EventList.Add(new DrinksEvent());
+       //EventList.Add(new TurnOffLightsEvent());
         StartCoroutine(EventRoutine());
     }
 
@@ -25,18 +28,15 @@ public class EventManager : MonoBehaviour
     IEnumerator EventRoutine()
     {
         yield return new WaitForSeconds(Random.Range(minEventTime, maxEventTime));
-        int randomEventIndex = Random.Range(0, EventList.Count - 1);
-        
-        if (randomEventIndex < EventList.Count)
-        {
-            JackEvent randomEvent = EventList[randomEventIndex];
-            if (randomEvent != null) randomEvent.ExecuteEvent();
-            randomEvent.addListenerEventEnded(() => {
-                StartCoroutine(EventRoutine());
-                randomEvent.ClearListeners();
+        int randomEventIndex = Random.Range(0, EventList.Count);
+        JackEvent randomEvent = EventList[randomEventIndex];
+        randomEvent.ExecuteEvent();
+        randomEvent.addListenerEventEnded(() => {
+            StartCoroutine(EventRoutine());
+            randomEvent.ClearListeners();
 
-            });
-        }
+        });
+        
         
     }
 

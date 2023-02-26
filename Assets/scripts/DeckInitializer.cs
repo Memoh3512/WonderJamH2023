@@ -10,7 +10,7 @@ public class DeckInitializer : MonoBehaviour
     void Start()
     {
         if (allCards == null) return;
-        DeckManager.ResetDeck();
+        DeckManager.Reset();
         for (int i = 0; i < nbDecks; i++)
         {
             foreach (Card card in allCards)
