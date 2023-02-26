@@ -11,6 +11,7 @@ public class AIJackPlayer : JackPlayer
     public AIDecision aiDecision;
     
     public bool lost = false;
+    public bool lostRound = false;
 
     public FacialExpressionManager expressionManager;
     public HandGestureManager handGestureManager;
@@ -23,19 +24,6 @@ public class AIJackPlayer : JackPlayer
 
         //StartCoroutine(testHitMiss());
         StartCoroutine(SuspicionCooldown());
-    }
-
-    IEnumerator testHitMiss()
-    {
-        handGestureManager.HitGesture();
-
-        yield return new WaitForSeconds(3);
-        
-        handGestureManager.HoldGesture();
-
-        yield return new WaitForSeconds(3);
-        
-        handGestureManager.HitGesture();
     }
 
     public void Bet(int amount)
@@ -86,11 +74,26 @@ public class AIJackPlayer : JackPlayer
     public void Lose()
     {
         lost = true;
+        expressionManager.SetFace(FaceType.sad);
     }
 
-    public void WitnessIllegalAction()
+    public void LoseRound()
     {
-        suspicion += (100 - distractionLevel);
+        expressionManager.SetFace(FaceType.sad);
+        lostRound = true;
+    }
+
+    public void NewRound()
+    {
+        if (lost) return;
+        expressionManager.SetFace(FaceType.neutral);
+        lostRound = false;
+    }
+
+    public void WitnessIllegalAction(float actionValue)
+    {
+        
+        suspicion += actionValue + (100 - distractionLevel);
         if (suspicion > 100)
         {
             suspicion = 100;
@@ -98,6 +101,7 @@ public class AIJackPlayer : JackPlayer
 
         if (suspicion >= 100)
         {
+            Debug.Log("SUS = 100, LOSE");
             BlackJackManager.GameEnd(false);
         }
 
@@ -107,6 +111,9 @@ public class AIJackPlayer : JackPlayer
         } else if (suspicion > 50)
         {
             expressionManager.SusExpression();
+        } else if (suspicion > 75)
+        {
+            expressionManager.AngryExpression();
         }
     }
 

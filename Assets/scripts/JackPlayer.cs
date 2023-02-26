@@ -38,6 +38,10 @@ public class JackPlayer : MonoBehaviour
         OnCardAskComplete.AddListener(action);
     }
 
+    public int HandValue()
+    {
+        return HandValue(DeckManager.GetCardsForPlayer(this));
+    }
     public int HandValue(List<Card> hand)
     {
         List<int> values = new List<int>();
