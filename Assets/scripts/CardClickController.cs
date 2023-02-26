@@ -69,14 +69,17 @@ public class CardClickController : MonoBehaviour
         side2.sprite = temp;
         flipped = !flipped;
         
-        //TODO SFX Flip card
+        
+        SoundPlayer.instance.PlaySFX("sfx/Flip card");
     }
 
     public void PickUpCard(GameObject holder = null)
     {
         transform.position = hand.transform.position;
         transform.rotation = hand.transform.rotation;
-        transform.parent = hand.transform;
+        GetComponent<FollowObject>().target = hand.transform;
+        GetComponent<FollowObject>().offset = Vector3.zero;
+
         heldCard = this;
         if (holder != null)
         {
@@ -93,7 +96,8 @@ public class CardClickController : MonoBehaviour
     {
         transform.rotation = holder.transform.rotation;
         transform.position = holder.transform.position;
-        transform.parent = holder.transform;
+        GetComponent<FollowObject>().target = holder.transform;
+        GetComponent<FollowObject>().offset = new Vector3(0.203f,-0.04f,0);
         heldCard = null;
         holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
         if (!flipped) flipCard();
