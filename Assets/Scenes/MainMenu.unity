@@ -661,16 +661,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4298e424d358f145a7cd71442045aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  right_lights:
-  - {fileID: 1580074530299940286}
-  - {fileID: 625872917}
-  - {fileID: 1200482220}
-  - {fileID: 1064121122}
   left_lights:
-  - {fileID: 319855158}
-  - {fileID: 1766948360}
-  - {fileID: 1430629294}
   - {fileID: 8755854}
+  - {fileID: 1430629294}
+  - {fileID: 1766948360}
+  - {fileID: 319855158}
+  right_lights:
+  - {fileID: 1064121122}
+  - {fileID: 1200482220}
+  - {fileID: 625872917}
+  - {fileID: 1580074530299940286}
 --- !u!1001 &625872915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -908,7 +908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2cba9c8a368d5b4f85e8029372b38dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 1
+  nextScene: 4
   transition: 0
 --- !u!1 &859621051
 GameObject:

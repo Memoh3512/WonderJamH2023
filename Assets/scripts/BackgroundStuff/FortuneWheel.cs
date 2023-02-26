@@ -37,7 +37,8 @@ public class FortuneWheel : MonoBehaviour
         
         is_running = true;
         FortuneWheelAnimator.enabled = true;
-        //TODO SFX FortuneWheelRolling
+        
+        SoundPlayer.instance.PlaySFX("sfx/Fortune wheel rolling");
         FortuneWheelAnimator.Play("Rolling");
         FortuneWheelAnimator.SetTrigger("Roll");
         FortuneWheelAnimator.ResetTrigger("Roll");
@@ -46,7 +47,8 @@ public class FortuneWheel : MonoBehaviour
         int random = Random.Range(0, 10);
         if (random<2)
         {
-            //TODO SFX FortuneWheelWin
+            
+            SoundPlayer.instance.PlaySFX("sfx/Fortune wheel win");
             //Debug.Log("Winner");
             //WINNER
             FortuneWheelAnimator.SetTrigger("Winner");

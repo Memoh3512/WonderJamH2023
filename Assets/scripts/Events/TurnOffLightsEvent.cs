@@ -12,7 +12,8 @@ public class TurnOffLightsEvent : JackEvent
     }
     public override void ExecuteEvent()
     {
-        //todo SFX panne de courant
+        
+        SoundPlayer.instance.PlaySFX("sfx/Panne de courant");
         GameObject effectPrefab = Resources.Load<GameObject>("LightsOffEffect");
         if (effectPrefab != null)
         {
@@ -29,7 +30,7 @@ public class TurnOffLightsEvent : JackEvent
 
     IEnumerator Distraction(GameObject effect)
     {
-        BlackJackManager.DistractAll(20);
+        BlackJackManager.DistractAll(40);
         yield return new WaitForSeconds(5);
         
 
