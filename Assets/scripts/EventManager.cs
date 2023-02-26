@@ -14,7 +14,6 @@ public class EventManager : MonoBehaviour
         
         EventList.Add(new DecorationFallingEvent());
         EventList.Add(new SprinklerEvent());
-
         EventList.Add(new DrinksEvent());
         EventList.Add(new TurnOffLightsEvent());
         StartCoroutine(EventRoutine());
