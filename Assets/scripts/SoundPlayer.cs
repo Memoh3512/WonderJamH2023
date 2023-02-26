@@ -12,14 +12,6 @@ public enum Songs
     
 }
 
-public enum SoundEffects
-{
-    
-    MenuButtonPress,
-    JoinGame,
-    
-}
-
 public enum TransitionBehavior
 {
     
@@ -37,7 +29,6 @@ public class SoundPlayer : MonoBehaviour
     public AudioSource source2;
 
     static Dictionary<Songs, AudioClip> songs;
-    static Dictionary<SoundEffects, AudioClip> effects;
     
     [Range(0,1)]
     public float globalVolume; // global volume multiplier
@@ -163,16 +154,13 @@ public class SoundPlayer : MonoBehaviour
 
     }
 
-    public void PlaySFX(SoundEffects sfx, float vol = 1f)
+    public void PlaySFX(string sfxPath, float vol = 1f)
     {
-
-        if (effects.ContainsKey(sfx))
+        AudioClip sfx = Resources.Load<AudioClip>(sfxPath);
+        if (sfx != null)
         {
-            
-            source.PlayOneShot(effects[sfx],2*globalVolume*vol);   
-            
+            source.PlayOneShot(sfx,2*globalVolume*vol);
         }
-
     }
 
     void InitializeSounds()
@@ -184,16 +172,6 @@ public class SoundPlayer : MonoBehaviour
             {Songs.ADRENALINE, Resources.Load<AudioClip>("Sound/Music/ADRENALINE")},
             {Songs.GameplaySong, Resources.Load<AudioClip>("Sound/Music/Where Do I Belong")},
             //...
-        };
-
-        //put sfx in this list
-        effects = new Dictionary<SoundEffects, AudioClip>()
-        {
-
-            {SoundEffects.MenuButtonPress, Resources.Load<AudioClip>("Music/Forest")},
-            {SoundEffects.JoinGame, Resources.Load<AudioClip>("Music/Forest")},
-            //...
-
         };
         
     }

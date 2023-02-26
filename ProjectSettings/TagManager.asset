@@ -10,6 +10,7 @@ TagManager:
   - Glass2Spawn
   - Glass3Spawn
   - ActiveGlass
+  - droplet
   layers:
   - Default
   - TransparentFX

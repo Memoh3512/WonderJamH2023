@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,18 +16,19 @@ public class DrinksEvent : JackEvent
     private bool glassOnTable = false;
     private bool firstTime = true;
     GameObject[] glassList = new GameObject[3];
+    GameObject[] drinkPossibilities = new GameObject[4];
     
     
        
     
 
    
-    public void Distract(GameObject waiter, GameObject glassPrefab)
+    public void Distract(GameObject waiter)
     {
-        BlackJackManager.StartGlobalCoroutine(Distraction(waiter, glassPrefab));
+        BlackJackManager.StartGlobalCoroutine(Distraction(waiter));
     }
 
-    IEnumerator Distraction(GameObject waiter,GameObject glassPrefab)
+    IEnumerator Distraction(GameObject waiter)
     {
         float posX = posInitiale.x;
         
@@ -46,24 +46,27 @@ public class DrinksEvent : JackEvent
         yield return new WaitForSeconds(1);
         if (firstTime)
         {
-            if (glassPrefab != null)
-            {
-                GameObject glass1 = GameObject.Instantiate(glassPrefab);
+
+            
+                int firstGlass = Random.Range(0,3);
+                GameObject glass1 = GameObject.Instantiate(drinkPossibilities[firstGlass]);
                 glassList[0] = glass1;
                 glass1.transform.position = posGlass1;
                 yield return new WaitForSeconds(1);
-                GameObject glass2 = GameObject.Instantiate(glassPrefab);
+                int secondGlass = Random.Range(0, 3);
+                GameObject glass2 = GameObject.Instantiate(drinkPossibilities[secondGlass]);
                 glassList[1] = glass2;
                 glass2.transform.position = posGlass2;
                 yield return new WaitForSeconds(1);
-                GameObject glass3 = GameObject.Instantiate(glassPrefab);
+                int thirdGlass = Random.Range(0, 3);
+                GameObject glass3 = GameObject.Instantiate(drinkPossibilities[thirdGlass]);
                 glassList[2] = glass3;
                 glass3.transform.position = posGlass3;
                 yield return new WaitForSeconds(1);
                 firstTime = false;
                 glassOnTable = true;
 
-            }
+            
         }
         else
         {
@@ -85,7 +88,7 @@ public class DrinksEvent : JackEvent
             waiter.transform.position = new Vector3(posX, waiter.transform.position.y + Time.deltaTime*3, posInitiale.z);
         }
         
-        Debug.Log("destroy");
+        
 
         BlackJackManager.DistractAll(0);
         EventEnded();
@@ -106,14 +109,18 @@ public class DrinksEvent : JackEvent
         walkingYCurve = Resources.Load<AnimationCurveAsset>("YWaiterCurve");
         
         GameObject waiterPrefab = Resources.Load<GameObject>("Waiter");
-        GameObject glassPrefab = Resources.Load<GameObject>("FilledGlass");
+        drinkPossibilities[0] = Resources.Load<GameObject>("wine");
+        drinkPossibilities[1] = Resources.Load<GameObject>("Champagne");        
+        drinkPossibilities[2] = Resources.Load<GameObject>("Bottle");
+        drinkPossibilities[3] = Resources.Load<GameObject>("Cocktail");
         
+
         if (waiterPrefab != null)
         {
             GameObject waiter = GameObject.Instantiate(waiterPrefab);
             waiter.transform.position = posInitiale;
            
-            Distract(waiter,glassPrefab);
+            Distract(waiter);
 
         }
     }
