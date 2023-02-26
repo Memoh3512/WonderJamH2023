@@ -49,7 +49,7 @@ public class CasinoMachine : MonoBehaviour
         int random = Random.Range(0, 10);
         if (random<2)
         {
-            //TODO sfx a changer
+            
             SoundPlayer.instance.PlaySFX("sfx/Jackpot");
             //Debug.Log("Winner");
             //WINNER
