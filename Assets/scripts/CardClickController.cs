@@ -68,6 +68,8 @@ public class CardClickController : MonoBehaviour
         side1.sprite = side2.sprite;
         side2.sprite = temp;
         flipped = !flipped;
+        
+        //TODO SFX Flip card
     }
 
     public void PickUpCard(GameObject holder = null)
