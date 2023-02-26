@@ -8,6 +8,7 @@ public class MainMenuLights : MonoBehaviour
 {
     public List<GameObject> left_lights;
     public List<GameObject> right_lights;
+    public Animator Titre;
     private bool is_running = false;
     // Start is called before the first frame update
     private void Awake()
@@ -17,6 +18,7 @@ public class MainMenuLights : MonoBehaviour
             right_lights[i].GetComponent<Animator>().enabled = false;
             left_lights[i].GetComponent<Animator>().enabled = false;
         }
+        Titre.enabled = false;
     }
     void Start()
     {
@@ -46,6 +48,8 @@ public class MainMenuLights : MonoBehaviour
             left_lights[i].GetComponent<Animator>().enabled = true;
             yield return new WaitForSeconds(0.3f);
         }
+        Titre.enabled = true;
+        
         is_running = false;
     }
 }
