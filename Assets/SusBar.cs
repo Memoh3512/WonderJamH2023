@@ -6,6 +6,7 @@ public class SusBar : MonoBehaviour
 {
     float startY;
     float endY = 4.1f;
+    public float lerpSpeed;
     public AIJackPlayer player;
     void Start()
     {
@@ -14,7 +15,9 @@ public class SusBar : MonoBehaviour
 
     void Update()
     {
+        
         float yValue = startY + (endY - startY) * player.suspicion / 100f;
-        transform.localPosition = new Vector3(transform.localPosition.x, yValue, transform.localPosition.z);
+        Vector3 target = new Vector3(transform.localPosition.x, yValue, transform.localPosition.z);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, lerpSpeed);
     }
 }
