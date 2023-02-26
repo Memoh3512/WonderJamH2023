@@ -89,8 +89,8 @@ public class CardClickController : MonoBehaviour
 
     public void PutDownCard(GameObject holder)
     {
-        transform.position = holder.transform.position+(Vector3)offsetHolder;
         transform.rotation = holder.transform.rotation;
+        transform.position = holder.transform.position - side1.transform.localPosition;
         transform.parent = holder.transform;
         heldCard = null;
         holder.GetComponent<CardHolder>().SwapCard(cardRep.card);
