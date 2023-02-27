@@ -38,10 +38,10 @@ public class TokenPile : MonoBehaviour
         if (owner.money <= 0)
         {
             sr.sprite = null;
-        } else if (owner.money < 20)
+        } else if (owner.money < 30)
         {
             sr.sprite = smallToken;
-        } else if (owner.money < 150)
+        } else if (owner.money < 70)
         {
             sr.sprite = mediumToken;
         }

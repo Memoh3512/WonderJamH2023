@@ -169,7 +169,7 @@ public class BlackJackManager : MonoBehaviour
                     //win
                     player.money += 20;
                     player.expressionManager.HappyExpression();
-                    if (!player.intel && player.money >= 200)
+                    if (!player.intel && player.money >= 100)
                     {
                         GameEnd(true);
                     }
@@ -188,6 +188,11 @@ public class BlackJackManager : MonoBehaviour
             foreach (AIJackPlayer player in PlayersDead)
             {
                 players.Remove(player);
+            }
+            //win si reste juste le MC
+            if (players.Count == 1 && !players[0].intel)
+            {
+                GameEnd(true);
             }
             foreach (HoldersManager holder in FindObjectsOfType<HoldersManager>())
             {
